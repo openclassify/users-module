@@ -2,9 +2,9 @@
 
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Anomaly\Streams\Platform\Routing\UrlGenerator;
+use Anomaly\Streams\Platform\View\ViewTemplate;
 use Anomaly\UsersModule\User\UserAuthenticator;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Translation\Translator;
 
 /**
  * Class LoginController
@@ -19,22 +19,23 @@ class LoginController extends PublicController
     /**
      * Return the login form.
      *
-     * @param  Translator $translator
-     * @param Guard $auth
-     * @return \Illuminate\Http\RedirectResponse
+     * @param ViewTemplate $template
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|mixed
+     * @internal param Guard $auth
      */
-    public function login(Translator $translator, Guard $auth)
+    public function login(ViewTemplate $template)
     {
-        if ($auth->check()) {
-            return $this->redirect->to($this->request->get('redirect', '/'));
+        if (auth()->check()) {
+            return redirect(request('redirect', '/'));
         }
 
-        $this->template->set(
+        // @todo need to figure out variables
+        $template->set(
             'meta_title',
-            $translator->trans('anomaly.module.users::breadcrumb.login')
+            trans('anomaly.module.users::breadcrumb.login')
         );
 
-        return $this->view->make('anomaly.module.users::login');
+        return view('anomaly.module.users::login');
     }
 
     /**
