@@ -2,15 +2,14 @@
 
 use Anomaly\UsersModule\User\UserAuthenticator;
 use Anomaly\UsersModule\User\UserSecurity;
-use Illuminate\Routing\Redirector;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class LoginFormHandler
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class LoginFormHandler
 {
@@ -18,16 +17,14 @@ class LoginFormHandler
     /**
      * Handle the form.
      *
-     * @param LoginFormBuilder  $builder
+     * @param LoginFormBuilder $builder
      * @param UserAuthenticator $authenticator
-     * @param UserSecurity      $security
-     * @param Redirector        $redirect
+     * @param UserSecurity $security
      */
     public function handle(
         LoginFormBuilder $builder,
         UserAuthenticator $authenticator,
-        UserSecurity $security,
-        Redirector $redirect
+        UserSecurity $security
     ) {
 
         /**
@@ -52,6 +49,6 @@ class LoginFormHandler
 
         $authenticator->login($user, $builder->getFormValue('remember_me'));
 
-        $builder->setFormResponse($redirect->intended($builder->getFormOption('redirect', '/')));
+        $builder->setFormResponse(redirect()->intended($builder->getFormOption('redirect', '/')));
     }
 }

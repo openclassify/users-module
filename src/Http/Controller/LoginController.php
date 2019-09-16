@@ -1,10 +1,8 @@
 <?php namespace Anomaly\UsersModule\Http\Controller;
 
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
-use Anomaly\Streams\Platform\Routing\UrlGenerator;
 use Anomaly\Streams\Platform\View\ViewTemplate;
 use Anomaly\UsersModule\User\UserAuthenticator;
-use Illuminate\Contracts\Auth\Guard;
 
 /**
  * Class LoginController
@@ -42,17 +40,16 @@ class LoginController extends PublicController
      * Logout the active user.
      *
      * @param  UserAuthenticator $authenticator
-     * @param  Guard $auth
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function logout(UserAuthenticator $authenticator, Guard $auth, UrlGenerator $url)
+    public function logout(UserAuthenticator $authenticator)
     {
-        if (!$auth->guest()) {
+        if (!auth()->guest()) {
             $authenticator->logout();
         }
 
-        $this->messages->success($this->request->get('message', 'anomaly.module.users::message.logged_out'));
+        messages('success', request('message', 'anomaly.module.users::message.logged_out'));
 
-        return $this->response->redirectTo($this->url->to($this->request->get('redirect', '/')));
+        return redirect(url(request('redirect', '/')));
     }
 }

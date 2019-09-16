@@ -61,7 +61,7 @@ class FieldsController extends AdminController
         $form
             ->setStream($users->getStream())
             ->setOption('auto_assign', true)
-            ->setFieldType($fieldTypes->get($this->request->get('field_type')));
+            ->setFieldType($fieldTypes->get(request('field_type')));
 
         return $form->render();
     }
