@@ -16,7 +16,6 @@ use Illuminate\Notifications\Notification;
  */
 class UserPendingActivation extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     /**

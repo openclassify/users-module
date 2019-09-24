@@ -24,7 +24,7 @@ class UserWasLoggedOut
      *
      * @param UserInterface $user
      */
-    function __construct(UserInterface $user)
+    public function __construct(UserInterface $user)
     {
         $this->user = $user;
     }

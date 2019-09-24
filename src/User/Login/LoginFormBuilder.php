@@ -63,7 +63,6 @@ class LoginFormBuilder extends FormBuilder
         $response = $security->attempt();
 
         if ($response instanceof Response) {
-
             $this->setFormResponse($response);
 
             $this->setSave(false);

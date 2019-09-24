@@ -78,7 +78,6 @@ class PermissionFormBuilder extends FormBuilder
         $this->setEntry($role = $roles->find($this->getEntry()));
 
         if ($role->getSlug() === 'admin') {
-
             $messages->warning('anomaly.module.users::warning.modify_admin_permissions');
 
             $this->setFormResponse($redirect->to('admin/users/roles'));

@@ -5,11 +5,12 @@ use Illuminate\Encryption\Encrypter;
 
 class UserRouter extends EntryRouter
 {
+
     /**
      * Return the activate route.
      *
      * @param Encrypter $encrypter
-     * @param array     $parameters
+     * @param array $parameters
      *
      * @return string
      */
@@ -25,7 +26,7 @@ class UserRouter extends EntryRouter
      * Return the password reset route.
      *
      * @param Encrypter $encrypter
-     * @param array     $parameters
+     * @param array $parameters
      */
     public function reset(Encrypter $encrypter, array $parameters = [])
     {

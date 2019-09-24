@@ -76,8 +76,7 @@ class PermissionFormBuilder extends FormBuilder
         BreadcrumbCollection $breadcrumbs,
         MessageBag $messages,
         Redirector $redirect
-    )
-    {
+    ) {
         $this->setEntry($user = $users->find($this->getEntry()));
 
         if ($user->hasRole($roles->findBySlug('admin'))) {
@@ -136,5 +135,4 @@ class PermissionFormBuilder extends FormBuilder
 
         return $this;
     }
-
 }

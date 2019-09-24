@@ -4,7 +4,6 @@ use Anomaly\Streams\Platform\Model\EloquentModel;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 
-
 /**
  * Class ResetPassword
  *
@@ -43,7 +42,7 @@ class ResetPassword
      * @param               $code
      * @param               $password
      */
-    function __construct(UserInterface $user, $code, $password)
+    public function __construct(UserInterface $user, $code, $password)
     {
         $this->user     = $user;
         $this->code     = $code;

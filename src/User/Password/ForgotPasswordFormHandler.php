@@ -3,14 +3,13 @@
 use Anomaly\Streams\Platform\Message\MessageBag;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Anomaly\UsersModule\User\UserPassword;
-use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class ForgotPasswordFormHandler
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class ForgotPasswordFormHandler
 {
@@ -19,17 +18,15 @@ class ForgotPasswordFormHandler
      * Handle the form.
      *
      * @param ForgotPasswordFormBuilder $builder
-     * @param UserRepositoryInterface   $users
-     * @param UserPassword              $password
-     * @param MessageBag                $messages
-     * @param Repository                $config
+     * @param UserRepositoryInterface $users
+     * @param UserPassword $password
+     * @param MessageBag $messages
      */
     public function handle(
         ForgotPasswordFormBuilder $builder,
         UserRepositoryInterface $users,
         UserPassword $password,
-        MessageBag $messages,
-        Repository $config
+        MessageBag $messages
     ) {
         if ($builder->hasFormErrors()) {
             return;
@@ -38,7 +35,7 @@ class ForgotPasswordFormHandler
         $user = $users->findByEmail($builder->getFormValue('email'));
 
         if ($path = $builder->getFormOption('reset_path')) {
-            $config->set('anomaly.module.users::paths.reset', $path);
+            config(['anomaly.module.users::paths.reset' => $path]);
         }
 
         $password->forgot($user);

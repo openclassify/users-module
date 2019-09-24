@@ -6,7 +6,7 @@ use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Event\UserWasKickedOut;
 use Anomaly\UsersModule\User\Event\UserWasLoggedIn;
 use Anomaly\UsersModule\User\Event\UserWasLoggedOut;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\RedirectResponse;
 
 /**
@@ -20,13 +20,6 @@ class UserAuthenticator
 {
 
     /**
-     * Laravel's authentication.
-     *
-     * @var Guard
-     */
-    protected $guard;
-
-    /**
      * The extension collection.
      *
      * @var ExtensionCollection
@@ -36,12 +29,10 @@ class UserAuthenticator
     /**
      * Create a new Authenticator instance.
      *
-     * @param Guard $guard
      * @param ExtensionCollection $extensions
      */
-    public function __construct(Guard $guard, ExtensionCollection $extensions)
+    public function __construct(ExtensionCollection $extensions)
     {
-        $this->guard      = $guard;
         $this->extensions = $extensions;
     }
 
@@ -55,7 +46,6 @@ class UserAuthenticator
     public function attempt(array $credentials, $remember = false)
     {
         if ($response = $this->authenticate($credentials)) {
-
             if ($response instanceof UserInterface) {
                 $this->login($response, $remember);
             }
@@ -80,7 +70,6 @@ class UserAuthenticator
 
         /* @var AuthenticatorExtensionInterface $authenticator */
         foreach ($authenticators as $authenticator) {
-
             $response = $authenticator->authenticate($credentials);
 
             if ($response instanceof UserInterface) {
@@ -98,12 +87,12 @@ class UserAuthenticator
     /**
      * Force login a user.
      *
-     * @param UserInterface $user
+     * @param UserInterface|Authenticatable $user
      * @param bool $remember
      */
     public function login(UserInterface $user, $remember = false)
     {
-        $this->guard->login($user, $remember);
+        auth()->login($user, $remember);
 
         event(new UserWasLoggedIn($user));
     }
@@ -116,14 +105,14 @@ class UserAuthenticator
     public function logout(UserInterface $user = null)
     {
         if (!$user) {
-            $user = $this->guard->user();
+            $user = user();
         }
 
         if (!$user) {
             return;
         }
 
-        $this->guard->logout($user);
+        auth()->logout();
 
         event(new UserWasLoggedOut($user));
     }

@@ -4,7 +4,6 @@ use Anomaly\Streams\Platform\Model\EloquentModel;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 
-
 /**
  * Class StartPasswordReset
  *

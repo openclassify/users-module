@@ -35,5 +35,4 @@ class SecurityCheckExtension extends Extension implements SecurityCheckInterface
     {
         return true;
     }
-
 }

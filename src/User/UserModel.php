@@ -85,62 +85,6 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     }
 
     /**
-     * Get the first name.
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->first_name;
-    }
-
-    /**
-     * Get the last name.
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->last_name;
-    }
-
-    /**
-     * Get related roles.
-     *
-     * @return RoleCollection
-     */
-    public function getRoles()
-    {
-        return $this->roles;
-    }
-
-    /**
-     * Return whether a user is in a role.
-     *
-     * @param RoleInterface|RolePresenter|string $role
-     * @return bool
-     */
-    public function hasRole($role)
-    {
-        if (!is_object($role)) {
-            $role = $this->dispatch(new GetRole($role));
-        }
-
-        if (!$role) {
-            return false;
-        }
-
-        /* @var RoleInterface $role */
-        foreach ($roles = $this->getRoles() as $attached) {
-            if ($attached->getId() === $role->getId()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Return whether a user is in any of the provided roles.
      *
      * @param $roles
@@ -166,15 +110,24 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     }
 
     /**
-     * Return whether the user is an admin or not.
+     * Return whether a user is in a role.
      *
+     * @param RoleInterface|RolePresenter|string $role
      * @return bool
      */
-    public function isAdmin()
+    public function hasRole($role)
     {
+        if (!is_object($role)) {
+            $role = dispatch_now(new GetRole($role));
+        }
+
+        if (!$role) {
+            return false;
+        }
+
         /* @var RoleInterface $role */
-        foreach ($this->getRoles() as $role) {
-            if ($role->getSlug() === 'admin') {
+        foreach ($roles = $this->getRoles() as $attached) {
+            if ($attached->getId() === $role->getId()) {
                 return true;
             }
         }
@@ -183,13 +136,31 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     }
 
     /**
-     * Get the permissions.
+     * Get related roles.
      *
-     * @return array
+     * @return RoleCollection
      */
-    public function getPermissions()
+    public function getRoles()
     {
-        return $this->permissions;
+        return $this->roles;
+    }
+
+    /**
+     * Return whether a user has any of provided permission.
+     *
+     * @param array $permissions
+     * @param bool $checkRoles
+     * @return bool
+     */
+    public function hasAnyPermission(array $permissions, $checkRoles = true)
+    {
+        foreach ($permissions as $permission) {
+            if ($this->hasPermission($permission, $checkRoles)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -223,21 +194,13 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     }
 
     /**
-     * Return whether a user has any of provided permission.
+     * Get the permissions.
      *
-     * @param array $permissions
-     * @param bool $checkRoles
-     * @return bool
+     * @return array
      */
-    public function hasAnyPermission(array $permissions, $checkRoles = true)
+    public function getPermissions()
     {
-        foreach ($permissions as $permission) {
-            if ($this->hasPermission($permission, $checkRoles)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->permissions;
     }
 
     /**
@@ -271,13 +234,20 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     }
 
     /**
-     * Return the activated flag.
+     * Return whether the user is an admin or not.
      *
      * @return bool
      */
-    public function isActivated()
+    public function isAdmin()
     {
-        return $this->activated;
+        /* @var RoleInterface $role */
+        foreach ($this->getRoles() as $role) {
+            if ($role->getSlug() === 'admin') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -318,6 +288,26 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     public function name()
     {
         return "{$this->getFirstName()} {$this->getLastName()}";
+    }
+
+    /**
+     * Get the first name.
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Get the last name.
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
     }
 
     /**
@@ -373,5 +363,15 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     public function shouldBeSearchable()
     {
         return $this->isActivated();
+    }
+
+    /**
+     * Return the activated flag.
+     *
+     * @return bool
+     */
+    public function isActivated()
+    {
+        return $this->activated;
     }
 }

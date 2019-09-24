@@ -3,7 +3,6 @@
 use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
 
-
 /**
  * Class SetGuestRole
  *

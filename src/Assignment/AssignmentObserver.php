@@ -27,5 +27,4 @@ class AssignmentObserver extends \Anomaly\Streams\Platform\Assignment\Assignment
 
         parent::deleted($model);
     }
-
 }

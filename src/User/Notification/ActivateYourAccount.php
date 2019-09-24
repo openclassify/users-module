@@ -15,7 +15,6 @@ use Illuminate\Notifications\Notification;
  */
 class ActivateYourAccount extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     /**

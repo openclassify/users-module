@@ -25,7 +25,6 @@ use Anomaly\UsersModule\User\Password\ResetPasswordFormBuilder;
 use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
 use Anomaly\UsersModule\User\UserModel;
 use Anomaly\UsersModule\User\UserRepository;
-use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class UsersModuleServiceProvider
@@ -126,7 +125,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     protected $routes = [
-        '/users/self'           => [
+        'users/self'            => [
             'ttl'  => 0,
             'as'   => 'anomaly.module.users::self',
             'uses' => 'Anomaly\UsersModule\Http\Controller\UsersController@self',
@@ -189,15 +188,14 @@ class UsersModuleServiceProvider extends AddonServiceProvider
 
     /**
      * Register the addon.
-     *
-     * @param Repository $config
      */
-    public function register(Repository $config)
+    public function register()
     {
-        foreach ($config->get($this->addon->getNamespace('config.permissions')) as $namespace => $group) {
+        foreach (config($this->addon->getNamespace('config.permissions')) as $namespace => $group) {
             foreach (array_get($group, 'permissions', []) as $permission => $permissions) {
                 foreach ($permissions['available'] as $option) {
-                    $config->set($namespace . '::permissions.' . $permission . '.' . $option);
+                    // @todo this looks wrong.
+                    config([$namespace . '::permissions.' . $permission . '.' . $option]);
                 }
             }
         }

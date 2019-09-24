@@ -21,5 +21,4 @@ class PendingQuery
     {
         $query->where('activated', false);
     }
-
 }

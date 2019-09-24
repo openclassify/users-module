@@ -13,7 +13,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
  */
 class UserModelTest extends \TestCase
 {
-
     use UserData, DatabaseTransactions;
 
     /**

@@ -37,7 +37,6 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-
         $this->roles->create(
             [
                 'en'   => [

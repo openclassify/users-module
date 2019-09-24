@@ -43,5 +43,4 @@ class AnomalyModuleUsersCreateRolesStream extends Migration
         ],
         'permissions',
     ];
-
 }

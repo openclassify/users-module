@@ -50,5 +50,4 @@ trait UserData
     {
         return factory(UserModel::class)->create($attributes);
     }
-
 }

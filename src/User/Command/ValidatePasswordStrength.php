@@ -1,6 +1,5 @@
 <?php namespace Anomaly\UsersModule\User\Command;
 
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Validation\Validator;
 
 /**
@@ -33,14 +32,13 @@ class ValidatePasswordStrength
     /**
      * Handle the command.
      *
-     * @param Repository $config
      * @return Validator
      */
-    public function handle(Repository $config)
+    public function handle()
     {
         $factory = app('validator');
 
-        $requirements = $config->get(
+        $requirements = config(
             'anomaly.module.users::password.requirements',
             [
                 '[a-z]',
@@ -56,7 +54,7 @@ class ValidatePasswordStrength
             [
                 'password' => array_merge(
                     [
-                        'min:' . $config->get('anomaly.module.users::password.minimum_length'),
+                        'min:' . config('anomaly.module.users::password.minimum_length'),
                     ],
                     array_map(
                         function ($requirement) {
@@ -67,9 +65,8 @@ class ValidatePasswordStrength
                 ),
             ]
         );
-        
-        if (!$validator->passes()) {
 
+        if (!$validator->passes()) {
             $failed = array_filter(
                 $requirements,
                 function ($pattern) {

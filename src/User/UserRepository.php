@@ -27,7 +27,7 @@ class UserRepository extends EntryRepository implements UserRepositoryInterface
      *
      * @param UserModel $model
      */
-    function __construct(UserModel $model)
+    public function __construct(UserModel $model)
     {
         $this->model = $model;
     }

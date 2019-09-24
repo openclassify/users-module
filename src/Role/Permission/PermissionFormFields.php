@@ -2,15 +2,14 @@
 
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Translation\Translator;
 
 /**
  * Class PermissionFormFields
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class PermissionFormFields
 {
@@ -20,14 +19,10 @@ class PermissionFormFields
      *
      * @param PermissionFormBuilder $builder
      * @param AddonCollection $addons
-     * @param Translator $translator
-     * @param Repository $config
      */
     public function handle(
         PermissionFormBuilder $builder,
-        AddonCollection $addons,
-        Translator $translator,
-        Repository $config
+        AddonCollection $addons
     ) {
         /* @var RoleInterface $role */
         $role = $builder->getEntry();
@@ -43,8 +38,7 @@ class PermissionFormFields
          * @var Addon $addon
          */
         foreach ($namespaces as $namespace) {
-
-            foreach ($config->get($namespace . '::permissions', []) as $group => $permissions) {
+            foreach (config($namespace . '::permissions', []) as $group => $permissions) {
 
                 /*
                  * Determine the general
@@ -52,11 +46,14 @@ class PermissionFormFields
                  */
                 $label = $namespace . '::permission.' . $group . '.name';
 
-                if (!$translator->has($warning = $namespace . '::permission.' . $group . '.warning')) {
+                if (!trans()->has($warning = $namespace . '::permission.' . $group . '.warning')) {
                     $warning = null;
                 }
 
-                if (!$translator->has($instructions = $namespace . '::permission.' . $group . '.instructions')) {
+                if (!trans()->has(
+                    $instructions = $namespace . '::permission.' . $group . '.instructions'
+                )
+                ) {
                     $instructions = null;
                 }
 
@@ -100,8 +97,7 @@ class PermissionFormFields
          * Allow custom configured permissions
          * to be hooked in to the form as well.
          */
-        if ($permissions = $config->get('anomaly.module.users::config.permissions')) {
-
+        if ($permissions = config('anomaly.module.users::config.permissions')) {
             foreach ($permissions as $namespace => $group) {
                 foreach (array_get($group, 'permissions', []) as $permission => $permissions) {
                     $fields[str_replace('.', '_', $namespace . '::' . $permission)] = [

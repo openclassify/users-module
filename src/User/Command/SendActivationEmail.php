@@ -2,14 +2,17 @@
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Notification\ActivateYourAccount;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Mail\Mailer;
-use Illuminate\Mail\Message;
+use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class SendActivationEmail
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class SendActivationEmail
 {
-    use DispatchesJobs;
 
     /**
      * The user instance.
@@ -28,8 +31,8 @@ class SendActivationEmail
     /**
      * Create a new SendActivationEmail instance.
      *
-     * @param UserInterface $user
-     * @param string        $redirect
+     * @param UserInterface|Notifiable $user
+     * @param string $redirect
      */
     public function __construct(UserInterface $user, $redirect = '/')
     {
@@ -39,8 +42,6 @@ class SendActivationEmail
 
     /**
      * Handle the command.
-     *
-     * @return bool
      */
     public function handle()
     {

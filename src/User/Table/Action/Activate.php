@@ -30,11 +30,9 @@ class Activate extends ActionHandler
 
         /* @var UserInterface|Notifiable $user */
         foreach ($selected as $id) {
-
             $user = $users->find($id);
 
             if ($user && $activator->force($user)) {
-
                 $count++;
 
                 $user->notify(new UserHasBeenActivated());

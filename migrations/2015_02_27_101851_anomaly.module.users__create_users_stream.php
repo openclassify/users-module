@@ -58,5 +58,4 @@ class AnomalyModuleUsersCreateUsersStream extends Migration
         'last_activity_at',
         'ip_address',
     ];
-
 }

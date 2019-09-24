@@ -2,7 +2,7 @@
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Notification\ActivateYourAccount;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class SendUserRegisteredEmail
@@ -14,23 +14,30 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 class SendUserRegisteredEmail
 {
 
-    use DispatchesJobs;
-
     /**
      * The user instance.
      *
-     * @var UserInterface
+     * @var UserInterface|Notifiable
      */
     protected $user;
 
     /**
+     * The redirect path.
+     *
+     * @var string
+     */
+    protected $redirect;
+
+    /**
      * Create a new SendUserRegisteredEmail instance.
      *
-     * @param UserInterface $user
+     * @param UserInterface|Notifiable $user
+     * @param string $redirect
      */
-    public function __construct(UserInterface $user)
+    public function __construct(UserInterface $user, $redirect = '/')
     {
-        $this->user = $user;
+        $this->user     = $user;
+        $this->redirect = $redirect;
     }
 
     /**

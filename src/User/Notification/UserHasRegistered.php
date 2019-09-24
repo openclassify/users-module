@@ -18,7 +18,6 @@ use Illuminate\Notifications\Notification;
  */
 class UserHasRegistered extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     /**

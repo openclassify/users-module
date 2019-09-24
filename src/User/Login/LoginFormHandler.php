@@ -39,7 +39,6 @@ class LoginFormHandler
         $response = $security->check($user);
 
         if ($response instanceof Response) {
-
             $authenticator->logout($user);
 
             $builder->setFormResponse($response);

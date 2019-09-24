@@ -85,10 +85,9 @@ class UsersController extends AdminController
         }
 
         if ($user->isAdmin()) {
-
             $this->messages->error('anomaly.module.users::error.impersonate_admins');
 
-            return $this->redirect->back();
+            return back();
         }
 
         return $form
@@ -117,17 +116,16 @@ class UsersController extends AdminController
         }
 
         if ($user->isAdmin()) {
-
             $this->messages->error('anomaly.module.users::error.reset_admins');
 
-            return $this->redirect->back();
+            return back();
         }
 
         $password->invalidate($user);
 
         $this->messages->success('anomaly.module.users::success.reset_user');
 
-        return $this->redirect->back();
+        return back();
     }
 
     /**

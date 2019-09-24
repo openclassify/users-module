@@ -2,7 +2,6 @@
 
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
 
-
 /**
  * Class GetRole
  *

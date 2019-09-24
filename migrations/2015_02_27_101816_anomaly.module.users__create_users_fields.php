@@ -72,5 +72,4 @@ class AnomalyModuleUsersCreateUsersFields extends Migration
             ],
         ],
     ];
-
 }

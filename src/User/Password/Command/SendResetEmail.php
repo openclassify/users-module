@@ -2,7 +2,6 @@
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Notification\ResetYourPassword;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Notifications\Notifiable;
 
 /**
@@ -14,8 +13,6 @@ use Illuminate\Notifications\Notifiable;
  */
 class SendResetEmail
 {
-
-    use DispatchesJobs;
 
     /**
      * The user instance.
@@ -35,7 +32,7 @@ class SendResetEmail
      * Create a new SendResetEmail instance.
      *
      * @param UserInterface $user
-     * @param string        $redirect
+     * @param string $redirect
      */
     public function __construct(UserInterface $user, $redirect = '/')
     {

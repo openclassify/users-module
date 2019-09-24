@@ -1,6 +1,6 @@
 <?php
 
-return [  
+return [
     'forgot_password'          => 'Wachtwoord vergeten?',
     'logged_in'                => 'Je bent nu ingelogd.',
     'logged_out'               => 'Je bent nu uitgelogd.',

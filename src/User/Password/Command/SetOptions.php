@@ -1,14 +1,13 @@
 <?php namespace Anomaly\UsersModule\User\Password\Command;
 
 use Anomaly\UsersModule\User\Password\ForgotPasswordFormBuilder;
-use Illuminate\Contracts\Config\Repository;
 
 /**
- * Class SetDefaultOptions
+ * Class SetOptions
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class SetOptions
 {
@@ -32,10 +31,8 @@ class SetOptions
 
     /**
      * Handle the command.
-     *
-     * @param Repository $config
      */
-    public function handle(Repository $config)
+    public function handle()
     {
         if (!$this->builder->getOption('redirect')) {
             $this->builder->setOption('redirect', '/');
@@ -52,5 +49,4 @@ class SetOptions
             $this->builder->setOption('container_class', 'form-wrapper');
         }
     }
-
 }

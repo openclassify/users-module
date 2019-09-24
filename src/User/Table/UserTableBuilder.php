@@ -162,5 +162,4 @@ class UserTableBuilder extends TableBuilder
             ],
         ],
     ];
-
 }

@@ -59,5 +59,4 @@ class RoleTableBuilder extends TableBuilder
     protected $actions = [
         'delete',
     ];
-
 }

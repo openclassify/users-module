@@ -1,13 +1,11 @@
 <?php namespace Anomaly\UsersModule\User\Login;
 
-use Illuminate\Contracts\Config\Repository;
-
 /**
  * Class LoginFormFields
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class LoginFormFields
 {
@@ -16,11 +14,10 @@ class LoginFormFields
      * Handle the fields.
      *
      * @param LoginFormBuilder $builder
-     * @param Repository       $config
      */
-    public function handle(LoginFormBuilder $builder, Repository $config)
+    public function handle(LoginFormBuilder $builder)
     {
-        $method = $config->get('anomaly.module.users::config.login');
+        $method = config('anomaly.module.users::config.login');
 
         if ($method == 'username') {
             $login = [

@@ -3,14 +3,13 @@
 use Anomaly\Streams\Platform\Message\MessageBag;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Anomaly\UsersModule\User\UserPassword;
-use Illuminate\Contracts\Config\Repository;
 
 /**
  * Class ResetPasswordFormHandler
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class ResetPasswordFormHandler
 {
@@ -18,10 +17,10 @@ class ResetPasswordFormHandler
     /**
      * Handle the form.
      *
-     * @param UserRepositoryInterface  $users
+     * @param UserRepositoryInterface $users
      * @param ResetPasswordFormBuilder $builder
-     * @param MessageBag               $messages
-     * @param UserPassword             $password
+     * @param MessageBag $messages
+     * @param UserPassword $password
      */
     public function handle(
         UserRepositoryInterface $users,
@@ -29,6 +28,7 @@ class ResetPasswordFormHandler
         MessageBag $messages,
         UserPassword $password
     ) {
+        
         $user = $users->findByEmail($builder->getEmail());
 
         /*
@@ -36,7 +36,6 @@ class ResetPasswordFormHandler
          * provided then head back to the form.
          */
         if (!$user) {
-
             $messages->error(trans('anomaly.module.users::error.reset_password'));
 
             return;
@@ -47,7 +46,6 @@ class ResetPasswordFormHandler
          * provided user then back back to the form.
          */
         if (!$password->reset($user, $builder->getCode(), $builder->getFormValue('password'))) {
-
             $messages->error(trans('anomaly.module.users::error.reset_password'));
 
             return;

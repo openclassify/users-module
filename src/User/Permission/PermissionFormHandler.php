@@ -24,8 +24,7 @@ class PermissionFormHandler
         PermissionFormBuilder $builder,
         UserRepositoryInterface $users,
         Redirector $redirect
-    )
-    {
+    ) {
         /* @var UserInterface|EloquentModel $user */
         $user = $builder->getEntry();
 
@@ -38,5 +37,4 @@ class PermissionFormHandler
 
         $builder->setFormResponse($redirect->refresh());
     }
-
 }

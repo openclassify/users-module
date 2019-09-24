@@ -6,7 +6,6 @@ use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
 use Anomaly\UsersModule\User\UserActivator;
 use Anomaly\UsersModule\User\UserAuthenticator;
 
-
 /**
  * Class HandleAutomaticRegistration
  *
@@ -55,5 +54,4 @@ class HandleAutomaticRegistration
 
         $messages->success('anomaly.module.users::message.logged_in');
     }
-
 }

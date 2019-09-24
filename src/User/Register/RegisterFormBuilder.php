@@ -89,7 +89,7 @@ class RegisterFormBuilder extends FormBuilder
      */
     public function onSaved()
     {
-        $this->dispatch(new AssociateActivationRoles($this));
+        dispatch_now(new AssociateActivationRoles($this));
     }
 
     /**

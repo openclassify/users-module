@@ -2,7 +2,6 @@
 
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Anomaly\UsersModule\User\Register\Command\HandleActivateRequest;
-use Illuminate\Translation\Translator;
 
 /**
  * Class RegisterController
@@ -17,17 +16,16 @@ class RegisterController extends PublicController
     /**
      * Return the register view.
      *
-     * @param  Translator $translator
      * @return \Illuminate\Contracts\View\View|mixed
      */
-    public function register(Translator $translator)
+    public function register()
     {
-        $this->template->set(
+        share(
             'meta_title',
-            $translator->trans('anomaly.module.users::breadcrumb.register')
+            trans('anomaly.module.users::breadcrumb.register')
         );
 
-        return $this->view->make('anomaly.module.users::register');
+        return view('anomaly.module.users::register');
     }
 
     /**
@@ -37,8 +35,7 @@ class RegisterController extends PublicController
      */
     public function activate()
     {
-        if (!$this->dispatch(new HandleActivateRequest())) {
-
+        if (!dispatch_now(new HandleActivateRequest())) {
             $this->messages->error('anomaly.module.users::error.activate_user');
 
             return redirect('/');

@@ -5,11 +5,16 @@ use Anomaly\UsersModule\User\Command\ActivateUserByForce;
 use Anomaly\UsersModule\User\Command\SendActivationEmail;
 use Anomaly\UsersModule\User\Command\StartUserActivation;
 use Anomaly\UsersModule\User\Contract\UserInterface;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 
+/**
+ * Class UserActivator
+ *
+ * @link   http://pyrocms.com/
+ * @author PyroCMS, Inc. <support@pyrocms.com>
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class UserActivator
 {
-    use DispatchesJobs;
 
     /**
      * Start a user activation process.
@@ -19,19 +24,19 @@ class UserActivator
      */
     public function start(UserInterface $user)
     {
-        return $this->dispatch(new StartUserActivation($user));
+        return dispatch_now(new StartUserActivation($user));
     }
 
     /**
      * Activate a user by code.
      *
-     * @param  UserInterface $user
-     * @param                $code
-     * @return bool
+     * @param UserInterface $user
+     * @param $code
+     * @return mixed
      */
     public function activate(UserInterface $user, $code)
     {
-        return $this->dispatch(new ActivateUserByCode($user, $code));
+        return dispatch_now(new ActivateUserByCode($user, $code));
     }
 
     /**
@@ -42,18 +47,18 @@ class UserActivator
      */
     public function force(UserInterface $user)
     {
-        return $this->dispatch(new ActivateUserByForce($user));
+        return dispatch_now(new ActivateUserByForce($user));
     }
 
     /**
      * Send an activation email.
      *
      * @param  UserInterface $user
-     * @param  string        $redirect
+     * @param  string $redirect
      * @return bool
      */
     public function send(UserInterface $user, $redirect = '/')
     {
-        return $this->dispatch(new SendActivationEmail($user, $redirect));
+        return dispatch_now(new SendActivationEmail($user, $redirect));
     }
 }

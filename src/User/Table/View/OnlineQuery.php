@@ -1,7 +1,6 @@
 <?php namespace Anomaly\UsersModule\User\Table\View;
 
 use Carbon\Carbon;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -18,13 +17,11 @@ class OnlineQuery
      * Handle the query.
      *
      * @param Builder $query
-     * @param Guard   $auth
      */
-    public function handle(Builder $query, Guard $auth)
+    public function handle(Builder $query)
     {
         $query
             ->where('last_activity_at', '>', new Carbon('-10 minutes'))
-            ->where('id', '!=', $auth->id());
+            ->where('id', '!=', auth()->id());
     }
-
 }

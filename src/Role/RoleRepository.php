@@ -27,7 +27,7 @@ class RoleRepository extends EntryRepository implements RoleRepositoryInterface
      *
      * @param RoleModel $model
      */
-    function __construct(RoleModel $model)
+    public function __construct(RoleModel $model)
     {
         $this->model = $model;
     }

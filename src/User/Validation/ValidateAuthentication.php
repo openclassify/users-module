@@ -2,7 +2,6 @@
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\UserAuthenticator;
-use Illuminate\Contracts\Auth\Guard;
 
 /**
  * Class ValidateAuthentication
@@ -18,14 +17,13 @@ class ValidateAuthentication
      * Handle the validation.
      *
      * @param UserAuthenticator $authenticator
-     * @param Guard             $auth
-     * @param                   $value
+     * @param $value
      * @return UserInterface|bool
      */
-    public function handle(UserAuthenticator $authenticator, Guard $auth, $value)
+    public function handle(UserAuthenticator $authenticator, $value)
     {
         /* @var UserInterface $user */
-        $user = $auth->user();
+        $user = user();
 
         return $authenticator->attempt(
             [

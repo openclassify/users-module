@@ -25,16 +25,6 @@ class RoleModel extends UsersRolesEntryModel implements RoleInterface, StreamsRo
     ];
 
     /**
-     * Get the role slug.
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
      * Get the role name.
      *
      * @return string
@@ -42,16 +32,6 @@ class RoleModel extends UsersRolesEntryModel implements RoleInterface, StreamsRo
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Get the role's permissions.
-     *
-     * @return array
-     */
-    public function getPermissions()
-    {
-        return $this->permissions;
     }
 
     /**
@@ -75,6 +55,26 @@ class RoleModel extends UsersRolesEntryModel implements RoleInterface, StreamsRo
         }
 
         return false;
+    }
+
+    /**
+     * Get the role slug.
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Get the role's permissions.
+     *
+     * @return array
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
     }
 
     /**

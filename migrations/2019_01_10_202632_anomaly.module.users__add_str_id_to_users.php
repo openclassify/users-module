@@ -64,7 +64,6 @@ class AnomalyModuleUsersAddStrIdToUsers extends Migration
 
         /* @var UserInterface|EloquentModel $user */
         foreach ($users->allWithTrashed() as $user) {
-
             if ($user->getStrId()) {
                 continue;
             }
@@ -78,5 +77,4 @@ class AnomalyModuleUsersAddStrIdToUsers extends Migration
 
         $this->assignments()->save($assignment->setAttribute('unique', true));
     }
-
 }

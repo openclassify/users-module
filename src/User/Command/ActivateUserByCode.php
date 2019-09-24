@@ -3,7 +3,6 @@
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 
-
 /**
  * Class ActivateUserByCode
  *
@@ -34,7 +33,7 @@ class ActivateUserByCode
      * @param UserInterface $user
      * @param               $code
      */
-    function __construct(UserInterface $user, $code)
+    public function __construct(UserInterface $user, $code)
     {
         $this->user = $user;
         $this->code = $code;

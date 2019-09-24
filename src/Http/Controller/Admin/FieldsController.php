@@ -45,7 +45,7 @@ class FieldsController extends AdminController
      */
     public function choose(FieldTypeCollection $fieldTypes)
     {
-        return $this->view->make('anomaly.module.users::admin/fields/choose', ['field_types' => $fieldTypes]);
+        return view('anomaly.module.users::admin/fields/choose', ['field_types' => $fieldTypes]);
     }
 
     /**

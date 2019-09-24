@@ -2,7 +2,6 @@
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Notification\PasswordInvalidated;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Notifications\Notifiable;
 
 /**
@@ -14,8 +13,6 @@ use Illuminate\Notifications\Notifiable;
  */
 class SendInvalidatedEmail
 {
-
-    use DispatchesJobs;
 
     /**
      * The user instance.
@@ -35,7 +32,7 @@ class SendInvalidatedEmail
      * Create a new SendInvalidatedEmail instance.
      *
      * @param UserInterface $user
-     * @param string        $redirect
+     * @param string $redirect
      */
     public function __construct(UserInterface $user, $redirect = '/')
     {

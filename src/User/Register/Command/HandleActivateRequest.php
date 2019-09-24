@@ -25,8 +25,7 @@ class HandleActivateRequest
         UserActivator $activator,
         Encrypter $encrypter,
         Request $request
-    )
-    {
+    ) {
         if (!$code = $request->get('code')) {
             return false;
         }

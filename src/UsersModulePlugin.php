@@ -1,7 +1,6 @@
 <?php namespace Anomaly\UsersModule;
 
 use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
-use Anomaly\Streams\Platform\Support\Decorator;
 use Anomaly\UsersModule\Role\Command\GetRole;
 use Anomaly\UsersModule\User\Command\GetUser;
 use Anomaly\UsersModule\User\UserMentions;
@@ -27,13 +26,13 @@ class UsersModulePlugin extends Plugin
             new \Twig_SimpleFunction(
                 'user',
                 function ($identifier = null) {
-                    return (new Decorator())->decorate($this->dispatch(new GetUser($identifier)));
+                    return decorate(dispatch_now(new GetUser($identifier)));
                 }
             ),
             new \Twig_SimpleFunction(
                 'role',
                 function ($identifier) {
-                    return (new Decorator())->decorate($this->dispatch(new GetRole($identifier)));
+                    return decorate(dispatch_now(new GetRole($identifier)));
                 }
             ),
             new \Twig_SimpleFunction(

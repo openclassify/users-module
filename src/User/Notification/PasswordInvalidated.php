@@ -15,7 +15,6 @@ use Illuminate\Notifications\Notification;
  */
 class PasswordInvalidated extends Notification implements ShouldQueue
 {
-
     use Queueable;
 
     /**

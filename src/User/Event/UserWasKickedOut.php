@@ -33,7 +33,7 @@ class UserWasKickedOut
      * @param UserInterface $user
      * @param               $reason
      */
-    function __construct(UserInterface $user, $reason)
+    public function __construct(UserInterface $user, $reason)
     {
         $this->user   = $user;
         $this->reason = $reason;
