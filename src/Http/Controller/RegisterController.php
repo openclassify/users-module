@@ -41,12 +41,12 @@ class RegisterController extends PublicController
 
             $this->messages->error('anomaly.module.users::error.activate_user');
 
-            return $this->redirect->to('/');
+            return redirect('/');
         }
 
         $this->messages->success('anomaly.module.users::success.activate_user');
         $this->messages->success('anomaly.module.users::message.logged_in');
 
-        return $this->redirect->to(request('redirect', '/'));
+        return redirect(request('redirect', '/'));
     }
 }

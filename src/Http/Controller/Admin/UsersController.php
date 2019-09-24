@@ -144,6 +144,6 @@ class UsersController extends AdminController
             abort(404);
         }
 
-        return $this->redirect->to($user->route('view'));
+        return redirect($user->route('view'));
     }
 }

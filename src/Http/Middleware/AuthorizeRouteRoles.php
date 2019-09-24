@@ -124,7 +124,7 @@ class AuthorizeRouteRoles
             }
 
             if ($redirect) {
-                return $this->redirect->to($redirect);
+                return redirect($redirect);
             }
 
             $route = array_get($this->route->getAction(), 'anomaly.module.users::route');
