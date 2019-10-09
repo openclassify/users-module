@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Login;
+<?php
+
+namespace Anomaly\UsersModule\User\Login;
 
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Anomaly\UsersModule\User\Contract\UserInterface;

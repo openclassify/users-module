@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Login;
+<?php
+
+namespace Anomaly\UsersModule\User\Login;
 
 use Anomaly\UsersModule\User\UserAuthenticator;
 use Anomaly\UsersModule\User\UserSecurity;
