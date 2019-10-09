@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule;
+<?php
+
+namespace Anomaly\UsersModule;
 
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Application\Event\ApplicationHasLoaded;
