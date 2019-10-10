@@ -192,7 +192,6 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      */
     public function register()
     {
-        dd('Test');
         foreach (config($this->addon->getNamespace('config.permissions')) as $namespace => $group) {
             foreach (array_get($group, 'permissions', []) as $permission => $permissions) {
                 foreach ($permissions['available'] as $option) {
