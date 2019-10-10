@@ -47,5 +47,12 @@
         "psr-4": {
             "Anomaly\\UsersModuleTest\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anomaly\\UsersModule\\UsersModuleServiceProvider"
+            ]
+        }
     }
 }

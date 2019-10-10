@@ -32,7 +32,6 @@ use Anomaly\UsersModule\User\UserRepository;
  * Class UsersModuleServiceProvider
  *
  * @link   http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class UsersModuleServiceProvider extends AddonServiceProvider
@@ -43,7 +42,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $commands = [
+    public $commands = [
         UsersCleanup::class,
     ];
 
@@ -52,7 +51,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $plugins = [
+    public $plugins = [
         UsersModulePlugin::class,
     ];
 
@@ -61,7 +60,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $schedules = [
+    public $schedules = [
         'daily' => [
             UsersCleanup::class,
         ],
@@ -72,7 +71,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $middleware = [
+    public $middleware = [
         CheckSecurity::class,
         AuthorizeRouteRoles::class,
         AuthorizeModuleAccess::class,
@@ -85,7 +84,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $listeners = [
+    public $listeners = [
         UserWasLoggedIn::class      => [
             TouchLastLogin::class,
         ],
@@ -102,7 +101,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $bindings = [
+    public $bindings = [
         'login'                     => LoginFormBuilder::class,
         'register'                  => RegisterFormBuilder::class,
         'reset_password'            => ResetPasswordFormBuilder::class,
@@ -116,7 +115,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $singletons = [
+    public $singletons = [
         UserRepositoryInterface::class => UserRepository::class,
         RoleRepositoryInterface::class => RoleRepository::class,
     ];
@@ -126,7 +125,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      *
      * @var array
      */
-    protected $routes = [
+    public $routes = [
         'users/self'            => [
             'ttl'  => 0,
             'as'   => 'anomaly.module.users::self',
@@ -193,6 +192,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      */
     public function register()
     {
+        dd('Test');
         foreach (config($this->addon->getNamespace('config.permissions')) as $namespace => $group) {
             foreach (array_get($group, 'permissions', []) as $permission => $permissions) {
                 foreach ($permissions['available'] as $option) {
