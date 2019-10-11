@@ -27,7 +27,6 @@ class LoginController extends PublicController
      */
     public function login(NavigationCollection $navigation, LoginFormBuilder $form)
     {
-        return view('theme::login');
         /*
          * If we're already logged in
          * proceed to the dashboard.
