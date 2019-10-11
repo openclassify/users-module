@@ -186,21 +186,4 @@ class UsersModuleServiceProvider extends AddonServiceProvider
             'uses' => 'Anomaly\UsersModule\Http\Controller\Admin\LoginController@logout',
         ],
     ];
-
-    /**
-     * Register the addon.
-     */
-    public function register()
-    {
-        parent::register();
-        return;
-        foreach (config($this->addon->getNamespace('config.permissions')) as $namespace => $group) {
-            foreach (array_get($group, 'permissions', []) as $permission => $permissions) {
-                foreach ($permissions['available'] as $option) {
-                    // @todo this looks wrong.
-                    config([$namespace . '::permissions.' . $permission . '.' . $option]);
-                }
-            }
-        }
-    }
 }
