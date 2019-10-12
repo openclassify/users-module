@@ -4,7 +4,7 @@
     <div class="container">
         <div class="col-lg-6 col-lg-offset-3">
 
-            {{ form('login').redirect(request('redirect', '/')) }}
+            {{-- {{ form('login')->redirect(request('redirect', '/')) }} --}}
 
             <br>
 

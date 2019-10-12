@@ -38,10 +38,7 @@ class LoginController extends PublicController
             return redirect($home->getHref());
         }
 
-        return $form
-            ->setOption('redirect', 'admin')
-            ->setOption('wrapper_view', 'theme::login')
-            ->render();
+        return view('theme::login');
     }
 
     /**
