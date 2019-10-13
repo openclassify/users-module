@@ -10,7 +10,7 @@ return [
     | Specify whether to use the 'email' or 'username' for logging in.
     |
     */
-    'login'           => env('LOGIN', 'email'),
+    'login' => env('LOGIN', 'email'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,11 +28,38 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Permissions
+    | Authenticators
     |--------------------------------------------------------------------------
     |
-    | Define additional permissions here.
+    | Define login authenticators.
     |
     */
-    'permissions'     => [],
+    'authenticators' => [
+        \Anomaly\DefaultAuthenticatorExtension\DefaultAuthenticatorExtension::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Minimum Length
+    |--------------------------------------------------------------------------
+    |
+    | Specify the required minimum length for passwords.
+    |
+    */
+    'passwords.minimum_length' => env('PASSWORD_LENGTH', 8),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Password Requirements
+    |--------------------------------------------------------------------------
+    |
+    | Specify the security requirements for passwords.
+    |
+    */
+    'passwords.requirements' => [
+        '[0-9]',
+        '[a-z]',
+        '[A-Z]',
+        '[!@#$%^&*()]',
+    ],
 ];

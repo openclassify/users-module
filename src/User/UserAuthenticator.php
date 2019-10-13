@@ -66,13 +66,10 @@ class UserAuthenticator
      */
     public function authenticate(array $credentials)
     {
-        $authenticators = $this->extensions
-            ->search('anomaly.module.users::authenticator.*')
-            ->enabled();
+        foreach (config('users.authenticators', []) as $authenticator) {
 
-        /* @var AuthenticatorExtensionInterface $authenticator */
-        foreach ($authenticators as $authenticator) {
-            $response = $authenticator->authenticate($credentials);
+            /* @var AuthenticatorExtensionInterface $authenticator */
+            $response = app($authenticator)->authenticate($credentials);
 
             if ($response instanceof UserInterface) {
                 return $response;

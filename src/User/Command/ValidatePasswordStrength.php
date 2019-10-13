@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Command;
+<?php
+
+namespace Anomaly\UsersModule\User\Command;
 
 use Illuminate\Validation\Validator;
 
@@ -54,7 +56,7 @@ class ValidatePasswordStrength
             [
                 'password' => array_merge(
                     [
-                        'min:' . config('anomaly.module.users::password.minimum_length'),
+                        'min:' . config('anomaly.module.users::config.password.minimum_length'),
                     ],
                     array_map(
                         function ($requirement) {
@@ -70,7 +72,7 @@ class ValidatePasswordStrength
             $failed = array_filter(
                 $requirements,
                 function ($pattern) {
-                    return !(bool)preg_match('/' . $pattern . '/', $this->password);
+                    return !(bool) preg_match('/' . $pattern . '/', $this->password);
                 }
             );
 

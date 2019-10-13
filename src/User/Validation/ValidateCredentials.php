@@ -26,7 +26,6 @@ class ValidateCredentials
     public function handle(UserAuthenticator $authenticator, LoginFormBuilder $builder)
     {
         if (!$response = $authenticator->authenticate($builder->getPostData())) {
-            dd($response);
             return false;
         }
 
