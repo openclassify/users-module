@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Role;
+<?php
+
+namespace Anomaly\UsersModule\Role;
 
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;

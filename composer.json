@@ -36,7 +36,8 @@
         "anomaly/multiple-field_type": "^3.0",
         "anomaly/datetime-field_type": "^4.0",
         "anomaly/textarea-field_type": "^3.0",
-        "anomaly/checkboxes-field_type": "^3.0"
+        "anomaly/checkboxes-field_type": "^3.0",
+        "anomaly/default_authenticator-extension": "^3.0"
     },
     "autoload": {
         "psr-4": {

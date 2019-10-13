@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Validation;
+<?php
+
+namespace Anomaly\UsersModule\User\Validation;
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Login\LoginFormBuilder;
@@ -8,9 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Class ValidateCredentials
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class ValidateCredentials
 {
@@ -25,6 +26,7 @@ class ValidateCredentials
     public function handle(UserAuthenticator $authenticator, LoginFormBuilder $builder)
     {
         if (!$response = $authenticator->authenticate($builder->getPostData())) {
+            dd($response);
             return false;
         }
 
