@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Table;
+<?php
+
+namespace Anomaly\UsersModule\User\Table;
 
 use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 use Anomaly\UsersModule\User\Table\Action\Activate;
