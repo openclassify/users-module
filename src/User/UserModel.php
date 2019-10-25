@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User;
+<?php
+
+namespace Anomaly\UsersModule\User;
 
 use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
 use Anomaly\Streams\Platform\Support\Collection;
