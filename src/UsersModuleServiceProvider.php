@@ -92,7 +92,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
             SendNewUserNotifications::class,
         ],
         ApplicationHasLoaded::class => [
-            TouchLastActivity::class,
+            //TouchLastActivity::class,
         ],
     ];
 
