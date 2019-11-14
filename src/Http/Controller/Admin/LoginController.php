@@ -38,6 +38,10 @@ class LoginController extends PublicController
             return redirect($home->getHref());
         }
 
+        template([
+            'meta_title' => trans('anomaly.module.users::breadcrumb.login')
+        ]);
+
         return view('theme::login');
     }
 
