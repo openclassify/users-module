@@ -6,9 +6,8 @@ use Anomaly\UsersModule\Role\RoleModel;
 /**
  * Class AnomalyModuleUsersCreateUsersFields
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
 class AnomalyModuleUsersCreateUsersFields extends Migration
 {
@@ -19,8 +18,8 @@ class AnomalyModuleUsersCreateUsersFields extends Migration
      * @var array
      */
     protected $fields = [
-        'email'                      => 'anomaly.field_type.email',
-        'username'                   => [
+        'email'    => 'anomaly.field_type.email',
+        'username' => [
             'type'   => 'anomaly.field_type.slug',
             'config' => [
                 'type'      => '_',
