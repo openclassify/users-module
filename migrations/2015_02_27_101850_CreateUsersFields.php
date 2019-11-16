@@ -4,12 +4,12 @@ use Anomaly\Streams\Platform\Database\Migration\Migration;
 use Anomaly\UsersModule\Role\RoleModel;
 
 /**
- * Class AnomalyModuleUsersCreateUsersFields
+ * Class CreateUsersFields
  *
  * @link   http://pyrocms.com/
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class AnomalyModuleUsersCreateUsersFields extends Migration
+class CreateUsersFields extends Migration
 {
 
     /**

@@ -2,7 +2,13 @@
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
-class AnomalyModuleUsersMakeUsersSearchable extends Migration
+/**
+ * Class MakeUsersSearchable
+ *
+ * @link   http://pyrocms.com/
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
+class MakeUsersSearchable extends Migration
 {
 
     /**

@@ -3,13 +3,12 @@
 use Anomaly\Streams\Platform\Database\Migration\Migration;
 
 /**
- * Class AnomalyModuleUsersCreateUsersStream
+ * Class CreateUsersStream
  *
- * @link          http://pyrocms.com/
- * @author        PyroCMS, Inc. <support@pyrocms.com>
- * @author        Ryan Thompson <ryan@pyrocms.com>
+ * @link   http://pyrocms.com/
+ * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class AnomalyModuleUsersCreateUsersStream extends Migration
+class CreateUsersStream extends Migration
 {
 
     /**

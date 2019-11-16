@@ -1,19 +1,17 @@
 <?php
 
 use Anomaly\Streams\Platform\Database\Migration\Migration;
-use Anomaly\Streams\Platform\Model\EloquentModel;
-use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Anomaly\UsersModule\User\UserRepository;
 
 /**
- * Class AnomalyModuleUsersAddStrIdToUsers
+ * Class AddStrIdToUsers
  *
  * @link   http://pyrocms.com/
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class AnomalyModuleUsersAddStrIdToUsers extends Migration
+class AddStrIdToUsers extends Migration
 {
 
     /**
