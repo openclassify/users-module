@@ -22,10 +22,9 @@ class LoginController extends PublicController
      * Return the admin login form.
      *
      * @param NavigationCollection $navigation
-     * @param LoginFormBuilder $form
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Http\Response
      */
-    public function login(NavigationCollection $navigation, LoginFormBuilder $form)
+    public function login(NavigationCollection $navigation)
     {
         /*
          * If we're already logged in

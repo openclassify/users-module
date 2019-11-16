@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Login;
+<?php
+
+namespace Anomaly\UsersModule\User\Login;
 
 /**
  * Class LoginFormFields
@@ -58,14 +60,14 @@ class LoginFormFields
                             ],
                         ],
                     ],
-                    'remember_me' => [
-                        'label'  => false,
-                        'type'   => 'anomaly.field_type.boolean',
-                        'config' => [
-                            'mode'  => 'checkbox',
-                            'label' => 'anomaly.module.users::field.remember_me.name',
-                        ],
-                    ],
+                    // 'remember_me' => [
+                    //     'label'  => false,
+                    //     'type'   => 'anomaly.field_type.boolean',
+                    //     'config' => [
+                    //         'mode'  => 'checkbox',
+                    //         'label' => 'anomaly.module.users::field.remember_me.name',
+                    //     ],
+                    // ],
                 ]
             )
         );
