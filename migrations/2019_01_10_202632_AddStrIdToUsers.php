@@ -53,6 +53,12 @@ class AddStrIdToUsers extends Migration
      */
     public function up()
     {
+
+        /**
+         * Run parent first!
+         */
+        parent::up();
+
         /**
          * Load the concrete on purpose.
          *
