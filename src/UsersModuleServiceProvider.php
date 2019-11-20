@@ -179,10 +179,12 @@ class UsersModuleServiceProvider extends AddonServiceProvider
         ],
         'admin/login'           => [
             'ttl'  => 0,
+            'as'   => 'login',
             'uses' => 'Anomaly\UsersModule\Http\Controller\Admin\LoginController@login',
         ],
         'admin/logout'          => [
             'ttl'  => 0,
+            'as'   => 'logout',
             'uses' => 'Anomaly\UsersModule\Http\Controller\Admin\LoginController@logout',
         ],
     ];
