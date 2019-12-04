@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Form;
+<?php
+
+namespace Anomaly\UsersModule\User\Form;
 
 use Anomaly\UsersModule\User\UserModel;
 use Anomaly\UsersModule\User\Validation\ValidatePassword;
@@ -25,8 +27,18 @@ class UserFormFields
             'first_name',
             'last_name',
             'display_name',
-            'username',
-            'email',
+            'username' => [
+                'attributes' => [
+                    'autocomplete' => 'off',
+                    'data-lpignore' => true,
+                ]
+            ],
+            'email' => [
+                'attributes' => [
+                    'autocomplete' => 'off',
+                    'data-lpignore' => true,
+                ]
+            ],
             'password' => [
                 'value'      => '',
                 'required'   => false,
@@ -41,7 +53,8 @@ class UserFormFields
                     ],
                 ],
                 'attributes' => [
-                    'autocomplete' => 'new-password',
+                    'autocomplete' => 'off',
+                    'data-lpignore' => true,
                 ],
             ],
             'activated',
