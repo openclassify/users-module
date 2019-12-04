@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Role\Table;
+<?php
+
+namespace Anomaly\UsersModule\Role\Table;
 
 use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
 
@@ -49,14 +51,5 @@ class RoleTableBuilder extends TableBuilder
             'icon'   => 'lock',
             'href'   => 'admin/users/roles/permissions/{entry.id}',
         ],
-    ];
-
-    /**
-     * The table actions.
-     *
-     * @var array
-     */
-    protected $actions = [
-        'delete',
     ];
 }

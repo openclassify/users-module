@@ -81,15 +81,6 @@ class UserTableBuilder extends TableBuilder
     ];
 
     /**
-     * The table actions.
-     *
-     * @var array
-     */
-    public $actions = [
-        'delete',
-    ];
-
-    /**
      * The table filters.
      *
      * @var array
@@ -121,7 +112,9 @@ class UserTableBuilder extends TableBuilder
      * @var array
      */
     protected $columns = [
-        'display_name',
+        'display_name' => [
+            'href' => 'admin/users/edit/{entry.id}',
+        ],
         'username',
         'email',
         'status'     => [
