@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Form;
+<?php
+
+namespace Anomaly\UsersModule\User\Form;
 
 use Anomaly\UsersModule\User\UserModel;
 

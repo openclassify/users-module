@@ -1,6 +1,9 @@
-<?php namespace Anomaly\UsersModule\Http\Controller\Admin;
+<?php
+
+namespace Anomaly\UsersModule\Http\Controller\Admin;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypeCollection;
+use Anomaly\Streams\Platform\Addon\Module\ModuleCollection;
 use Anomaly\Streams\Platform\Assignment\AssignmentModel;
 use Anomaly\Streams\Platform\Assignment\Contract\AssignmentInterface;
 use Anomaly\Streams\Platform\Assignment\Contract\AssignmentRepositoryInterface;
@@ -40,12 +43,13 @@ class FieldsController extends AdminController
     /**
      * Choose a field type for creating a field.
      *
-     * @param  FieldTypeCollection $fieldTypes
+     * @param FieldTypeCollection $fieldTypes
+     * @param ModuleCollection $modules
      * @return \Illuminate\View\View
      */
-    public function choose(FieldTypeCollection $fieldTypes)
+    public function choose(FieldTypeCollection $fieldTypes, ModuleCollection $modules)
     {
-        return view('anomaly.module.users::admin/fields/choose', ['field_types' => $fieldTypes]);
+        return view('streams::fields/choose', ['fieldTypes' => $fieldTypes, 'module' => $modules->active()]);
     }
 
     /**
