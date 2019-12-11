@@ -47,15 +47,6 @@ class UsersModuleServiceProvider extends AddonServiceProvider
     ];
 
     /**
-     * The addon plugins.
-     *
-     * @var array
-     */
-    public $plugins = [
-        UsersModulePlugin::class,
-    ];
-
-    /**
      * The addon schedules.
      *
      * @var array

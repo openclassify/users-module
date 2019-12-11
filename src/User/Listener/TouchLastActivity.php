@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Listener;
+<?php
+
+namespace Anomaly\UsersModule\User\Listener;
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;

@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Console;
+<?php
+
+namespace Anomaly\UsersModule\Console;
 
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Illuminate\Console\Command;
@@ -20,8 +22,15 @@ class UsersCleanup extends Command
      */
     protected $name = 'users:cleanup';
 
+    /**
+     * Handle the command.
+     *
+     * @param \Anomaly\UsersModule\User\Contract\UserRepositoryInterface $users
+     */
     public function handle(UserRepositoryInterface $users)
     {
         $users->cleanup();
+
+        $this->info('Inactive users pruned.');
     }
 }
