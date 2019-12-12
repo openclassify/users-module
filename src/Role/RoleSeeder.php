@@ -39,11 +39,15 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        $locale = config('app.fallback_locale', 'en');
+
         $this->roles->create(
             [
-                'en'   => [
-                    'name'        => 'Admin',
-                    'description' => 'The super admin role.',
+                'name' => [
+                    $locale => 'Admin',
+                ],
+                'description' => [
+                    $locale => 'The super admin role.',
                 ],
                 'slug' => 'admin',
             ]
@@ -51,9 +55,11 @@ class RoleSeeder extends Seeder
 
         $this->roles->create(
             [
-                'en'   => [
-                    'name'        => 'User',
-                    'description' => 'The default user role.',
+                'name' => [
+                    $locale => 'User',
+                ],
+                'description' => [
+                    $locale => 'The default user role.',
                 ],
                 'slug' => 'user',
             ]
@@ -61,9 +67,11 @@ class RoleSeeder extends Seeder
 
         $this->roles->create(
             [
-                'en'   => [
-                    'name'        => 'Guest',
-                    'description' => 'The fallback role for non-users.',
+                'name' => [
+                    $locale => 'Guest',
+                ],
+                'description' => [
+                    $locale => 'The fallback role for non-users.',
                 ],
                 'slug' => 'guest',
             ]

@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Role;
+<?php
+
+namespace Anomaly\UsersModule\Role;
 
 use Anomaly\Streams\Platform\Model\Users\UsersRolesEntryModel;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface as StreamsRole;
@@ -14,15 +16,6 @@ use Anomaly\UsersModule\User\UserCollection;
  */
 class RoleModel extends UsersRolesEntryModel implements RoleInterface, StreamsRole
 {
-
-    /**
-     * Eager loaded relations.
-     *
-     * @var array
-     */
-    protected $with = [
-        'translations',
-    ];
 
     /**
      * Get the role name.

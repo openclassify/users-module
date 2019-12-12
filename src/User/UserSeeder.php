@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User;
+<?php
+
+namespace Anomaly\UsersModule\User;
 
 use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
