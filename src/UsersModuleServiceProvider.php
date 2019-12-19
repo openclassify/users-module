@@ -6,6 +6,7 @@ use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Application\Event\ApplicationHasLoaded;
 use Anomaly\Streams\Platform\Model\Users\UsersRolesEntryModel;
 use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
+use Anomaly\Streams\Platform\Support\Hydrator;
 use Anomaly\UsersModule\Console\UsersCleanup;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeControlPanel;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeModuleAccess;

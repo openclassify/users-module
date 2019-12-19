@@ -34,7 +34,10 @@ class UsersModule extends Module
         ],
         'roles'  => [
             'buttons' => [
-                'new_role',
+                'new_role' => [
+                    'data-toggle' => 'modal',
+                    'data-target' => '#modal',
+                ],
             ],
         ],
         'fields' => [

@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Http\Controller\Admin;
+<?php
+
+namespace Anomaly\UsersModule\Http\Controller\Admin;
 
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\UsersModule\Role\Form\RoleFormBuilder;
@@ -35,7 +37,9 @@ class RolesController extends AdminController
      */
     public function create(RoleFormBuilder $form)
     {
-        return $form->render();
+        return $form
+            ->setAjax(true)
+            ->render();
     }
 
     /**
@@ -47,7 +51,9 @@ class RolesController extends AdminController
      */
     public function edit(RoleFormBuilder $form, $id)
     {
-        return $form->render($id);
+        return $form
+            ->setAjax(true)
+            ->render($id);
     }
 
     /**
