@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Role\Permission;
+<?php
+
+namespace Anomaly\UsersModule\Role\Permission;
 
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
@@ -52,8 +54,7 @@ class PermissionFormFields
 
                 if (!trans()->has(
                     $instructions = $namespace . '::permission.' . $group . '.instructions'
-                )
-                ) {
+                )) {
                     $instructions = null;
                 }
 
@@ -114,6 +115,6 @@ class PermissionFormFields
             }
         }
 
-        $builder->setFields($fields);
+        $builder->setFields(translate($fields));
     }
 }
