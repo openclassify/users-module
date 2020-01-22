@@ -12,6 +12,14 @@ class CreateUsersStream extends Migration
 {
 
     /**
+     * Should the migration delete
+     * its stream when rolling back?
+     *
+     * @var bool
+     */
+    protected $delete = true;
+
+    /**
      * The stream definition.
      *
      * @var string
