@@ -41,6 +41,8 @@ class RoleSeeder extends Seeder
     {
         $locale = config('app.fallback_locale', 'en');
 
+        $this->roles->truncate();
+
         $this->roles->create(
             [
                 'name' => [
