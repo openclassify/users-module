@@ -37,9 +37,7 @@ class RolesController extends AdminController
      */
     public function create(RoleFormBuilder $form)
     {
-        return $form
-            ->setAjax(true)
-            ->render();
+        return $form->render();
     }
 
     /**
@@ -51,9 +49,7 @@ class RolesController extends AdminController
      */
     public function edit(RoleFormBuilder $form, $id)
     {
-        return $form
-            ->setAjax(true)
-            ->render($id);
+        return $form->render($id);
     }
 
     /**
