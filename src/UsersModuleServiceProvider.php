@@ -3,7 +3,6 @@
 namespace Anomaly\UsersModule;
 
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
-use Anomaly\Streams\Platform\Application\Event\ApplicationHasLoaded;
 use Anomaly\Streams\Platform\Model\Users\UsersRolesEntryModel;
 use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
 use Anomaly\UsersModule\Console\UsersCleanup;
@@ -19,7 +18,6 @@ use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Anomaly\UsersModule\User\Event\UserHasRegistered;
 use Anomaly\UsersModule\User\Event\UserWasLoggedIn;
 use Anomaly\UsersModule\User\Listener\SendNewUserNotifications;
-use Anomaly\UsersModule\User\Listener\TouchLastActivity;
 use Anomaly\UsersModule\User\Listener\TouchLastLogin;
 use Anomaly\UsersModule\User\Login\LoginFormBuilder;
 use Anomaly\UsersModule\User\Password\ForgotPasswordFormBuilder;
@@ -81,9 +79,6 @@ class UsersModuleServiceProvider extends AddonServiceProvider
         ],
         UserHasRegistered::class    => [
             SendNewUserNotifications::class,
-        ],
-        ApplicationHasLoaded::class => [
-            //TouchLastActivity::class,
         ],
     ];
 
