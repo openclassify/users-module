@@ -19,21 +19,14 @@ class LoginController extends PublicController
     /**
      * Return the login form.
      *
-     * @param ViewTemplate $template
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|mixed
      * @internal param Guard $auth
      */
-    public function login(ViewTemplate $template)
+    public function login()
     {
         if (auth()->check()) {
             return redirect(request('redirect', '/'));
         }
-
-        // @todo need to figure out variables
-        $template->set(
-            'meta_title',
-            trans('anomaly.module.users::breadcrumb.login')
-        );
 
         return view('anomaly.module.users::login');
     }

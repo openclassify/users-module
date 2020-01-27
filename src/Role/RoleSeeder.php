@@ -2,7 +2,7 @@
 
 namespace Anomaly\UsersModule\Role;
 
-use Anomaly\Streams\Platform\Database\Seeder\Seeder;
+use Illuminate\Database\Seeder;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
 
 /**
@@ -29,8 +29,6 @@ class RoleSeeder extends Seeder
      */
     public function __construct(RoleRepositoryInterface $roles)
     {
-        parent::__construct();
-
         $this->roles = $roles;
     }
 

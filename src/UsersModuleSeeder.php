@@ -2,7 +2,7 @@
 
 namespace Anomaly\UsersModule;
 
-use Anomaly\Streams\Platform\Database\Seeder\Seeder;
+use Illuminate\Database\Seeder;
 use Anomaly\UsersModule\Role\RoleSeeder;
 use Anomaly\UsersModule\User\UserSeeder;
 

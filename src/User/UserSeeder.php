@@ -2,10 +2,8 @@
 
 namespace Anomaly\UsersModule\User;
 
-use Anomaly\Streams\Platform\Database\Seeder\Seeder;
-use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
+use Illuminate\Database\Seeder;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
-use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 
 /**
@@ -51,8 +49,6 @@ class UserSeeder extends Seeder
         RoleRepositoryInterface $roles,
         UserActivator $activator
     ) {
-        parent::__construct();
-
         $this->users     = $users;
         $this->roles     = $roles;
         $this->activator = $activator;
