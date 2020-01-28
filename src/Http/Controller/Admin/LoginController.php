@@ -42,7 +42,7 @@ class LoginController extends PublicController
             'metaTitle' => trans('anomaly.module.users::breadcrumb.login')
         ]);
 
-        return view('theme::login');
+        return view('admin::login');
     }
 
     /**
