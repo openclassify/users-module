@@ -2,11 +2,12 @@
 
 namespace Anomaly\UsersModule\Http\Controller\Admin;
 
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\View;
+use Anomaly\UsersModule\User\UserAuthenticator;
+use Anomaly\UsersModule\User\Login\LoginFormBuilder;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Anomaly\Streams\Platform\Ui\ControlPanel\Component\Navigation\NavigationCollection;
-use Anomaly\UsersModule\User\Login\LoginFormBuilder;
-use Anomaly\UsersModule\User\UserAuthenticator;
-use Illuminate\Routing\Redirector;
 
 /**
  * Class LoginController
@@ -37,8 +38,8 @@ class LoginController extends PublicController
             return redirect($home->getHref());
         }
 
-        template([
-            'meta_title' => trans('anomaly.module.users::breadcrumb.login')
+        View::share([
+            'metaTitle' => trans('anomaly.module.users::breadcrumb.login')
         ]);
 
         return view('theme::login');
