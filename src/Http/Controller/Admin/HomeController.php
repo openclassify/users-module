@@ -23,10 +23,10 @@ class HomeController extends AdminController
      * @param  Redirector           $redirect
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function index(NavigationCollection $navigation, Redirector $redirect)
+    public function index()
     {
-        $home = $navigation->first();
+        $home = cp()->navigation->first();
 
-        return $redirect->to($home->getHref());
+        return redirect($home->getHref());
     }
 }

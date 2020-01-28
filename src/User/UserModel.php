@@ -2,6 +2,7 @@
 
 namespace Anomaly\UsersModule\User;
 
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
 use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;
@@ -21,12 +22,73 @@ use Illuminate\Notifications\Notifiable;
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUser, \Illuminate\Contracts\Auth\Authenticatable
+class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illuminate\Contracts\Auth\Authenticatable
 {
 
     use Notifiable;
     use Authenticatable;
     use CanResetPassword;
+
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+
+    protected $searchable = true;
+
+    protected $versionable = false;
+
+    protected $table = 'users_users';
+
+    protected $titleName = 'display_name';
+
+    protected $rules = [
+        'email' => 'required|unique:users_users,email',
+        'username' => 'required|unique:users_users,username',
+        'password' => 'required',
+        'roles' => 'required',
+        'display_name' => 'required',
+        'first_name' => '',
+        'last_name' => '',
+        'activated' => '',
+        'enabled' => '',
+        'permissions' => '',
+        'last_login_at' => '',
+        'remember_token' => '',
+        'activation_code' => '',
+        'reset_code' => '',
+        'last_activity_at' => '',
+        'ip_address' => '',
+        'str_id' => 'required',
+    ];
+
+    protected $fields = [
+        'email',
+        'username',
+        'password',
+        'roles',
+        'display_name',
+        'first_name',
+        'last_name',
+        'activated',
+        'enabled',
+        'permissions',
+        'last_login_at',
+        'remember_token',
+        'activation_code',
+        'reset_code',
+        'last_activity_at',
+        'ip_address',
+        'str_id',
+    ];
+
+    protected $casts = [];
+
+    protected $dates = ['created_at', 'updated_at', 'last_login_at', 'last_activity_at', 'deleted_at'];
+
+    protected $relationships = ['roles'];
+
+    // @todo put this in $translated and use !empty for isTranslatable.
+
+
+    protected $stream = 'users.users';
 
     /**
      * The eager loaded relationships.
@@ -45,6 +107,16 @@ class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUs
     protected $guarded = [
         'password',
     ];
+
+    /**
+     * The roles relation
+     *
+     * @return Relation
+     */
+    public function roles()
+    {
+        return $this->getFieldType('roles')->getRelation();
+    }
 
     /**
      * Get the string ID.

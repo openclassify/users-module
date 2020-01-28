@@ -2,6 +2,7 @@
 
 namespace Anomaly\UsersModule\Role;
 
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Model\Users\UsersRolesEntryModel;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface as StreamsRole;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
@@ -14,8 +15,45 @@ use Anomaly\UsersModule\User\UserCollection;
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class RoleModel extends UsersRolesEntryModel implements RoleInterface, StreamsRole
+class RoleModel extends EntryModel implements RoleInterface, StreamsRole
 {
+
+    use \Illuminate\Database\Eloquent\SoftDeletes;
+
+    protected $searchable = false;
+
+    protected $versionable = false;
+
+    protected $table = 'users_roles';
+
+    protected $titleName = 'name';
+
+    protected $rules = [
+        'name' => 'required',
+        'slug' => 'required|unique:users_roles,slug',
+        'description' => '',
+        'permissions' => '',
+    ];
+
+    protected $fields = [
+        'name',
+        'slug',
+        'description',
+        'permissions',
+    ];
+
+    protected $casts = ['name' => 'array', 'description' => 'array'];
+
+    protected $with = [];
+
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+
+    protected $relationships = [];
+
+    // @todo put this in $translated and use !empty for isTranslatable.
+    protected $translatedAttributes = ['name', 'description'];
+
+    protected $stream = 'users.roles';
 
     /**
      * Get the role name.
