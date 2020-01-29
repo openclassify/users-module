@@ -37,8 +37,6 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
 
     protected $table = 'users_users';
 
-    protected $titleName = 'display_name';
-
     protected $fields = [
         'email',
         'username',
@@ -63,10 +61,9 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
 
     protected $dates = ['created_at', 'updated_at', 'last_login_at', 'last_activity_at', 'deleted_at'];
 
-    protected $relationships = ['roles'];
-
-    // @todo put this in $translated and use !empty for isTranslatable.
-
+    protected $relationships = [
+        'roles'
+    ];
 
     protected $stream = 'users.users';
 
