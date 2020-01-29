@@ -72,8 +72,8 @@ class UserFormFields
             ],
         ];
 
-        $assignments = $users->getAssignments();
+        $assignments = $users->stream->assignments;
 
-        $builder->setFields(array_merge($fields, $assignments->notLocked()->fieldSlugs()));
+        $builder->setFields(array_merge($fields, $assignments->notLocked()->fieldSlugs()->all()));
     }
 }

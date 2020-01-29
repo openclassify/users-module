@@ -39,26 +39,6 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
 
     protected $titleName = 'display_name';
 
-    protected $rules = [
-        'email' => 'required|unique:users_users,email',
-        'username' => 'required|unique:users_users,username',
-        'password' => 'required',
-        'roles' => 'required',
-        'display_name' => 'required',
-        'first_name' => '',
-        'last_name' => '',
-        'activated' => '',
-        'enabled' => '',
-        'permissions' => '',
-        'last_login_at' => '',
-        'remember_token' => '',
-        'activation_code' => '',
-        'reset_code' => '',
-        'last_activity_at' => '',
-        'ip_address' => '',
-        'str_id' => 'required',
-    ];
-
     protected $fields = [
         'email',
         'username',

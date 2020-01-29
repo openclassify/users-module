@@ -33,9 +33,9 @@ class UserFormSections
             'roles',
         ];
 
-        $assignments = $users->getAssignments();
+        $assignments = $users->stream->assignments;
 
-        $profileFields = $assignments->notLocked()->fieldSlugs();
+        $profileFields = $assignments->notLocked()->fieldSlugs()->all();
 
         $builder->setSections(
             [

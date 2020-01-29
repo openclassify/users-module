@@ -3,7 +3,6 @@
 namespace Anomaly\UsersModule\Role;
 
 use Anomaly\Streams\Platform\Entry\EntryModel;
-use Anomaly\Streams\Platform\Model\Users\UsersRolesEntryModel;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface as StreamsRole;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
 use Anomaly\UsersModule\User\UserCollection;
@@ -27,13 +26,6 @@ class RoleModel extends EntryModel implements RoleInterface, StreamsRole
     protected $table = 'users_roles';
 
     protected $titleName = 'name';
-
-    protected $rules = [
-        'name' => 'required',
-        'slug' => 'required|unique:users_roles,slug',
-        'description' => '',
-        'permissions' => '',
-    ];
 
     protected $fields = [
         'name',
