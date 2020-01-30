@@ -41,7 +41,7 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
         'roles',
     ];
 
-    protected $hidden = [
+    protected $guarded = [
         'password',
     ];
 
