@@ -34,8 +34,6 @@ class RoleModel extends EntryModel implements RoleInterface, StreamsRole
         'permissions',
     ];
 
-    protected $with = [];
-
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $relationships = [];

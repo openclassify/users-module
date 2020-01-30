@@ -57,8 +57,6 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
         'str_id',
     ];
 
-    protected $casts = [];
-
     protected $dates = ['created_at', 'updated_at', 'last_login_at', 'last_activity_at', 'deleted_at'];
 
     protected $relationships = [
@@ -92,7 +90,7 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
      */
     public function roles()
     {
-        return $this->getFieldType('roles')->getRelation();
+        return $this->stream()->assignments->findBySlug('roles')->getRelation();
     }
 
     /**
