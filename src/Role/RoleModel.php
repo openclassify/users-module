@@ -23,18 +23,7 @@ class RoleModel extends EntryModel implements RoleInterface, StreamsRole
 
     protected $versionable = false;
 
-    protected $table = 'users_roles';
-
     protected $titleName = 'name';
-
-    protected $fields = [
-        'name',
-        'slug',
-        'description',
-        'permissions',
-    ];
-
-    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $relationships = [];
 

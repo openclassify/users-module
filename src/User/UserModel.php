@@ -35,51 +35,13 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
 
     protected $versionable = false;
 
-    protected $table = 'users_users';
-
-    protected $fields = [
-        'email',
-        'username',
-        'password',
-        'roles',
-        'display_name',
-        'first_name',
-        'last_name',
-        'activated',
-        'enabled',
-        'permissions',
-        'last_login_at',
-        'remember_token',
-        'activation_code',
-        'reset_code',
-        'last_activity_at',
-        'ip_address',
-        'str_id',
-    ];
-
-    protected $dates = ['created_at', 'updated_at', 'last_login_at', 'last_activity_at', 'deleted_at'];
-
-    protected $relationships = [
-        'roles'
-    ];
-
     protected $stream = 'users.users';
 
-    /**
-     * The eager loaded relationships.
-     *
-     * @var array
-     */
     protected $with = [
         'roles',
     ];
 
-    /**
-     * The guarded attributes.
-     *
-     * @var array
-     */
-    protected $guarded = [
+    protected $hidden = [
         'password',
     ];
 
