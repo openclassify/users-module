@@ -37,10 +37,6 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
 
     protected $stream = 'users.users';
 
-    protected $with = [
-        'roles',
-    ];
-
     protected $guarded = [
         'password',
     ];
