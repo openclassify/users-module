@@ -25,12 +25,37 @@ class RoleModel extends EntryModel implements RoleInterface, StreamsRole
 
     protected $titleName = 'name';
 
-    protected $relationships = [];
-
     // @todo put this in $translated and use !empty for isTranslatable.
     protected $translatedAttributes = ['name', 'description'];
 
-    protected $stream = 'users.roles';
+    protected $stream = [
+        'slug'         => 'roles',
+        'title_column' => 'name',
+        'translatable' => true,
+        'trashable'    => true,
+        'fields' => [
+            'name'        => [
+                'translatable' => true,
+                'required'     => true,
+                'type'         => 'anomaly.field_type.text',
+            ],
+            'slug'        => [
+                'required' => true,
+                'unique'   => true,
+                'type'     => 'anomaly.field_type.slug',
+                'config'   => [
+                    'slugify' => 'name',
+                ],
+            ],
+            'description' => [
+                'translatable' => true,
+                'type'         => 'anomaly.field_type.area',
+            ],
+            'permissions' => [
+                'type' => 'anomaly.field_type.checkboxes',
+            ],
+        ]
+    ];
 
     /**
      * Get the role name.

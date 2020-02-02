@@ -2,18 +2,18 @@
 
 namespace Anomaly\UsersModule\User;
 
+use Illuminate\Auth\Authenticatable;
+use Anomaly\UsersModule\Role\RoleModel;
+use Illuminate\Notifications\Notifiable;
+use Anomaly\UsersModule\Role\RolePresenter;
+use Anomaly\UsersModule\Role\RoleCollection;
+use Anomaly\UsersModule\Role\Command\GetRole;
 use Anomaly\Streams\Platform\Entry\EntryModel;
-use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Anomaly\Streams\Platform\Support\Collection;
+use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;
 use Anomaly\Streams\Platform\User\Contract\UserInterface as StreamsUser;
-use Anomaly\UsersModule\Role\Command\GetRole;
-use Anomaly\UsersModule\Role\RoleCollection;
-use Anomaly\UsersModule\Role\RolePresenter;
-use Anomaly\UsersModule\User\Contract\UserInterface;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Notifications\Notifiable;
 
 /**
  * Class UserModel
@@ -29,13 +29,63 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
     use Authenticatable;
     use CanResetPassword;
 
-    use \Illuminate\Database\Eloquent\SoftDeletes;
-
-    protected $searchable = true;
-
-    protected $versionable = false;
-
-    protected $stream = 'users.users';
+    /**
+     * The stream definition.
+     *
+     * @var array
+     */
+    protected $stream = [
+        'slug'         => 'users',
+        'title_column' => 'display_name',
+        'trashable'    => true,
+        'versionable'  => true,
+        'searchable'   => true,
+        'fields' => [
+            'email'        => [
+                'required' => true,
+                'unique'   => true,
+                'type'     => 'anomaly.field_type.email',
+            ],
+            'username'     => [
+                'required' => true,
+                'unique'   => true,
+                'type'   => 'anomaly.field_type.slug',
+                'config' => [
+                    'type'      => '_',
+                    'lowercase' => false,
+                ],
+            ],
+            'password'     => [
+                'required' => true,
+                'type'   => 'anomaly.field_type.text',
+                'config' => [
+                    'type' => 'password',
+                ],
+            ],
+            'roles'        => [
+                'required' => true,
+                'type'   => 'anomaly.field_type.multiple',
+                'config' => [
+                    'related' => RoleModel::class,
+                ],
+            ],
+            'display_name' => [
+                'required' => true,
+                'type' => 'anomaly.field_type.text',
+            ],
+            'first_name'       => 'anomaly.field_type.text',
+            'last_name'        => 'anomaly.field_type.text',
+            'activated'        => 'anomaly.field_type.boolean',
+            'enabled'          => 'anomaly.field_type.boolean',
+            'permissions'      => 'anomaly.field_type.checkboxes',
+            'last_login_at'    => 'anomaly.field_type.datetime',
+            'remember_token'   => 'anomaly.field_type.text',
+            'activation_code'  => 'anomaly.field_type.text',
+            'reset_code'       => 'anomaly.field_type.text',
+            'last_activity_at' => 'anomaly.field_type.datetime',
+            'ip_address'       => 'anomaly.field_type.text',
+        ],
+    ];
 
     protected $guarded = [
         'password',
