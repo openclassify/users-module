@@ -30,6 +30,26 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
     use CanResetPassword;
 
     /**
+     * The entry table.
+     *
+     * @var string
+     */
+    protected $table = 'users_users';
+
+    /**
+     * The cast types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at'       => 'datetime',
+        'updated_at'       => 'datetime',
+        'deleted_at'       => 'datetime',
+        'last_login_at'    => 'datetime',
+        'last_activity_at' => 'datetime',
+    ];
+
+    /**
      * The stream definition.
      *
      * @var array
@@ -78,10 +98,10 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
             'activated'        => 'anomaly.field_type.boolean',
             'enabled'          => 'anomaly.field_type.boolean',
             'permissions'      => 'anomaly.field_type.checkboxes',
-            'last_login_at'    => 'anomaly.field_type.datetime',
             'remember_token'   => 'anomaly.field_type.text',
             'activation_code'  => 'anomaly.field_type.text',
             'reset_code'       => 'anomaly.field_type.text',
+            'last_login_at'    => 'anomaly.field_type.datetime',
             'last_activity_at' => 'anomaly.field_type.datetime',
             'ip_address'       => 'anomaly.field_type.text',
         ],
@@ -98,7 +118,14 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
      */
     public function roles()
     {
-        return $this->getFieldType('roles')->getRelation();
+        $field = $this->stream()->fields->roles;
+        $type = $field
+            ->type()
+            ->setEntry($this)
+            ->setField($field->slug)
+            ->mergeConfig($field->config);
+
+        return $type->getRelation();
     }
 
     /**

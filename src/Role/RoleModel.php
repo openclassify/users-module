@@ -17,17 +17,31 @@ use Anomaly\UsersModule\User\UserCollection;
 class RoleModel extends EntryModel implements RoleInterface, StreamsRole
 {
 
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    /**
+     * The entry table.
+     *
+     * @var string
+     */
+    protected $table = 'users_roles';
 
-    protected $searchable = false;
+    /**
+     * The cast types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at'  => 'datetime',
+        'updated_at'  => 'datetime',
+        'deleted_at'  => 'datetime',
+        'name'        => 'array',
+        'description' => 'array',
+    ];
 
-    protected $versionable = false;
-
-    protected $titleName = 'name';
-
-    // @todo put this in $translated and use !empty for isTranslatable.
-    protected $translatedAttributes = ['name', 'description'];
-
+    /**
+     * The stream definition.
+     *
+     * @var array
+     */
     protected $stream = [
         'slug'         => 'roles',
         'title_column' => 'name',
