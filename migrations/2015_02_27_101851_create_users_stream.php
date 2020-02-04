@@ -1,6 +1,12 @@
 <?php
 
-use Anomaly\Streams\Platform\Database\Migration\Migration;
+use Anomaly\UsersModule\User\UserModel;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Anomaly\Streams\Platform\Field\FieldSchema;
+use Anomaly\Streams\Platform\Stream\StreamSchema;
+use Anomaly\Streams\Platform\Stream\StreamMigrator;
+use Anomaly\Streams\Platform\Field\Contract\FieldInterface;
 
 /**
  * Class CreateUsersStream
@@ -12,57 +18,26 @@ class CreateUsersStream extends Migration
 {
 
     /**
-     * Should the migration delete
-     * its stream when rolling back?
-     *
-     * @var bool
+     * Run the migration.
      */
-    protected $delete = true;
+    public function up()
+    {
+        $schema = new StreamSchema(UserModel::class);
+
+        $schema->create(function (FieldSchema $schema) {
+            foreach ($schema->stream->fields as $field) {
+                $schema->add($field);
+            }
+        });
+
+        $schema = new StreamSchema(UserModel::class);
+    }
 
     /**
-     * The stream definition.
-     *
-     * @var string
+     * Revert the migration.
      */
-    protected $stream = [
-        'slug'         => 'users',
-        'title_column' => 'display_name',
-        'trashable'    => true,
-    ];
-
-    /**
-     * The stream assignments.
-     *
-     * @var array
-     */
-    protected $assignments = [
-        'email'        => [
-            'required' => true,
-            'unique'   => true,
-        ],
-        'username'     => [
-            'required' => true,
-            'unique'   => true,
-        ],
-        'password'     => [
-            'required' => true,
-        ],
-        'roles'        => [
-            'required' => true,
-        ],
-        'display_name' => [
-            'required' => true,
-        ],
-        'first_name',
-        'last_name',
-        'activated',
-        'enabled',
-        'permissions',
-        'last_login_at',
-        'remember_token',
-        'activation_code',
-        'reset_code',
-        'last_activity_at',
-        'ip_address',
-    ];
+    public function down()
+    {
+        StreamSchema::drop(UserModel::class);
+    }
 }

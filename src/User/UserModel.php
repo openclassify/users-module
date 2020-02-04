@@ -61,6 +61,11 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
         'versionable'  => true,
         'searchable'   => true,
         'fields' => [
+            'str_id'        => [
+                'required' => true,
+                'unique'   => true,
+                'type'     => 'anomaly.field_type.text',
+            ],
             'email'        => [
                 'required' => true,
                 'unique'   => true,

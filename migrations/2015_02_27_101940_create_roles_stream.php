@@ -1,6 +1,9 @@
 <?php
 
-use Anomaly\Streams\Platform\Database\Migration\Migration;
+use Anomaly\UsersModule\Role\RoleModel;
+use Illuminate\Database\Migrations\Migration;
+use Anomaly\Streams\Platform\Field\FieldSchema;
+use Anomaly\Streams\Platform\Stream\StreamSchema;
 
 /**
  * Class CreateRolesStream
@@ -12,42 +15,26 @@ class CreateRolesStream extends Migration
 {
 
     /**
-     * Should the migration delete
-     * its stream when rolling back?
-     *
-     * @var bool
+     * Run the migration.
      */
-    protected $delete = true;
+    public function up()
+    {
+        $schema = new StreamSchema(RoleModel::class);
+
+        $schema->create(function (FieldSchema $schema) {
+            foreach ($schema->stream->fields as $field) {
+                $schema->add($field);
+            }
+        });
+
+        $schema = new StreamSchema(RoleModel::class);
+    }
 
     /**
-     * The stream definition.
-     *
-     * @var array
+     * Revert the migration.
      */
-    protected $stream = [
-        'slug'         => 'roles',
-        'title_column' => 'name',
-        'translatable' => true,
-        'trashable'    => true,
-    ];
-
-    /**
-     * The stream assignments.
-     *
-     * @var array
-     */
-    protected $assignments = [
-        'name'        => [
-            'required'     => true,
-            'translatable' => true,
-        ],
-        'slug'        => [
-            'required' => true,
-            'unique'   => true,
-        ],
-        'description' => [
-            'translatable' => true,
-        ],
-        'permissions',
-    ];
+    public function down()
+    {
+        StreamSchema::drop(RoleModel::class);
+    }
 }

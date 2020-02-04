@@ -63,7 +63,7 @@ class RoleModel extends EntryModel implements RoleInterface, StreamsRole
             ],
             'description' => [
                 'translatable' => true,
-                'type'         => 'anomaly.field_type.area',
+                'type'         => 'anomaly.field_type.textarea',
             ],
             'permissions' => [
                 'type' => 'anomaly.field_type.checkboxes',
