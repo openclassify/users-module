@@ -123,7 +123,7 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
      */
     public function roles()
     {
-        return $this->stream()->fields->roles->type()->getRelation();
+        return $this->stream()->fields->roles->type()->setEntry($this)->getRelation();
     }
 
     /**
