@@ -45,7 +45,6 @@ class RoleModel extends EntryModel implements RoleInterface, StreamsRole
     protected $stream = [
         'slug'         => 'roles',
         'title_column' => 'name',
-        'translatable' => true,
         'trashable'    => true,
         'fields' => [
             'name'        => [
