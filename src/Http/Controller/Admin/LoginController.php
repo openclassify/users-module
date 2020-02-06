@@ -22,10 +22,9 @@ class LoginController extends PublicController
     /**
      * Return the admin login form.
      *
-     * @param NavigationCollection $navigation
      * @return \Illuminate\Http\Response
      */
-    public function login(NavigationCollection $navigation)
+    public function login()
     {
         /*
          * If we're already logged in
@@ -34,8 +33,9 @@ class LoginController extends PublicController
          * Replace this later with a
          * configurable landing page.
          */
-        if (auth()->check() && $home = $navigation->first()) {
-            return redirect($home->getHref());
+
+        if (auth()->check()) {
+            return redirect('admin');
         }
 
         View::share([
