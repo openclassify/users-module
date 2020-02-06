@@ -2,15 +2,16 @@
 
 namespace Anomaly\UsersModule\User;
 
-use Anomaly\Streams\Platform\Entry\EntryModel;
 use Illuminate\Auth\Authenticatable;
 use Anomaly\UsersModule\Role\RoleModel;
 use Illuminate\Notifications\Notifiable;
 use Anomaly\UsersModule\Role\RolePresenter;
 use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\Role\Command\GetRole;
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Anomaly\Streams\Platform\Support\Collection;
+use Anomaly\Streams\Platform\Model\Traits\Streams;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;
 use Anomaly\Streams\Platform\User\Contract\UserInterface as StreamsUser;
@@ -24,7 +25,7 @@ use Anomaly\Streams\Platform\User\Contract\UserInterface as StreamsUser;
  */
 class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illuminate\Contracts\Auth\Authenticatable
 {
-
+    use Streams;
     use Notifiable;
     use Authenticatable;
     use CanResetPassword;
@@ -54,7 +55,7 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
      *
      * @var array
      */
-    protected $stream = [
+    protected static $stream = [
         'slug'         => 'users',
         'title_column' => 'display_name',
         'trashable'    => true,

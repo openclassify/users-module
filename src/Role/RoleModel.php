@@ -2,10 +2,11 @@
 
 namespace Anomaly\UsersModule\Role;
 
-use Anomaly\Streams\Platform\Entry\EntryModel;
-use Anomaly\Streams\Platform\User\Contract\RoleInterface as StreamsRole;
-use Anomaly\UsersModule\Role\Contract\RoleInterface;
 use Anomaly\UsersModule\User\UserCollection;
+use Anomaly\Streams\Platform\Entry\EntryModel;
+use Anomaly\Streams\Platform\Model\Traits\Streams;
+use Anomaly\UsersModule\Role\Contract\RoleInterface;
+use Anomaly\Streams\Platform\User\Contract\RoleInterface as StreamsRole;
 
 /**
  * Class RoleModel
@@ -16,6 +17,8 @@ use Anomaly\UsersModule\User\UserCollection;
  */
 class RoleModel extends EntryModel implements RoleInterface, StreamsRole
 {
+
+    use Streams;
 
     /**
      * The entry table.
@@ -42,7 +45,7 @@ class RoleModel extends EntryModel implements RoleInterface, StreamsRole
      *
      * @var array
      */
-    protected $stream = [
+    protected static $stream = [
         'slug'         => 'roles',
         'title_column' => 'name',
         'trashable'    => true,

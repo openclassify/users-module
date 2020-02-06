@@ -33,7 +33,7 @@ class UserFormSections
             'roles',
         ];
 
-        $assignments = $users->stream->assignments;
+        $assignments = $users->stream()->assignments;
 
         $profileFields = $assignments->notLocked()->fieldSlugs()->all();
 
