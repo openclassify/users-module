@@ -91,8 +91,8 @@ class UserSeeder extends Seeder
             ]
         );
 
-        $administrator->roles()->sync([$admin->getId()]);
-        $demo->roles()->sync([$user->getId()]);
+        $administrator->roles()->sync([$admin->getKey()]);
+        $demo->roles()->sync([$user->getKey()]);
 
         $this->activator->force($demo);
         $this->activator->force($administrator);

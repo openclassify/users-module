@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Permission;
+<?php
+
+namespace Anomaly\UsersModule\User\Permission;
 
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Message\MessageBag;
@@ -91,12 +93,12 @@ class PermissionFormBuilder extends FormBuilder
 
         $breadcrumbs->add(
             $user->getDisplayName(),
-            'admin/users/edit/' . $user->getId()
+            'admin/users/edit/' . $user->getKey()
         );
 
         $breadcrumbs->add(
             'anomaly.module.users::breadcrumb.permissions',
-            'admin/users/permissions/' . $user->getId()
+            'admin/users/permissions/' . $user->getKey()
         );
     }
 

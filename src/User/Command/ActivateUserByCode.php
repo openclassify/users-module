@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Command;
+<?php
+
+namespace Anomaly\UsersModule\User\Command;
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
@@ -51,7 +53,7 @@ class ActivateUserByCode
             return false;
         }
 
-        if ($this->user->getId() !== $user->getId()) {
+        if ($this->user->getKey() !== $user->getKey()) {
             return false;
         }
 

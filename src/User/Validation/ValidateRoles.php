@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Validation;
+<?php
+
+namespace Anomaly\UsersModule\User\Validation;
 
 use Anomaly\Streams\Platform\Message\MessageBag;
 use Anomaly\Streams\Platform\Support\Authorizer;
@@ -27,7 +29,7 @@ class ValidateRoles
     {
         $admin = $roles->findBySlug('admin');
 
-        if (!in_array($admin->getId(), $value)) {
+        if (!in_array($admin->getKey(), $value)) {
             return true;
         }
 

@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Password\Command;
+<?php
+
+namespace Anomaly\UsersModule\User\Password\Command;
 
 use Anomaly\Streams\Platform\Model\EloquentModel;
 use Anomaly\UsersModule\User\Contract\UserInterface;
@@ -63,7 +65,7 @@ class ResetPassword
             return false;
         }
 
-        if ($user->getId() !== $this->user->getId()) {
+        if ($user->getKey() !== $this->user->getKey()) {
             return false;
         }
 

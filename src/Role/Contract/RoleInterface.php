@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Role\Contract;
+<?php
+
+namespace Anomaly\UsersModule\Role\Contract;
 
 use Anomaly\Streams\Platform\Entry\Contract\EntryInterface;
 use Anomaly\UsersModule\User\UserCollection;

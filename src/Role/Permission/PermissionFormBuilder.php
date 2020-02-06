@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\Role\Permission;
+<?php
+
+namespace Anomaly\UsersModule\Role\Permission;
 
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Message\MessageBag;
@@ -85,10 +87,10 @@ class PermissionFormBuilder extends FormBuilder
             return;
         }
 
-        $breadcrumbs->add($role->getName(), 'admin/users/roles/edit/' . $role->getId());
+        $breadcrumbs->add($role->getName(), 'admin/users/roles/edit/' . $role->getKey());
         $breadcrumbs->add(
             'anomaly.module.users::breadcrumb.permissions',
-            'admin/users/roles/permissions/' . $role->getId()
+            'admin/users/roles/permissions/' . $role->getKey()
         );
     }
 

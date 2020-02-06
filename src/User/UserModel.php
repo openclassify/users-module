@@ -2,13 +2,13 @@
 
 namespace Anomaly\UsersModule\User;
 
+use Anomaly\Streams\Platform\Entry\EntryModel;
 use Illuminate\Auth\Authenticatable;
 use Anomaly\UsersModule\Role\RoleModel;
 use Illuminate\Notifications\Notifiable;
 use Anomaly\UsersModule\Role\RolePresenter;
 use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\Role\Command\GetRole;
-use Anomaly\Streams\Platform\Entry\EntryModel;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
@@ -209,7 +209,7 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
 
         /* @var RoleInterface $role */
         foreach ($roles = $this->getRoles() as $attached) {
-            if ($attached->getId() === $role->getId()) {
+            if ($attached->getKey() === $role->getKey()) {
                 return true;
             }
         }
@@ -303,7 +303,7 @@ class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illum
     public function isDeletable()
     {
         // You can't delete yourself.
-        if ($this->getId() == app('auth')->id()) {
+        if ($this->getKey() == app('auth')->id()) {
             return false;
         }
 
