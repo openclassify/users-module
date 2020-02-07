@@ -25,7 +25,7 @@ class CreateUsersStream extends Migration
         $schema = new StreamSchema(UserModel::class);
 
         $schema->create(function (FieldSchema $schema) {
-            foreach ($schema->stream()->fields as $field) {
+            foreach ($schema->stream->fields as $field) {
                 $schema->add($field);
             }
         });

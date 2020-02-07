@@ -22,7 +22,7 @@ class CreateRolesStream extends Migration
         $schema = new StreamSchema(RoleModel::class);
 
         $schema->create(function (FieldSchema $schema) {
-            foreach ($schema->stream()->fields as $field) {
+            foreach ($schema->stream->fields as $field) {
                 $schema->add($field);
             }
         });
