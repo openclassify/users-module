@@ -1,4 +1,6 @@
-<?php namespace Anomaly\UsersModule\User\Command;
+<?php
+
+namespace Anomaly\UsersModule\User\Command;
 
 use Anomaly\UsersModule\User\Contract\UserInterface;
 
@@ -35,7 +37,7 @@ class SetStrId
     public function handle()
     {
         if (!$this->user->getStrId()) {
-            $this->user->setRawAttribute('str_id', str_random(24));
+            $this->user->setAttribute('str_id', str_random(24));
         }
     }
 }
