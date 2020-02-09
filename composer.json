@@ -28,17 +28,7 @@
         "source": "https://github.com/anomalylabs/users-module"
     },
     "require": {
-        "anomaly/streams-platform": "^2.0",
-        "anomaly/email-field_type": "^3.0",
-        "anomaly/slug-field_type": "^3.0",
-        "anomaly/text-field_type": "^3.0",
-        "anomaly/select-field_type": "^3.0",
-        "anomaly/boolean-field_type": "^3.0",
-        "anomaly/multiple-field_type": "^3.0",
-        "anomaly/datetime-field_type": "^4.0",
-        "anomaly/textarea-field_type": "^3.0",
-        "anomaly/checkboxes-field_type": "^3.0",
-        "anomaly/default_authenticator-extension": "^3.0"
+        "anomaly/streams-platform": "^2.0"
     },
     "autoload": {
         "psr-4": {
