@@ -1,12 +1,9 @@
 <?php
 
 use Anomaly\UsersModule\User\UserModel;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Anomaly\Streams\Platform\Field\FieldSchema;
 use Anomaly\Streams\Platform\Stream\StreamSchema;
-use Anomaly\Streams\Platform\Stream\StreamMigrator;
-use Anomaly\Streams\Platform\Field\Contract\FieldInterface;
 
 /**
  * Class CreateUsersStream
@@ -38,6 +35,6 @@ class CreateUsersStream extends Migration
      */
     public function down()
     {
-        StreamSchema::drop(UserModel::class);
+        (new StreamSchema(UserModel::class))->drop(UserModel::class);
     }
 }

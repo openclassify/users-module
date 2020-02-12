@@ -35,6 +35,6 @@ class CreateRolesStream extends Migration
      */
     public function down()
     {
-        StreamSchema::drop(RoleModel::class);
+        (new StreamSchema(RoleModel::class))->drop(RoleModel::class);
     }
 }
