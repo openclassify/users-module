@@ -81,9 +81,7 @@ class UserSecurity
      */
     public function check(UserInterface $user = null)
     {
-        $extensions = $this->extensions
-            ->search('anomaly.module.users::security_check.*')
-            ->enabled();
+        $extensions = $this->extensions->search('anomaly.module.users::security_check.*');
 
         /* @var SecurityCheckInterface $extension */
         foreach ($extensions as $extension) {
