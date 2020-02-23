@@ -2,29 +2,27 @@
 
 namespace Anomaly\UsersModule;
 
-use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
-use Anomaly\Streams\Platform\Model\Users\UsersRolesEntryModel;
-use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
+use Anomaly\UsersModule\Role\RoleRepository;
+use Anomaly\UsersModule\User\UserRepository;
 use Anomaly\UsersModule\Console\UsersCleanup;
+use Anomaly\UsersModule\User\Event\UserWasLoggedIn;
+use Anomaly\UsersModule\User\Login\LoginFormBuilder;
+use Anomaly\UsersModule\User\Event\UserHasRegistered;
+use Anomaly\UsersModule\User\Listener\TouchLastLogin;
+use Anomaly\UsersModule\Http\Middleware\CheckSecurity;
+use Anomaly\UsersModule\User\Command\DefineStreamGate;
+use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
+use Anomaly\Streams\Platform\Stream\Event\StreamWasBuilt;
+use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
+use Anomaly\UsersModule\Http\Middleware\AuthorizeRouteRoles;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeControlPanel;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeModuleAccess;
-use Anomaly\UsersModule\Http\Middleware\AuthorizeRoutePermission;
-use Anomaly\UsersModule\Http\Middleware\AuthorizeRouteRoles;
-use Anomaly\UsersModule\Http\Middleware\CheckSecurity;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
-use Anomaly\UsersModule\Role\RoleModel;
-use Anomaly\UsersModule\Role\RoleRepository;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
-use Anomaly\UsersModule\User\Event\UserHasRegistered;
-use Anomaly\UsersModule\User\Event\UserWasLoggedIn;
 use Anomaly\UsersModule\User\Listener\SendNewUserNotifications;
-use Anomaly\UsersModule\User\Listener\TouchLastLogin;
-use Anomaly\UsersModule\User\Login\LoginFormBuilder;
-use Anomaly\UsersModule\User\Password\ForgotPasswordFormBuilder;
 use Anomaly\UsersModule\User\Password\ResetPasswordFormBuilder;
-use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
-use Anomaly\UsersModule\User\UserModel;
-use Anomaly\UsersModule\User\UserRepository;
+use Anomaly\UsersModule\User\Password\ForgotPasswordFormBuilder;
+use Anomaly\UsersModule\Http\Middleware\AuthorizeRoutePermission;
 
 /**
  * Class UsersModuleServiceProvider
@@ -80,6 +78,9 @@ class UsersModuleServiceProvider extends AddonServiceProvider
         UserHasRegistered::class    => [
             SendNewUserNotifications::class,
         ],
+        StreamWasBuilt::class => [
+            DefineStreamGate::class,
+        ]
     ];
 
     /**
@@ -92,8 +93,6 @@ class UsersModuleServiceProvider extends AddonServiceProvider
         'register'                  => RegisterFormBuilder::class,
         'reset_password'            => ResetPasswordFormBuilder::class,
         'forgot_password'           => ForgotPasswordFormBuilder::class,
-        UsersUsersEntryModel::class => UserModel::class,
-        UsersRolesEntryModel::class => RoleModel::class,
     ];
 
     /**
