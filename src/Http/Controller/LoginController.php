@@ -3,7 +3,6 @@
 namespace Anomaly\UsersModule\Http\Controller;
 
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
-use Anomaly\Streams\Platform\View\ViewTemplate;
 use Anomaly\UsersModule\User\UserAuthenticator;
 
 /**

@@ -14,7 +14,6 @@ use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\Model\Traits\Streams;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;
-use Anomaly\Streams\Platform\User\Contract\UserInterface as StreamsUser;
 
 /**
  * Class UserModel
@@ -23,7 +22,7 @@ use Anomaly\Streams\Platform\User\Contract\UserInterface as StreamsUser;
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class UserModel extends EntryModel implements UserInterface, StreamsUser, \Illuminate\Contracts\Auth\Authenticatable
+class UserModel extends EntryModel implements UserInterface, \Illuminate\Contracts\Auth\Authenticatable
 {
     use Streams;
     use Notifiable;
