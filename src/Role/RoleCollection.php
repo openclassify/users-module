@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\Role;
 
-use Anomaly\Streams\Platform\Entry\EntryCollection;
+use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
 
 /**
@@ -10,7 +10,7 @@ use Anomaly\UsersModule\Role\Contract\RoleInterface;
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class RoleCollection extends EntryCollection
+class RoleCollection extends Collection
 {
 
     /**

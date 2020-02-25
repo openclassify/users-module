@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\User;
 
-use Anomaly\Streams\Platform\Entry\EntryCollection;
+use Anomaly\Streams\Platform\Support\Collection;
 
 /**
  * Class UserCollection
@@ -9,7 +9,7 @@ use Anomaly\Streams\Platform\Entry\EntryCollection;
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class UserCollection extends EntryCollection
+class UserCollection extends Collection
 {
 
 }
