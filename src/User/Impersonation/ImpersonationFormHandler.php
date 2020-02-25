@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\User\Impersonation;
 
-use Anomaly\Streams\Platform\Message\MessageBag;
+use Anomaly\Streams\Platform\Message\MessageManger;
 use Anomaly\UsersModule\User\UserAuthenticator;
 use Illuminate\Translation\Translator;
 use Illuminate\Routing\Redirector;
@@ -20,14 +20,14 @@ class ImpersonationFormHandler
      * @param UserAuthenticator        $authenticator
      * @param Translator               $translator
      * @param Redirector               $redirector
-     * @param MessageBag               $messages
+     * @param MessageManger               $messages
      */
     public function handle(
         ImpersonationFormBuilder $builder,
         UserAuthenticator $authenticator,
         Translator $translator,
         Redirector $redirector,
-        MessageBag $messages
+        MessageManger $messages
     ) {
         $authenticator->login($user = $builder->getUser());
 

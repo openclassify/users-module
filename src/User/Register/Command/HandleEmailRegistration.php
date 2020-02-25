@@ -1,7 +1,7 @@
 <?php namespace Anomaly\UsersModule\User\Register\Command;
 
 use Anomaly\UsersModule\User\UserActivator;
-use Anomaly\Streams\Platform\Message\MessageBag;
+use Anomaly\Streams\Platform\Message\MessageManger;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
 
@@ -29,9 +29,9 @@ class HandleEmailRegistration
      * Handle the command.
      *
      * @param UserActivator $activator
-     * @param MessageBag    $messages
+     * @param MessageManger    $messages
      */
-    public function handle(UserActivator $activator, MessageBag $messages)
+    public function handle(UserActivator $activator, MessageManger $messages)
     {
         /* @var UserInterface $user */
         $user = $this->builder->getFormEntry();

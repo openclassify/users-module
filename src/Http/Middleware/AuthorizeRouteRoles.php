@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\Http\Middleware;
 
-use Anomaly\Streams\Platform\Message\MessageBag;
+use Anomaly\Streams\Platform\Message\MessageManger;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Closure;
 use Illuminate\Http\Request;
@@ -18,16 +18,16 @@ class AuthorizeRouteRoles
     /**
      * The message bag.
      *
-     * @var MessageBag
+     * @var MessageManger
      */
     protected $messages;
 
     /**
      * Create a new AuthorizeModuleAccess instance.
      *
-     * @param MessageBag $messages
+     * @param MessageManger $messages
      */
-    public function __construct(MessageBag $messages)
+    public function __construct(MessageManger $messages)
     {
         $this->messages = $messages;
     }
