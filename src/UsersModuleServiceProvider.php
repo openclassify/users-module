@@ -23,6 +23,7 @@ use Anomaly\UsersModule\User\Listener\SendNewUserNotifications;
 use Anomaly\UsersModule\User\Password\ResetPasswordFormBuilder;
 use Anomaly\UsersModule\User\Password\ForgotPasswordFormBuilder;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeRoutePermission;
+use Anomaly\UsersModule\User\UserModel;
 
 /**
  * Class UsersModuleServiceProvider
@@ -173,4 +174,11 @@ class UsersModuleServiceProvider extends AddonServiceProvider
             'uses' => 'Anomaly\UsersModule\Http\Controller\Admin\LoginController@logout',
         ],
     ];
+
+    public function boot()
+    {
+        $this->app->singleton('users.users', function() {
+            return (new UserModel)->stream();
+        });
+    }
 }
