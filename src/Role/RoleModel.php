@@ -6,6 +6,7 @@ use Anomaly\UsersModule\User\UserCollection;
 use Anomaly\Streams\Platform\Entry\EntryModel;
 use Anomaly\Streams\Platform\Model\Traits\Streams;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class RoleModel
@@ -14,7 +15,7 @@ use Anomaly\UsersModule\Role\Contract\RoleInterface;
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class RoleModel extends EntryModel implements RoleInterface
+class RoleModel extends Model implements RoleInterface
 {
 
     use Streams;
