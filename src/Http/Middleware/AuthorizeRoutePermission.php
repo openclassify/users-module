@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\Http\Middleware;
 
-use Anomaly\Streams\Platform\Message\MessageManger;
+use Anomaly\Streams\Platform\Message\MessageManager;
 use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\Streams\Platform\User\Contract\UserInterface;
 use Closure;
@@ -19,7 +19,7 @@ class AuthorizeRoutePermission
     /**
      * The message bag.
      *
-     * @var MessageManger
+     * @var MessageManager
      */
     protected $messages;
 
@@ -33,10 +33,10 @@ class AuthorizeRoutePermission
     /**
      * Create a new AuthorizeModuleAccess instance.
      *
-     * @param MessageManger $messages
+     * @param MessageManager $messages
      * @param Authorizer $authorizer
      */
-    public function __construct(MessageManger $messages, Authorizer $authorizer)
+    public function __construct(MessageManager $messages, Authorizer $authorizer)
     {
         $this->messages   = $messages;
         $this->authorizer = $authorizer;

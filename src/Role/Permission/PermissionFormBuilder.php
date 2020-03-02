@@ -3,7 +3,7 @@
 namespace Anomaly\UsersModule\Role\Permission;
 
 use Anomaly\Streams\Platform\Addon\Addon;
-use Anomaly\Streams\Platform\Message\MessageManger;
+use Anomaly\Streams\Platform\Message\MessageManager;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
@@ -67,14 +67,14 @@ class PermissionFormBuilder extends FormBuilder
      *
      * @param  RoleRepositoryInterface $roles
      * @param  BreadcrumbCollection    $breadcrumbs
-     * @param  MessageManger              $messages
+     * @param  MessageManager              $messages
      * @param  Redirector              $redirect
      * @return \Illuminate\Http\RedirectResponse
      */
     public function onReady(
         RoleRepositoryInterface $roles,
         BreadcrumbCollection $breadcrumbs,
-        MessageManger $messages,
+        MessageManager $messages,
         Redirector $redirect
     ) {
         $this->setEntry($role = $roles->find($this->getEntry()));

@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\User\Register\Command;
 
-use Anomaly\Streams\Platform\Message\MessageManger;
+use Anomaly\Streams\Platform\Message\MessageManager;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Notification\UserPendingActivation;
 use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
@@ -36,9 +36,9 @@ class HandleManualRegistration
     /**
      * Handle the command.
      *
-     * @param MessageManger $messages
+     * @param MessageManager $messages
      */
-    public function handle(MessageManger $messages)
+    public function handle(MessageManager $messages)
     {
         if (!is_null($message = $this->builder->getFormOption('pending_message'))) {
             $messages->info($message);

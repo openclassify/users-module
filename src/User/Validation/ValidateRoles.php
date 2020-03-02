@@ -2,7 +2,7 @@
 
 namespace Anomaly\UsersModule\User\Validation;
 
-use Anomaly\Streams\Platform\Message\MessageManger;
+use Anomaly\Streams\Platform\Message\MessageManager;
 use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
 
@@ -20,12 +20,12 @@ class ValidateRoles
      * Handle the validation.
      *
      * @param RoleRepositoryInterface  $roles
-     * @param MessageManger               $messages
+     * @param MessageManager               $messages
      * @param Authorizer               $authorizer
      * @param                          $value
      * @return bool
      */
-    public function handle(RoleRepositoryInterface $roles, MessageManger $messages, Authorizer $authorizer, $value)
+    public function handle(RoleRepositoryInterface $roles, MessageManager $messages, Authorizer $authorizer, $value)
     {
         $admin = $roles->findBySlug('admin');
 
