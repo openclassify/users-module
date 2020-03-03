@@ -177,6 +177,8 @@ class UsersModuleServiceProvider extends AddonServiceProvider
 
     public function boot()
     {
+        parent::boot();
+        
         $this->app->singleton('users.users', function() {
             return (new UserModel)->stream();
         });
