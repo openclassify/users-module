@@ -17,7 +17,7 @@ class UserPolicy
      */
     public function viewAny(UserModel $user)
     {
-        return true;
+        //
     }
 
     /**
@@ -29,7 +29,7 @@ class UserPolicy
      */
     public function view(UserModel $user, UserModel $model)
     {
-        return true;
+        //
     }
 
     /**
@@ -40,7 +40,7 @@ class UserPolicy
      */
     public function create(UserModel $user)
     {
-        return true;
+        //
     }
 
     /**
