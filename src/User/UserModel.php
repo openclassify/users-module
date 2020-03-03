@@ -15,6 +15,7 @@ use Anomaly\Streams\Platform\Model\Traits\Streams;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 
 /**
  * Class UserModel
@@ -27,6 +28,7 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
 {
     use Streams;
     use Notifiable;
+    use Authorizable;
     use Authenticatable;
     use CanResetPassword;
 

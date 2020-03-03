@@ -2,6 +2,8 @@
 
 namespace Anomaly\UsersModule;
 
+use Anomaly\UsersModule\User\UserModel;
+use Anomaly\UsersModule\User\UserPolicy;
 use Anomaly\UsersModule\Role\RoleRepository;
 use Anomaly\UsersModule\User\UserRepository;
 use Anomaly\UsersModule\Console\UsersCleanup;
@@ -23,7 +25,6 @@ use Anomaly\UsersModule\User\Listener\SendNewUserNotifications;
 use Anomaly\UsersModule\User\Password\ResetPasswordFormBuilder;
 use Anomaly\UsersModule\User\Password\ForgotPasswordFormBuilder;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeRoutePermission;
-use Anomaly\UsersModule\User\UserModel;
 
 /**
  * Class UsersModuleServiceProvider
@@ -85,7 +86,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
     ];
 
     /**
-     * The class bindings.
+     * The addon bindings.
      *
      * @var array
      */
@@ -94,6 +95,15 @@ class UsersModuleServiceProvider extends AddonServiceProvider
         'register'                  => RegisterFormBuilder::class,
         'reset_password'            => ResetPasswordFormBuilder::class,
         'forgot_password'           => ForgotPasswordFormBuilder::class,
+    ];
+
+    /**
+     * The addon policies.
+     *
+     * @var array
+     */
+    public $policies = [
+        UserModel::class => UserPolicy::class,
     ];
 
     /**
@@ -174,13 +184,4 @@ class UsersModuleServiceProvider extends AddonServiceProvider
             'uses' => 'Anomaly\UsersModule\Http\Controller\Admin\LoginController@logout',
         ],
     ];
-
-    public function boot()
-    {
-        parent::boot();
-        
-        $this->app->singleton('users.users', function() {
-            return (new UserModel)->stream();
-        });
-    }
 }

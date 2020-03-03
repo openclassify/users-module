@@ -2,14 +2,15 @@
 
 namespace Anomaly\UsersModule\Http\Controller\Admin;
 
-use Anomaly\Streams\Platform\Http\Controller\AdminController;
-use Anomaly\Streams\Platform\Support\Authorizer;
-use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
-use Anomaly\UsersModule\User\Form\UserFormBuilder;
-use Anomaly\UsersModule\User\Impersonation\ImpersonationFormBuilder;
-use Anomaly\UsersModule\User\Permission\PermissionFormBuilder;
-use Anomaly\UsersModule\User\Table\UserTableBuilder;
+use Illuminate\Support\Facades\Auth;
 use Anomaly\UsersModule\User\UserPassword;
+use Anomaly\Streams\Platform\Support\Authorizer;
+use Anomaly\UsersModule\User\Form\UserFormBuilder;
+use Anomaly\UsersModule\User\Table\UserTableBuilder;
+use Anomaly\Streams\Platform\Http\Controller\AdminController;
+use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
+use Anomaly\UsersModule\User\Permission\PermissionFormBuilder;
+use Anomaly\UsersModule\User\Impersonation\ImpersonationFormBuilder;
 
 /**
  * Class UsersController
