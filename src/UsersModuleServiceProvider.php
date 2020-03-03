@@ -2,6 +2,7 @@
 
 namespace Anomaly\UsersModule;
 
+use Anomaly\UsersModule\Role\RoleModel;
 use Anomaly\UsersModule\User\UserModel;
 use Anomaly\UsersModule\User\UserPolicy;
 use Anomaly\UsersModule\Role\RoleRepository;
@@ -34,6 +35,16 @@ use Anomaly\UsersModule\Http\Middleware\AuthorizeRoutePermission;
  */
 class UsersModuleServiceProvider extends AddonServiceProvider
 {
+
+    /**
+     * The addon streams.
+     *
+     * @var array
+     */
+    public $streams = [
+        'users.users' => UserModel::class,
+        'users.roles' => RoleModel::class,
+    ];
 
     /**
      * The addon commands.
