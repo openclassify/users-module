@@ -196,13 +196,4 @@ class UsersModuleServiceProvider extends AddonServiceProvider
             'uses' => 'Anomaly\UsersModule\Http\Controller\Admin\LoginController@logout',
         ],
     ];
-
-    // public function register()
-    // {
-    //     parent::register();
-
-    //     foreach (app(StreamRegistry::class)->getStreams() as $stream => $model) {
-
-    //     }
-    // }
 }
