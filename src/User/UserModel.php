@@ -8,14 +8,13 @@ use Illuminate\Notifications\Notifiable;
 use Anomaly\UsersModule\Role\RolePresenter;
 use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\Role\Command\GetRole;
-use Anomaly\Streams\Platform\Entry\EntryModel;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\Model\Traits\Streams;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class UserModel
@@ -115,6 +114,11 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
         ],
     ];
 
+    /**
+     * Guarded attributes.
+     *
+     * @var array
+     */
     protected $guarded = [
         'password',
     ];

@@ -33,7 +33,7 @@ class UserFormSections
             'roles',
         ];
 
-        $profileFields = $users->stream()->fields->slugs()->values()->all();
+        $profileFields = [];//$users->stream()->fields->slugs()->values()->all();
 
         $builder->setSections(
             [

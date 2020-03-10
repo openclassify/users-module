@@ -72,6 +72,6 @@ class UserFormFields
             ],
         ];
 
-        $builder->setFields(array_merge($fields, $users->stream()->fields->slugs()->values()->all()));
+        $builder->setFields($fields);
     }
 }

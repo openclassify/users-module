@@ -19,7 +19,11 @@ class UserFormBuilder extends FormBuilder
      * @var array
      */
     protected $skips = [
+        'ip_address',
+        'reset_code',
         'permissions',
+        'remember_token',
+        'activation_code',
     ];
 
     /**
