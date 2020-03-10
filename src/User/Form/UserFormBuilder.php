@@ -14,6 +14,15 @@ class UserFormBuilder extends FormBuilder
 {
 
     /**
+     * The skipped fields.
+     *
+     * @var array
+     */
+    protected $skips = [
+        'permissions',
+    ];
+
+    /**
      * Fired just before posting.
      *
      * @param Request $request
