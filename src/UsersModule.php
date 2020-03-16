@@ -40,15 +40,6 @@ class UsersModule extends Module
                 ],
             ],
         ],
-        'fields' => [
-            'buttons' => [
-                'add_field' => [
-                    'data-toggle' => 'modal',
-                    'data-target' => '#modal',
-                    'href'        => 'admin/users/fields/choose',
-                ],
-            ],
-        ],
     ];
 
     /**
