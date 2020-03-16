@@ -74,6 +74,8 @@ class UserSeeder extends Seeder
         /* @var UserInterface|UsersUsersEntryModel $administrator */
         $administrator = $this->users->create(
             [
+                'enabled'      => true,
+                'activated'    => true,
                 'display_name' => 'Administrator',
                 'email'        => env('ADMIN_EMAIL'),
                 'username'     => env('ADMIN_USERNAME'),
@@ -84,6 +86,8 @@ class UserSeeder extends Seeder
         /* @var UserInterface|UsersUsersEntryModel $demo */
         $demo = $this->users->create(
             [
+                'enabled'      => true,
+                'activated'    => true,
                 'display_name' => 'Demo User',
                 'email'        => 'demo@pyrocms.com',
                 'password'     => 'password',

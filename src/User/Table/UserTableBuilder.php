@@ -117,9 +117,7 @@ class UserTableBuilder extends TableBuilder
         ],
         'username',
         'email',
-        'status'     => [
-            'value' => 'entry.status_label',
-        ],
+        'entry.status',
     ];
 
     /**
