@@ -1,7 +1,7 @@
 <?php namespace Anomaly\UsersModule\User;
 
 use Anomaly\Streams\Platform\Entry\EntryPresenter;
-use Anomaly\Streams\Platform\Image\Image;
+use Anomaly\Streams\Platform\Image\ImageManager;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 
 /**
@@ -41,7 +41,7 @@ class UserPresenter extends EntryPresenter
     public function gravatar($parameters = [])
     {
         /* @var Image $image */
-        $image = app(Image::class);
+        $image = app(ImageManager::class);
 
         return $image->make(
             'https://www.gravatar.com/avatar/' . md5($this->object->getEmail()) . '?' . http_build_query(
