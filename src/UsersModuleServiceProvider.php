@@ -43,8 +43,8 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     public $streams = [
-        'users.users' => UserModel::class,
-        'users.roles' => RoleModel::class,
+        'users' => UserModel::class,
+        'roles' => RoleModel::class,
     ];
 
     /**
