@@ -52,7 +52,7 @@ class AuthorizeRouteRoles
          * Check if the user is an admin.
          */
         if ($user && $user->isAdmin()) {
-            return $next($request);
+            return $next($request); 
         }
 
         /**
