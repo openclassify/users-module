@@ -45,7 +45,7 @@ class AuthorizeRouteRoles
         }
 
         /* @var UserInterface $user */
-        $user = user();
+        $user = auth()->user();
         $role = (array)array_get(request()->route()->getAction(), 'anomaly.module.users::role');
 
         /**

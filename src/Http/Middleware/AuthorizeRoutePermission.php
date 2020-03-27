@@ -67,7 +67,7 @@ class AuthorizeRoutePermission
          *
          * @var UserInterface $user
          */
-        if (($user = user()) && $user->isAdmin()) {
+        if (($user = auth()->user()) && $user->isAdmin()) {
             return $next($request);
         }
 
