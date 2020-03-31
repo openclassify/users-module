@@ -9,7 +9,7 @@ use Anomaly\UsersModule\Role\RolePresenter;
 use Anomaly\UsersModule\Role\RoleCollection;
 use Anomaly\UsersModule\Role\Command\GetRole;
 use Illuminate\Auth\Passwords\CanResetPassword;
-use Anomaly\Streams\Platform\Support\Collection;
+use Illuminate\Support\Collection;
 use Anomaly\Streams\Platform\Model\Traits\Streams;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;

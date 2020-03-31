@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\Role;
 
-use Anomaly\Streams\Platform\Support\Collection;
+use Illuminate\Support\Collection;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
 
 /**

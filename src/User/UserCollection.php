@@ -1,6 +1,6 @@
 <?php namespace Anomaly\UsersModule\User;
 
-use Anomaly\Streams\Platform\Support\Collection;
+use Illuminate\Support\Collection;
 
 /**
  * Class UserCollection
