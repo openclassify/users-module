@@ -104,7 +104,7 @@ class UserAuthenticator
     public function logout(UserInterface $user = null)
     {
         if (!$user) {
-            $user = user();
+            $user = auth()->user();
         }
 
         if (!$user) {
