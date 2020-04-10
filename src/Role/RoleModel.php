@@ -36,8 +36,6 @@ class RoleModel extends Model implements RoleInterface
         'created_at'  => 'datetime',
         'updated_at'  => 'datetime',
         'deleted_at'  => 'datetime',
-        'name'        => 'array',
-        'description' => 'array',
     ];
 
     /**
