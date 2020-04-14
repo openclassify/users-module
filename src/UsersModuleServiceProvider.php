@@ -16,7 +16,6 @@ use Anomaly\UsersModule\Http\Middleware\CheckSecurity;
 use Anomaly\UsersModule\User\Command\DefineStreamGate;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Anomaly\Streams\Platform\Stream\Event\StreamWasBuilt;
-use Anomaly\Streams\Platform\Stream\StreamRegistry;
 use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeRouteRoles;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeControlPanel;
