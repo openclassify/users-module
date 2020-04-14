@@ -12,7 +12,8 @@ $factory->define(
             'password'     => bcrypt('secret'),
             'activated'    => 1,
             'enabled'      => 1,
-            'permissions'  => ["anomaly.module.users::users.read"],
+            'str_id'       => str_random(24),
+            'permissions'  => "anomaly.module.users::users.read",
         ];
     }
 );
