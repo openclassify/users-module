@@ -14,9 +14,7 @@ use Anomaly\UsersModule\User\Login\LoginFormBuilder;
 use Anomaly\UsersModule\User\Event\UserHasRegistered;
 use Anomaly\UsersModule\User\Listener\TouchLastLogin;
 use Anomaly\UsersModule\Http\Middleware\CheckSecurity;
-use Anomaly\UsersModule\User\Command\DefineStreamGate;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
-use Anomaly\Streams\Platform\Stream\Event\StreamWasBuilt;
 use Anomaly\UsersModule\User\Register\RegisterFormBuilder;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeRouteRoles;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeControlPanel;
@@ -92,9 +90,6 @@ class UsersModuleServiceProvider extends AddonServiceProvider
         UserHasRegistered::class    => [
             SendNewUserNotifications::class,
         ],
-        StreamWasBuilt::class => [
-            DefineStreamGate::class,
-        ]
     ];
 
     /**
