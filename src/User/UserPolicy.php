@@ -2,6 +2,7 @@
 
 namespace Anomaly\UsersModule\User;
 
+use Illuminate\Support\Facades\Gate;
 use Anomaly\UsersModule\User\UserModel;
 
 class UserPolicy
@@ -50,7 +51,9 @@ class UserPolicy
      */
     public function update(UserModel $user, UserModel $model)
     {
-        dd('Hi');
+        // Check security providers.
+
+        return Gate::has('users.update');
         //
     }
 

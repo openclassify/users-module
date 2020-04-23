@@ -29,7 +29,9 @@ class DefineStreamGate
          * This all needs to be replaced with permissions
          * but useage through gates only in core.
          */
-        Gate::define($stream->getSlug() . '.edit', function () {
+        //Gate::define($stream->getSlug() . '.update', function () {
+        Gate::define('users.update', function () {
+            dd('Here at last');
             return true;
         });
 
