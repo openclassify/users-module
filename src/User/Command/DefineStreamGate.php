@@ -1,8 +1,9 @@
-<?php namespace Anomaly\UsersModule\User\Command;
+<?php
+
+namespace Anomaly\UsersModule\User\Command;
 
 use Illuminate\Support\Facades\Gate;
 use Anomaly\Streams\Platform\Stream\Event\StreamWasBuilt;
-
 
 /**
  * Class DefineStreamGate
@@ -27,11 +28,14 @@ class DefineStreamGate
          * This all needs to be replaced with permissions
          * but useage through gates only in core.
          */
-        Gate::define($stream->getSlug() . '.edit', function() {
+        Gate::define($stream->getSlug() . '.edit', function () {
             return true;
         });
 
-        $response = Gate::inspect($stream->getSlug() . '.edit', $stream);
+        // This one
+        //dd(Gate::check('update', auth()->user()));
+
+        //$response = Gate::inspect($stream->getSlug() . '.edit', $stream);
 
         //dd(Gate::allows($stream->getSlug() . '.edit'));
     }

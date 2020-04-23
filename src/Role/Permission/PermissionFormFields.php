@@ -34,7 +34,7 @@ class PermissionFormFields
         $namespaces = array_merge(['streams'], $addons->withConfig('permissions')->namespaces());
 
         /*
-         * gather all the addons with a
+         * Gather all the addons with a
          * permissions configuration file.
          *
          * @var Addon $addon

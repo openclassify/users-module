@@ -52,6 +52,7 @@ class UserPolicy
      */
     public function update(UserModel $user, UserModel $model)
     {
+        dd('Hi');
         //
     }
 
