@@ -3,6 +3,7 @@
 namespace Anomaly\UsersModule\User\Command;
 
 use Illuminate\Support\Facades\Gate;
+use Anomaly\UsersModule\Role\RoleModel;
 use Anomaly\Streams\Platform\Stream\Event\StreamWasBuilt;
 
 /**
@@ -34,6 +35,7 @@ class DefineStreamGate
 
         // This one
         //dd(Gate::check('update', auth()->user()));
+        //dd(Gate::check('update', RoleModel::first()));
 
         //$response = Gate::inspect($stream->getSlug() . '.edit', $stream);
 

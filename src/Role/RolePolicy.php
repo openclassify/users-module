@@ -1,10 +1,17 @@
 <?php
 
-namespace Anomaly\UsersModule\User;
+namespace Anomaly\UsersModule\Role;
 
+use Anomaly\UsersModule\Role\RoleModel;
 use Anomaly\UsersModule\User\UserModel;
 
-class UserPolicy
+/**
+ * Class Role
+ *
+ * @link   http://pyrocms.com/
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
+class RolePolicy
 {
 
     /**
@@ -25,7 +32,7 @@ class UserPolicy
      * @param  \Anomaly\UsersModule\User\UserModel
      * @return mixed
      */
-    public function view(UserModel $user, UserModel $model)
+    public function view(UserModel $user, RoleModel $model)
     {
         //
     }
@@ -44,13 +51,13 @@ class UserPolicy
     /**
      * Determine whether the user can update the anomaly users module user user model.
      *
-     * @param  \Anomaly\UsersModule\User\UserModel  $user
-     * @param  \Anomaly\UsersModule\User\UserModel
+     * @param  \Anomaly\UsersModule\User\UserModel $user
+     * @param  \Anomaly\UsersModule\Role\RoleModel $model
      * @return mixed
      */
-    public function update(UserModel $user, UserModel $model)
+    public function update(UserModel $user, RoleModel $model)
     {
-        dd('Hi');
+        dd('Hi (Roles)');
         //
     }
 

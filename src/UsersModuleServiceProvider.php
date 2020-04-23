@@ -5,6 +5,7 @@ namespace Anomaly\UsersModule;
 use Anomaly\UsersModule\Role\RoleModel;
 use Anomaly\UsersModule\User\UserModel;
 use Anomaly\UsersModule\User\UserPolicy;
+use Anomaly\UsersModule\Role\RolePolicy;
 use Anomaly\UsersModule\Role\RoleRepository;
 use Anomaly\UsersModule\User\UserRepository;
 use Anomaly\UsersModule\Console\UsersCleanup;
@@ -115,6 +116,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      */
     public $policies = [
         UserModel::class => UserPolicy::class,
+        RoleModel::class => RolePolicy::class,
     ];
 
     /**
