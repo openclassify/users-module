@@ -49,6 +49,9 @@ class RoleModel extends Model implements RoleInterface
         'slug'         => 'roles',
         'title_column' => 'name',
         'trashable'    => true,
+        'config' => [
+            'policy' => RolePolicy::class,
+        ],
         'fields' => [
             'name'        => [
                 'translatable' => true,

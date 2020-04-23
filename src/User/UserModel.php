@@ -62,6 +62,9 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
         'trashable'    => true,
         'versionable'  => true,
         'searchable'   => true,
+        'config' => [
+            'policy' => UserPolicy::class,
+        ],
         'fields' => [
             'str_id'        => [
                 'required' => true,
