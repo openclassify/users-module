@@ -4,10 +4,13 @@ namespace Anomaly\UsersModule;
 
 use Anomaly\UsersModule\Role\RoleModel;
 use Anomaly\UsersModule\User\UserModel;
+use Anomaly\UsersModule\Support\Authorizer;
 use Anomaly\UsersModule\Role\RoleRepository;
 use Anomaly\UsersModule\User\UserRepository;
 use Anomaly\UsersModule\Console\UsersCleanup;
+use Anomaly\Streams\Platform\Security\Policy;
 use Anomaly\UsersModule\User\Event\UserWasLoggedIn;
+use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Login\LoginFormBuilder;
 use Anomaly\UsersModule\User\Event\UserHasRegistered;
 use Anomaly\UsersModule\User\Listener\TouchLastLogin;
@@ -23,6 +26,7 @@ use Anomaly\UsersModule\User\Listener\SendNewUserNotifications;
 use Anomaly\UsersModule\User\Password\ResetPasswordFormBuilder;
 use Anomaly\UsersModule\User\Password\ForgotPasswordFormBuilder;
 use Anomaly\UsersModule\Http\Middleware\AuthorizeRoutePermission;
+use Anomaly\UsersModule\Support\Facades\Authorizer as AuthorizerFacade;
 
 /**
  * Class UsersModuleServiceProvider
@@ -108,6 +112,7 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     public $singletons = [
+        'authorizer' => Authorizer::class,
         UserRepositoryInterface::class => UserRepository::class,
         RoleRepositoryInterface::class => RoleRepository::class,
     ];
@@ -180,4 +185,18 @@ class UsersModuleServiceProvider extends AddonServiceProvider
             'uses' => 'Anomaly\UsersModule\Http\Controller\Admin\LoginController@logout',
         ],
     ];
+
+    /**
+     * Boot the addon.
+     */
+    public function boot()
+    {
+        Policy::macro('viewAny', function (UserInterface $user) {
+            return AuthorizerFacade::authorize('view_any', $user);
+        });
+
+        Policy::macro('update', function (UserInterface $user) {
+            return AuthorizerFacade::authorize('update', $user);
+        });
+    }
 }

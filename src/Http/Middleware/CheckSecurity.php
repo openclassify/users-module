@@ -1,8 +1,10 @@
-<?php namespace Anomaly\UsersModule\Http\Middleware;
+<?php
 
-use Anomaly\UsersModule\User\UserSecurity;
+namespace Anomaly\UsersModule\Http\Middleware;
+
 use Closure;
 use Illuminate\Http\Request;
+use Anomaly\UsersModule\User\UserSecurity;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

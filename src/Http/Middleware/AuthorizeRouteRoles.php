@@ -1,9 +1,10 @@
-<?php namespace Anomaly\UsersModule\Http\Middleware;
+<?php
 
-use Anomaly\Streams\Platform\Message\MessageManager;
-use Anomaly\UsersModule\User\Contract\UserInterface;
+namespace Anomaly\UsersModule\Http\Middleware;
+
 use Closure;
 use Illuminate\Http\Request;
+use Anomaly\Streams\Platform\Message\MessageManager;
 
 /**
  * Class AuthorizeRouteRoles
@@ -46,13 +47,13 @@ class AuthorizeRouteRoles
 
         /* @var UserInterface $user */
         $user = auth()->user();
-        $role = (array)array_get(request()->route()->getAction(), 'anomaly.module.users::role');
+        $role = (array) array_get(request()->route()->getAction(), 'anomaly.module.users::role');
 
         /**
          * Check if the user is an admin.
          */
         if ($user && $user->isAdmin()) {
-            return $next($request); 
+            return $next($request);
         }
 
         /**

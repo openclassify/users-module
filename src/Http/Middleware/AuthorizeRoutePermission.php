@@ -1,10 +1,12 @@
-<?php namespace Anomaly\UsersModule\Http\Middleware;
+<?php
 
-use Anomaly\Streams\Platform\Message\MessageManager;
-use Anomaly\Streams\Platform\Support\Authorizer;
-use Anomaly\Streams\Platform\User\Contract\UserInterface;
+namespace Anomaly\UsersModule\Http\Middleware;
+
 use Closure;
 use Illuminate\Http\Request;
+use Anomaly\UsersModule\Support\Authorizer;
+use Anomaly\Streams\Platform\Message\MessageManager;
+use Anomaly\Streams\Platform\User\Contract\UserInterface;
 
 /**
  * Class AuthorizeRoutePermission
@@ -55,7 +57,8 @@ class AuthorizeRoutePermission
             return $next($request);
         }
 
-        if ($request->segment(1) == 'admin' && !$this->authorizer->authorize(
+        if (
+            $request->segment(1) == 'admin' && !$this->authorizer->authorize(
                 'streams::general.control_panel'
             )
         ) {
@@ -71,7 +74,7 @@ class AuthorizeRoutePermission
             return $next($request);
         }
 
-        $permission = (array)array_get(request()->route()->getAction(), 'anomaly.module.users::permission');
+        $permission = (array) array_get(request()->route()->getAction(), 'anomaly.module.users::permission');
 
         if ($permission && !$this->authorizer->authorizeAny($permission, null, true)) {
             $redirect = array_get(request()->route()->getAction(), 'anomaly.module.users::redirect');

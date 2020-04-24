@@ -1,8 +1,10 @@
-<?php namespace Anomaly\UsersModule\Http\Middleware;
+<?php
 
-use Anomaly\Streams\Platform\Support\Authorizer;
+namespace Anomaly\UsersModule\Http\Middleware;
+
 use Closure;
 use Illuminate\Http\Request;
+use Anomaly\UsersModule\Support\Authorizer;
 
 /**
  * Class AuthorizeControlPanel

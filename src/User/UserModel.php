@@ -292,7 +292,7 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
      */
     public function getPermissions()
     {
-        return $this->permissions;
+        return (array) $this->permissions;
     }
 
     /**
