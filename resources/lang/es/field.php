@@ -45,7 +45,7 @@ return [
         'count'        => ':count rol(s)',
         'instructions' => 'Escoja los roles para asignarle al usuario.',
     ],
-    'abilities'  => [
+    'permissions'  => [
         'name'  => 'Permisos',
         'count' => ':count permiso(s)',
     ],

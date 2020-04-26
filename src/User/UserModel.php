@@ -107,7 +107,7 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
             'last_name'        => 'anomaly.field_type.text',
             'activated'        => 'anomaly.field_type.boolean',
             'enabled'          => 'anomaly.field_type.boolean',
-            'abilities'      => 'anomaly.field_type.checkboxes',
+            'permissions'      => 'anomaly.field_type.checkboxes',
             'remember_token'   => 'anomaly.field_type.text',
             'activation_code'  => 'anomaly.field_type.text',
             'reset_code'       => 'anomaly.field_type.text',
@@ -238,16 +238,16 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
-     * Return whether a user has any of provided ability.
+     * Return whether a user has any of provided permission.
      *
-     * @param array $abilities
+     * @param array $permissions
      * @param bool $checkRoles
      * @return bool
      */
-    public function hasAnyAbility(array $abilities, $checkRoles = true)
+    public function hasAnyPermission(array $permissions, $checkRoles = true)
     {
-        foreach ($abilities as $ability) {
-            if ($this->hasAbility($ability, $checkRoles)) {
+        foreach ($permissions as $permission) {
+            if ($this->hasPermission($permission, $checkRoles)) {
                 return true;
             }
         }
@@ -256,19 +256,19 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
-     * Return whether a user or it's roles has a ability.
+     * Return whether a user or it's roles has a permission.
      *
-     * @param        $ability
+     * @param        $permission
      * @param  bool $checkRoles
      * @return mixed
      */
-    public function hasAbility($ability, $checkRoles = true)
+    public function hasPermission($permission, $checkRoles = true)
     {
-        if (!$ability) {
+        if (!$permission) {
             return true;
         }
 
-        if (in_array($ability, $this->getAbilities())) {
+        if (in_array($permission, $this->getPermissions())) {
             return true;
         }
 
@@ -276,7 +276,7 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
 
             /* @var RoleInterface $role */
             foreach ($this->getRoles() as $role) {
-                if ($role->hasAbility($ability) || $role->getSlug() === 'admin') {
+                if ($role->hasPermission($permission) || $role->getSlug() === 'admin') {
                     return true;
                 }
             }
@@ -286,13 +286,13 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
-     * Get the abilities.
+     * Get the permissions.
      *
      * @return array
      */
-    public function getAbilities()
+    public function getPermissions()
     {
-        return (array) $this->abilities;
+        return (array) $this->permissions;
     }
 
     /**

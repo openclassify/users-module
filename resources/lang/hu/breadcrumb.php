@@ -2,5 +2,5 @@
 
 return [
     'login'       => 'Bejelentkezés',
-    'abilities' => 'Jogok',
+    'permissions' => 'Jogok',
 ];

@@ -12,6 +12,6 @@ return [
     'reinstate'      => 'Återinsätt',
     'add_field'      => 'Lägg Till Fält',
     'deactivate'     => 'Inaktivera',
-    'abilities'    => 'Behörigheter',
+    'permissions'    => 'Behörigheter',
     'reset_password' => 'Återställ Lösenord',
 ];

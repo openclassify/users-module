@@ -3,6 +3,6 @@
 return [
     'login' => 'Prisijungti',
     'register' => 'Registruotis',
-    'abilities' => 'Leidimai',
+    'permissions' => 'Leidimai',
     'reset_password' => 'Atstatyti slaptažodį',
 ];

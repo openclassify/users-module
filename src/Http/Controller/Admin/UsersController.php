@@ -9,7 +9,7 @@ use Anomaly\UsersModule\User\Form\UserFormBuilder;
 use Anomaly\UsersModule\User\Table\UserTableBuilder;
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
-use Anomaly\UsersModule\User\Ability\AbilityFormBuilder;
+use Anomaly\UsersModule\User\Permission\PermissionFormBuilder;
 use Anomaly\UsersModule\User\Impersonation\ImpersonationFormBuilder;
 
 /**
@@ -60,13 +60,13 @@ class UsersController extends AdminController
     }
 
     /**
-     * Return the form for editing abilities.
+     * Return the form for editing permissions.
      *
-     * @param  AbilityFormBuilder                      $form
+     * @param  PermissionFormBuilder                      $form
      * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function abilities(AbilityFormBuilder $form, $id)
+    public function permissions(PermissionFormBuilder $form, $id)
     {
         return $form->render($id);
     }

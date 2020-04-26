@@ -1,79 +1,79 @@
 <?php
 
-namespace Anomaly\UsersModule\User\Ability;
+namespace Anomaly\UsersModule\User\Permission;
 
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Illuminate\Translation\Translator;
 
 /**
- * Class AbilityFormFields
+ * Class PermissionFormFields
  *
  * @link   http://pyrocms.com/
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class AbilityFormFields
+class PermissionFormFields
 {
 
     /**
      * Handle the fields.
      *
-     * @param AbilityFormBuilder $builder
+     * @param PermissionFormBuilder $builder
      * @param AddonCollection $addons
      */
-    public function handle(AbilityFormBuilder $builder, AddonCollection $addons)
+    public function handle(PermissionFormBuilder $builder, AddonCollection $addons)
     {
         /* @var UserInterface $user */
         $user      = $builder->getEntry();
         $roles     = $user->getRoles();
-        $inherited = $roles->abilities();
+        $inherited = $roles->permissions();
 
         $fields = [];
 
-        $namespaces = array_merge(['streams'], $addons->withConfig('abilities')->namespaces());
+        $namespaces = array_merge(['streams'], $addons->withConfig('permissions')->namespaces());
 
         /*
          * gather all the addons with a
-         * abilities configuration file.
+         * permissions configuration file.
          *
          * @var Addon $addon
          */
         foreach ($namespaces as $namespace) {
-            foreach (config($namespace . '::abilities', []) as $group => $abilities) {
+            foreach (config($namespace . '::permissions', []) as $group => $permissions) {
 
                 /*
                  * Determine the general
                  * form UI components.
                  */
-                $label = $namespace . '::ability.' . $group . '.name';
+                $label = $namespace . '::permission.' . $group . '.name';
 
-                if (!trans()->has($warning = $namespace . '::ability.' . $group . '.warning')) {
+                if (!trans()->has($warning = $namespace . '::permission.' . $group . '.warning')) {
                     $warning = null;
                 }
 
                 if (!trans()->has(
-                    $instructions = $namespace . '::ability.' . $group . '.instructions'
+                    $instructions = $namespace . '::permission.' . $group . '.instructions'
                 )) {
                     $instructions = null;
                 }
 
                 /*
                  * Gather the available
-                 * abilities for the group.
+                 * permissions for the group.
                  */
                 $available = array_combine(
                     array_map(
-                        function ($ability) use ($namespace, $group) {
-                            return $namespace . '::' . $group . '.' . $ability;
+                        function ($permission) use ($namespace, $group) {
+                            return $namespace . '::' . $group . '.' . $permission;
                         },
-                        $abilities
+                        $permissions
                     ),
                     array_map(
-                        function ($ability) use ($namespace, $group) {
-                            return $namespace . '::ability.' . $group . '.option.' . $ability;
+                        function ($permission) use ($namespace, $group) {
+                            return $namespace . '::permission.' . $group . '.option.' . $permission;
                         },
-                        $abilities
+                        $permissions
                     )
                 );
 
@@ -86,7 +86,7 @@ class AbilityFormFields
                     'warning'      => $warning,
                     'instructions' => $instructions,
                     'type'         => 'anomaly.field_type.checkboxes',
-                    'value'        => array_merge($user->getAbilities(), $inherited),
+                    'value'        => array_merge($user->getPermissions(), $inherited),
                     'config'       => [
                         'disabled' => $inherited,
                         'options'  => $available,
@@ -96,20 +96,20 @@ class AbilityFormFields
         }
 
         /**
-         * Allow custom configured abilities
+         * Allow custom configured permissions
          * to be hooked in to the form as well.
          */
-        if ($abilities = config('anomaly.module.users::config.abilities')) {
-            foreach ($abilities as $namespace => $group) {
-                foreach (array_get($group, 'abilities', []) as $ability => $abilities) {
-                    $fields[str_replace('.', '_', $namespace . '::' . $ability)] = [
-                        'label'        => array_get($abilities, 'label'),
-                        'warning'      => array_get($abilities, 'warning'),
-                        'instructions' => array_get($abilities, 'instructions'),
+        if ($permissions = config('anomaly.module.users::config.permissions')) {
+            foreach ($permissions as $namespace => $group) {
+                foreach (array_get($group, 'permissions', []) as $permission => $permissions) {
+                    $fields[str_replace('.', '_', $namespace . '::' . $permission)] = [
+                        'label'        => array_get($permissions, 'label'),
+                        'warning'      => array_get($permissions, 'warning'),
+                        'instructions' => array_get($permissions, 'instructions'),
                         'type'         => 'anomaly.field_type.checkboxes',
-                        'value'        => $user->getAbilities(),
+                        'value'        => $user->getPermissions(),
                         'config'       => [
-                            'options' => array_get($abilities, 'available', []),
+                            'options' => array_get($permissions, 'available', []),
                         ],
                     ];
                 }

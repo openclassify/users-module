@@ -62,7 +62,7 @@ class ImpersonationFormBuilder extends FormBuilder
      * @var array
      */
     protected $options = [
-        'ability' => 'anomaly.module.users::users.impersonate',
+        'permission' => 'anomaly.module.users::users.impersonate',
     ];
 
     /**

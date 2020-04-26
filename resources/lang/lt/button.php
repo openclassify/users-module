@@ -8,6 +8,6 @@ return [
     'new_user' => 'Pridėti vartotoją',
     'new_role' => 'Pridėti rolę',
     'add_field' => 'Pridėti lauką',
-    'abilities' => 'Leidimai',
+    'permissions' => 'Leidimai',
     'reset_password' => 'Atstatyti slaptažodį',
 ];

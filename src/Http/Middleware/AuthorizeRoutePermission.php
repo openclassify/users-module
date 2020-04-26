@@ -9,13 +9,13 @@ use Anomaly\Streams\Platform\Message\MessageManager;
 use Anomaly\Streams\Platform\User\Contract\UserInterface;
 
 /**
- * Class AuthorizeRouteAbility
+ * Class AuthorizeRoutePermission
  *
  * @link   http://pyrocms.com/
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class AuthorizeRouteAbility
+class AuthorizeRoutePermission
 {
 
     /**
@@ -74,9 +74,9 @@ class AuthorizeRouteAbility
             return $next($request);
         }
 
-        $ability = (array) array_get(request()->route()->getAction(), 'anomaly.module.users::ability');
+        $permission = (array) array_get(request()->route()->getAction(), 'anomaly.module.users::permission');
 
-        if ($ability && !$this->authorizer->authorizeAny($ability, null, true)) {
+        if ($permission && !$this->authorizer->authorizeAny($permission, null, true)) {
             $redirect = array_get(request()->route()->getAction(), 'anomaly.module.users::redirect');
             $intended = array_get(request()->route()->getAction(), 'anomaly.module.users::intended');
             $message  = array_get(request()->route()->getAction(), 'anomaly.module.users::message');

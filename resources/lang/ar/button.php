@@ -8,6 +8,6 @@ return [
     'new_user'       => 'مستخدم جديد',
     'new_role'       => 'دور جديد',
     'add_field'      => 'اضافة حقل',
-    'abilities'    => 'الصلاحيات',
+    'permissions'    => 'الصلاحيات',
     'reset_password' => 'إعادة تعين كلمة المرور',
 ];

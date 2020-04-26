@@ -29,7 +29,7 @@ class LoginTest extends \TestCase
     }
 //
 //    /** @test */
-//    public function cantAccessAdminPagesWithWrongAbilities()
+//    public function cantAccessAdminPagesWithWrongPermissions()
 //    {
 //        $user = $this->getBasicUser();
 //        $this->actingAs($user)

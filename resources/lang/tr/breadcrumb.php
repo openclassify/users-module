@@ -3,6 +3,6 @@
 return [
     "login" => "Oturum aç",
     "register" => "Kayıt olmak",
-    "abilities" => "İzinler",
+    "permissions" => "İzinler",
     "reset_password" => "Şifreyi yenile"
 ];

@@ -18,6 +18,6 @@ class RoleFormBuilder extends FormBuilder
      * @var array
      */
     protected $skips = [
-        'abilities',
+        'permissions',
     ];
 }

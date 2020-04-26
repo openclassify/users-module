@@ -30,19 +30,19 @@ interface RoleInterface extends EntryInterface
     public function getName();
 
     /**
-     * Get the role's abilities.
+     * Get the role's permissions.
      *
      * @return array
      */
-    public function getAbilities();
+    public function getPermissions();
 
     /**
-     * Return if a role as access to a the ability.
+     * Return if a role as access to a the permission.
      *
-     * @param  string $ability
+     * @param  string $permission
      * @return bool
      */
-    public function hasAbility($ability);
+    public function hasPermission($permission);
 
     /**
      * Get the related users.

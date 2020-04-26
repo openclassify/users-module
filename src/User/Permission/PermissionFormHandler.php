@@ -1,27 +1,27 @@
-<?php namespace Anomaly\UsersModule\User\Ability;
+<?php namespace Anomaly\UsersModule\User\Permission;
 
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Illuminate\Routing\Redirector;
 
 /**
- * Class AbilityFormHandler
+ * Class PermissionFormHandler
  *
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class AbilityFormHandler
+class PermissionFormHandler
 {
 
     /**
      * Handle the form.
      *
-     * @param AbilityFormBuilder   $builder
+     * @param PermissionFormBuilder   $builder
      * @param UserRepositoryInterface $users
      * @param Redirector              $redirect
      */
     public function handle(
-        AbilityFormBuilder $builder,
+        PermissionFormBuilder $builder,
         UserRepositoryInterface $users,
         Redirector $redirect
     ) {
@@ -30,7 +30,7 @@ class AbilityFormHandler
 
         $users->save(
             $user->setAttribute(
-                'abilities',
+                'permissions',
                 array_filter(array_flatten($builder->getFormInput()))
             )
         );

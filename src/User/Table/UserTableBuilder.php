@@ -136,17 +136,17 @@ class UserTableBuilder extends TableBuilder
                     'target' => '_blank',
                     'text'   => 'anomaly.module.users::button.view_profile',
                 ],
-                'abilities' => [
+                'permissions' => [
                     'button' => 'info',
-                    'href'   => 'admin/users/abilities/{entry.id}',
+                    'href'   => 'admin/users/permissions/{entry.id}',
                 ],
                 'impersonate' => [
                     'text'       => 'anomaly.module.users::button.login_as_user',
-                    'ability' => 'anomaly.module.users::users.impersonate',
+                    'permission' => 'anomaly.module.users::users.impersonate',
                 ],
                 'reset'       => [
                     'text'       => 'anomaly.module.users::button.reset_password',
-                    'ability' => 'anomaly.module.users::users.reset',
+                    'permission' => 'anomaly.module.users::users.reset',
                     'attributes' => [
                         'data-toggle'  => 'confirm',
                         'data-message' => 'anomaly.module.users::message.confirm_reset_user',

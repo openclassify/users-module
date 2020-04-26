@@ -14,30 +14,30 @@ class RoleCollection extends Collection
 {
 
     /**
-     * Return all abilities.
+     * Return all permissions.
      *
      * @return array
      */
-    public function abilities()
+    public function permissions()
     {
         return $this->map(
             function (RoleInterface $role) {
-                return $role->getAbilities();
+                return $role->getPermissions();
             }
         )->flatten()->all();
     }
 
     /**
-     * Return if a role as access to a the ability.
+     * Return if a role as access to a the permission.
      *
-     * @param  string $ability
+     * @param  string $permission
      * @return RoleCollection
      */
-    public function hasAbility($ability)
+    public function hasPermission($permission)
     {
         return $this->filter(
-            function (RoleInterface $role) use ($ability) {
-                return $role->hasAbility($ability);
+            function (RoleInterface $role) use ($permission) {
+                return $role->hasPermission($permission);
             }
         );
     }

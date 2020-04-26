@@ -50,7 +50,7 @@ return [
         'name'     => 'Ruoli',
     'instructions' => 'Specifica a quali ruoli appartiene l&#039;utente.',
     ],
-    'abilities' => [
+    'permissions' => [
         'name' => 'Permessi',
     ],
     'last_activity_at' => [

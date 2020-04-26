@@ -7,7 +7,7 @@ $factory->define(
             'slug'        => $faker->slug,
             'name'        => $faker->word,
             'description' => $faker->words(3, true),
-            'abilities' => "anomaly.module.users::users.read",
+            'permissions' => "anomaly.module.users::users.read",
         ];
     }
 );

@@ -8,7 +8,7 @@ return [
     'new_user'       => 'New User',
     'new_role'       => 'New Role',
     'add_field'      => 'Add Field',
-    'abilities'    => 'Abilities',
+    'permissions'    => 'Permissions',
     'view_profile'   => 'View Profile',
     'login_as_user'  => 'Login as User',
     'reset_password' => 'Reset Password',

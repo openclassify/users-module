@@ -2,5 +2,5 @@
 
 return [
     'login'       => 'Connexion',
-    'abilities' => 'Abilities',
+    'permissions' => 'Permissions',
 ];

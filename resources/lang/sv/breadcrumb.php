@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'abilities' => 'Behörigheter',
+    'permissions' => 'Behörigheter',
 ];

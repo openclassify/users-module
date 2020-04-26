@@ -4,8 +4,8 @@ namespace Anomaly\UsersModule\Http\Controller\Admin;
 
 use Anomaly\Streams\Platform\Http\Controller\AdminController;
 use Anomaly\UsersModule\Role\Form\RoleFormBuilder;
-use Anomaly\UsersModule\Role\Ability\AbilityFormBuilder;
-use Anomaly\UsersModule\Role\Table\RoleAbilityTableBuilder;
+use Anomaly\UsersModule\Role\Permission\PermissionFormBuilder;
+use Anomaly\UsersModule\Role\Table\RolePermissionTableBuilder;
 use Anomaly\UsersModule\Role\Table\RoleTableBuilder;
 
 /**
@@ -53,13 +53,13 @@ class RolesController extends AdminController
     }
 
     /**
-     * Return the form for editing abilities.
+     * Return the form for editing permissions.
      *
-     * @param  AbilityFormBuilder                      $form
+     * @param  PermissionFormBuilder                      $form
      * @param                                             $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function abilities(AbilityFormBuilder $form, $id)
+    public function permissions(PermissionFormBuilder $form, $id)
     {
         return $form->render($id);
     }

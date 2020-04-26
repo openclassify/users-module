@@ -37,19 +37,19 @@ interface RoleRepositoryInterface extends EntryRepositoryInterface
     public function findBySlug($slug);
 
     /**
-     * Find a role by a ability key.
+     * Find a role by a permission key.
      *
-     * @param $ability
+     * @param $permission
      * @return null|EntryCollection
      */
-    public function findByAbility($ability);
+    public function findByPermission($permission);
 
     /**
-     * Update abilities for a role.
+     * Update permissions for a role.
      *
      * @param  RoleInterface $role
-     * @param  array         $abilities
+     * @param  array         $permissions
      * @return RoleInterface
      */
-    public function updateAbilities(RoleInterface $role, array $abilities);
+    public function updatePermissions(RoleInterface $role, array $permissions);
 }

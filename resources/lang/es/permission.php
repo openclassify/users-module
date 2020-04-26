@@ -8,13 +8,13 @@ return [
     'settings' => 'Configuración del módulo',
     'users'    => [
         'label'       => 'Administración de usuarios',
-        'abilities' => 'Permisos',
+        'permissions' => 'Permisos',
         'activate'    => 'Activar',
         'unblock'     => 'Desbloquear',
         'block'       => 'Bloquear',
     ],
     'roles'    => [
         'label'       => 'Administración de roles',
-        'abilities' => 'Permisos',
+        'permissions' => 'Permisos',
     ],
 ];

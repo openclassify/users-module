@@ -26,10 +26,10 @@ trait UserData
 
         if (is_null($roles)) {
             $user->attachRole(
-                factory(RoleModel::class)->create(['abilities' => 'anomaly.module.test::test.ability1'])
+                factory(RoleModel::class)->create(['permissions' => 'anomaly.module.test::test.permission1'])
             );
             $user->attachRole(
-                factory(RoleModel::class)->create(['abilities' => 'anomaly.module.test::test.ability2'])
+                factory(RoleModel::class)->create(['permissions' => 'anomaly.module.test::test.permission2'])
             );
         } else {
             $roles->each(
