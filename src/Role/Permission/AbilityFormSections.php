@@ -1,50 +1,50 @@
-<?php namespace Anomaly\UsersModule\Role\Permission;
+<?php namespace Anomaly\UsersModule\Role\Ability;
 
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 
 /**
- * Class PermissionFormSections
+ * Class AbilityFormSections
  *
  * @link   http://pyrocms.com/
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class PermissionFormSections
+class AbilityFormSections
 {
 
     /**
      * Handle the fields.
      *
-     * @param PermissionFormBuilder $builder
+     * @param AbilityFormBuilder $builder
      * @param AddonCollection $addons
      */
-    public function handle(PermissionFormBuilder $builder, AddonCollection $addons)
+    public function handle(AbilityFormBuilder $builder, AddonCollection $addons)
     {
         $sections = [];
 
         $sections['streams']['title'] = 'streams::message.system';
 
-        foreach (config('streams::permissions', []) as $group => $permissions) {
+        foreach (config('streams::abilities', []) as $group => $abilities) {
             $sections['streams']['fields'][] = 'streams::' . $group;
         }
 
         /* @var Addon $addon */
-        foreach ($addons->withConfig('permissions') as $addon) {
+        foreach ($addons->withConfig('abilities') as $addon) {
             $sections[$addon->getNamespace()]['title']       = $addon->getName();
             $sections[$addon->getNamespace()]['description'] = $addon->getDescription();
 
-            foreach (config($addon->getNamespace('permissions'), []) as $group => $permissions) {
+            foreach (config($addon->getNamespace('abilities'), []) as $group => $abilities) {
                 $sections[$addon->getNamespace()]['fields'][] = str_replace('.', '_', $addon->getNamespace($group));
             }
         }
 
         /**
-         * Allow custom configured permissions
+         * Allow custom configured abilities
          * to be hooked in to the form as well.
          */
-        if ($permissions = config('anomaly.module.users::config.permissions')) {
-            foreach ($permissions as $namespace => $group) {
+        if ($abilities = config('anomaly.module.users::config.abilities')) {
+            foreach ($abilities as $namespace => $group) {
                 if ($title = array_get($group, 'title')) {
                     $sections[$namespace]['title'] = $title;
                 }
@@ -56,10 +56,10 @@ class PermissionFormSections
                 $sections[$namespace]['fields'] = array_get($sections[$namespace], 'fields', []);
 
                 $sections[$namespace]['fields'] += array_map(
-                    function ($permission) use ($namespace) {
-                        return str_replace('.', '_', $namespace . '::' . $permission);
+                    function ($ability) use ($namespace) {
+                        return str_replace('.', '_', $namespace . '::' . $ability);
                     },
-                    array_keys(array_get($group, 'permissions'))
+                    array_keys(array_get($group, 'abilities'))
                 );
             }
         }

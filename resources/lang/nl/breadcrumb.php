@@ -3,6 +3,6 @@
 return [
     'login'          => 'Login',
     'register'       => 'Registreren',
-    'permissions'    => 'Permissies',
+    'abilities'    => 'Permissies',
     'reset_password' => 'Reset Wachtwoord',
 ];

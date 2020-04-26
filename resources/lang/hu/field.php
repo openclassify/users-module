@@ -50,7 +50,7 @@ return [
         'name'     => 'Szerepek',
     'instructions' => 'Határozd meg, hogy mely szerepek tartoznak a felhasználóhoz.',
     ],
-    'permissions' => [
+    'abilities' => [
         'name' => 'Jogok',
     ],
     'last_activity_at' => [

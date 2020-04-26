@@ -52,7 +52,7 @@ return [
         'count'        => ':count Rolle(n)',
         'instructions' => 'Wählen Sie die Rolle(n) für diesen Benutzer aus.',
     ],
-    'permissions'           => [
+    'abilities'           => [
         'name'  => 'Berechtigungen',
         'count' => ':count Berechtigung(en)',
     ],

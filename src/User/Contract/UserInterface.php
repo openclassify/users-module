@@ -90,28 +90,28 @@ interface UserInterface extends EntryInterface
     public function isAdmin();
 
     /**
-     * Get the permissions.
+     * Get the abilities.
      *
      * @return array
      */
-    public function getPermissions();
+    public function getAbilities();
 
     /**
-     * Return whether a user or it's roles has a permission.
+     * Return whether a user or it's roles has a ability.
      *
-     * @param        $permission
+     * @param        $ability
      * @param  bool $checkRoles
      * @return mixed
      */
-    public function hasPermission($permission, $checkRoles = true);
+    public function hasAbility($ability, $checkRoles = true);
 
     /**
-     * Return whether a user has any of provided permission.
+     * Return whether a user has any of provided ability.
      *
-     * @param $permissions
+     * @param $abilities
      * @return bool
      */
-    public function hasAnyPermission(array $permissions);
+    public function hasAnyAbility(array $abilities);
 
     /**
      * Return the activated flag.

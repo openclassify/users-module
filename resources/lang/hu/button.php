@@ -8,6 +8,6 @@ return [
     'new_user'       => 'Új Felhasználó',
     'new_role'       => 'Új Szerep',
     'add_field'      => 'Mező Hozzáadása',
-    'permissions'    => 'Jogok',
+    'abilities'    => 'Jogok',
     'reset_password' => 'Jelszó Visszaállítása',
 ];

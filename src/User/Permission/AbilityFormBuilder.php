@@ -1,27 +1,28 @@
 <?php
 
-namespace Anomaly\UsersModule\Role\Permission;
+namespace Anomaly\UsersModule\User\Ability;
 
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Message\MessageManager;
 use Anomaly\Streams\Platform\Ui\Breadcrumb\BreadcrumbCollection;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
+use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Illuminate\Routing\Redirector;
 
 /**
- * Class PermissionFormBuilder
+ * Class AbilityFormBuilder
  *
  * @link          http://pyrocms.com/
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class PermissionFormBuilder extends FormBuilder
+class AbilityFormBuilder extends FormBuilder
 {
 
     /**
      * The addon to modify
-     * permissions for.
+     * abilities for.
      *
      * @var null|Addon
      */
@@ -48,7 +49,7 @@ class PermissionFormBuilder extends FormBuilder
      */
     protected $actions = [
         'save' => [
-            'href' => 'admin/users/permissions/{request.route.parameters.id}',
+            'href' => 'admin/users/abilities/{request.route.parameters.id}',
         ],
     ];
 
@@ -59,51 +60,58 @@ class PermissionFormBuilder extends FormBuilder
      */
     protected $options = [
         'breadcrumb' => false,
-        'permission' => 'anomaly.module.users::users.permissions',
+        'ability' => 'anomaly.module.users::users.abilities',
     ];
 
     /**
      * Fired when builder is ready to build.
      *
-     * @param  RoleRepositoryInterface $roles
-     * @param  BreadcrumbCollection    $breadcrumbs
-     * @param  MessageManager              $messages
-     * @param  Redirector              $redirect
+     * @param  UserRepositoryInterface           $users
+     * @param  BreadcrumbCollection              $breadcrumbs
+     * @param  MessageManager                        $messages
+     * @param  Redirector                        $redirect
      * @return \Illuminate\Http\RedirectResponse
      */
     public function onReady(
+        UserRepositoryInterface $users,
         RoleRepositoryInterface $roles,
         BreadcrumbCollection $breadcrumbs,
         MessageManager $messages,
         Redirector $redirect
     ) {
-        $this->setEntry($role = $roles->find($this->getEntry()));
+        $this->setEntry($user = $users->find($this->getEntry()));
 
-        if ($role->getSlug() === 'admin') {
-            $messages->warning('anomaly.module.users::warning.modify_admin_permissions');
+        if ($user->hasRole($roles->findBySlug('admin'))) {
+            $messages->warning(
+                'anomaly.module.users::warning.modify_admin_abilities'
+            );
 
-            $this->setFormResponse($redirect->to('admin/users/roles'));
+            $this->setFormResponse($redirect->to('admin/users'));
 
             return;
         }
 
-        $breadcrumbs->add($role->getName(), 'admin/users/roles/edit/' . $role->getKey());
         $breadcrumbs->add(
-            'anomaly.module.users::breadcrumb.permissions',
-            'admin/users/roles/permissions/' . $role->getKey()
+            $user->getDisplayName(),
+            'admin/users/edit/' . $user->getKey()
+        );
+
+        $breadcrumbs->add(
+            'anomaly.module.users::breadcrumb.abilities',
+            'admin/users/abilities/' . $user->getKey()
         );
     }
 
     /**
      * If nothing is posted then
-     * the role gets no permissions.
+     * the user gets no abilities.
      *
-     * @param RoleRepositoryInterface $roles
+     * @param UserRepositoryInterface $users
      */
-    public function onPost(RoleRepositoryInterface $roles)
+    public function onPost(UserRepositoryInterface $users)
     {
         if (!$this->hasPostData() && $entry = $this->getEntry()) {
-            $roles->save($entry->setAttribute('permissions', []));
+            $users->save($entry->setAttribute('abilities', []));
         }
     }
 

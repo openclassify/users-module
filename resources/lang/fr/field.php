@@ -50,8 +50,8 @@ return [
         'name'         => 'Rôles',
         'instructions' => 'Choisissez quel rôle à l\'utilisateur.',
     ],
-    'permissions'      => [
-        'name' => 'Permissions',
+    'abilities'      => [
+        'name' => 'Abilities',
     ],
     'last_activity_at' => [
         'name' => 'Dernière activité',

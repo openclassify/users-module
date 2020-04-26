@@ -13,7 +13,7 @@ $factory->define(
             'activated'    => 1,
             'enabled'      => 1,
             'str_id'       => str_random(24),
-            'permissions'  => "anomaly.module.users::users.read",
+            'abilities'  => "anomaly.module.users::users.read",
         ];
     }
 );

@@ -67,32 +67,32 @@ class RoleRepository extends EntryRepository implements RoleRepositoryInterface
     }
 
     /**
-     * Find a role by a permission key.
+     * Find a role by a ability key.
      *
-     * @param $permission
+     * @param $ability
      * @return null|EntryCollection
      */
-    public function findByPermission($permission)
+    public function findByAbility($ability)
     {
         $query = $this->model->newQuery();
 
-        foreach ((array)$permission as $key) {
-            $query->where('permissions', 'LIKE', '%"' . str_replace('*', '%', $key) . '"%');
+        foreach ((array)$ability as $key) {
+            $query->where('abilities', 'LIKE', '%"' . str_replace('*', '%', $key) . '"%');
         }
 
         return $query->get();
     }
 
     /**
-     * Update permissions for a role.
+     * Update abilities for a role.
      *
      * @param  RoleInterface $role
-     * @param  array $permissions
+     * @param  array $abilities
      * @return RoleInterface
      */
-    public function updatePermissions(RoleInterface $role, array $permissions)
+    public function updateAbilities(RoleInterface $role, array $abilities)
     {
-        $role->permissions = $permissions;
+        $role->abilities = $abilities;
 
         $role->save();
 

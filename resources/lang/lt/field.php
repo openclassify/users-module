@@ -50,7 +50,7 @@ return [
         'name' => 'Rolės',
         'instructions' => 'Nurodykite kuri rolė priskiriama šiam vartotojui.',
     ],
-    'permissions' => [
+    'abilities' => [
         'name' => 'Teisės',
     ],
     'last_activity_at' => [

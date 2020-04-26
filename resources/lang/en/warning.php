@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'modify_admin_permissions' => 'Admin permissions can not be modified.',
+    'modify_admin_abilities' => 'Admin abilities can not be modified.',
 ];

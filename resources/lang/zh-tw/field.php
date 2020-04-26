@@ -50,7 +50,7 @@ return [
         'name'         => '角色',
         'instructions' => '請指定此用戶所屬的角色。',
     ],
-    'permissions'      => [
+    'abilities'      => [
         'name' => '權限',
     ],
     'last_activity_at' => [

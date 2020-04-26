@@ -8,6 +8,6 @@ return [
     'new_user'       => 'Nuovo Utente',
     'new_role'       => 'Nuovo Ruolo',
     'add_field'      => 'Aggiungi Campo',
-    'permissions'    => 'Permessi',
+    'abilities'    => 'Permessi',
     'reset_password' => 'Reset Password',
 ];

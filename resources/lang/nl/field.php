@@ -52,7 +52,7 @@ return [
         'name'         => 'Roles',
         'instructions' => 'Specify which roles the user belongs to. Specificeer waarbij welke roles de gebruiker bij hoort.',
     ],
-    'permissions'      => [
+    'abilities'      => [
         'name' => 'Permissies',
     ],
     'last_activity_at' => [

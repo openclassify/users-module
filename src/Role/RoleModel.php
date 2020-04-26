@@ -70,7 +70,7 @@ class RoleModel extends Model implements RoleInterface
                 'translatable' => true,
                 'type'         => 'anomaly.field_type.textarea',
             ],
-            'permissions' => [
+            'abilities' => [
                 'type' => 'anomaly.field_type.checkboxes',
             ],
         ]
@@ -87,22 +87,22 @@ class RoleModel extends Model implements RoleInterface
     }
 
     /**
-     * Return if a role as access to a the permission.
+     * Return if a role as access to a the ability.
      *
-     * @param  string $permission
+     * @param  string $ability
      * @return mixed
      */
-    public function hasPermission($permission)
+    public function hasAbility($ability)
     {
         if ($this->getSlug() == 'admin') {
             return true;
         }
 
-        if (!$this->getPermissions()) {
+        if (!$this->getAbilities()) {
             return false;
         }
 
-        if (in_array($permission, $this->getPermissions())) {
+        if (in_array($ability, $this->getAbilities())) {
             return true;
         }
 
@@ -120,13 +120,13 @@ class RoleModel extends Model implements RoleInterface
     }
 
     /**
-     * Get the role's permissions.
+     * Get the role's abilities.
      *
      * @return array
      */
-    public function getPermissions()
+    public function getAbilities()
     {
-        return $this->permissions;
+        return $this->abilities;
     }
 
     /**

@@ -22,13 +22,13 @@ class Authorizer
     protected $guest;
 
     /**
-     * Authorize a user against a permission.
+     * Authorize a user against a ability.
      *
-     * @param $permission
+     * @param $ability
      * @param null $user
      * @return bool
      */
-    public function authorize($permission, $user = null)
+    public function authorize($ability, $user = null)
     {
         if (!$user) {
             $user = auth()->user();
@@ -39,25 +39,25 @@ class Authorizer
         }
 
         if (!$user && $guest = $this->getGuest()) {
-            return $guest->hasPermission($permission);
+            return $guest->hasAbility($ability);
         }
 
         if (!$user) {
             return false;
         }
 
-        return $this->checkPermission($permission, $user);
+        return $this->checkAbility($ability, $user);
     }
 
     /**
-     * Authorize a user against any permission.
+     * Authorize a user against any ability.
      *
-     * @param  array $permissions
+     * @param  array $abilities
      * @param  $user
      * @param  bool $strict
      * @return bool
      */
-    public function authorizeAny(array $permissions, $user = null, $strict = false)
+    public function authorizeAny(array $abilities, $user = null, $strict = false)
     {
         if (!$user) {
             $user = auth()->user();
@@ -67,8 +67,8 @@ class Authorizer
             return !$strict;
         }
 
-        foreach ($permissions as $permission) {
-            if ($this->checkPermission($permission, $user)) {
+        foreach ($abilities as $ability) {
+            if ($this->checkAbility($ability, $user)) {
                 return true;
             }
         }
@@ -77,14 +77,14 @@ class Authorizer
     }
 
     /**
-     * Authorize a user against all permission.
+     * Authorize a user against all ability.
      *
-     * @param  array $permissions
+     * @param  array $abilities
      * @param  $user
      * @param  bool $strict
      * @return bool
      */
-    public function authorizeAll(array $permissions, $user = null, $strict = false)
+    public function authorizeAll(array $abilities, $user = null, $strict = false)
     {
         if (!$user) {
             $user = auth()->user();
@@ -94,8 +94,8 @@ class Authorizer
             return !$strict;
         }
 
-        foreach ($permissions as $permission) {
-            if (!$this->checkPermission($permission, $user)) {
+        foreach ($abilities as $ability) {
+            if (!$this->checkAbility($ability, $user)) {
                 return false;
             }
         }
@@ -104,37 +104,37 @@ class Authorizer
     }
 
     /**
-     * Return a user's permission.
+     * Return a user's ability.
      *
-     * @param                $permission
+     * @param                $ability
      * @param  $user
      * @return bool
      */
-    protected function checkPermission($permission, $user)
+    protected function checkAbility($ability, $user)
     {
         /*
-         * No permission, let it proceed.
+         * No ability, let it proceed.
          */
-        if (!$permission) {
+        if (!$ability) {
             return true;
         }
 
         /*
-         * If the permission does not actually exist
+         * If the ability does not actually exist
          * then we cant really do anything with it.
          */
-        if (str_is('*::*.*', $permission) && !ends_with($permission, '*')) {
-            $parts = explode('.', str_replace('::', '.', $permission));
+        if (str_is('*::*.*', $ability) && !ends_with($ability, '*')) {
+            $parts = explode('.', str_replace('::', '.', $ability));
             $end   = array_pop($parts);
             $group = array_pop($parts);
-            $parts = explode('::', $permission);
+            $parts = explode('::', $ability);
 
             // If it does not exist, we are authorized.
-            if (!in_array($end, (array) config($parts[0] . '::permissions.' . $group))) {
+            if (!in_array($end, (array) config($parts[0] . '::abilities.' . $group))) {
                 return true;
             }
-        } elseif (ends_with($permission, '*')) {
-            $parts = explode('::', $permission);
+        } elseif (ends_with($ability, '*')) {
+            $parts = explode('::', $ability);
 
             $addon = array_shift($parts);
 
@@ -142,47 +142,47 @@ class Authorizer
              * Check vendor.module.slug::group.*
              * then check vendor.module.slug::*
              */
-            if (str_is('*.*.*::*.*.*', $permission)) {
-                $end = trim(substr($permission, strpos($permission, '::') + 2), '.*');
+            if (str_is('*.*.*::*.*.*', $ability)) {
+                $end = trim(substr($ability, strpos($ability, '::') + 2), '.*');
 
-                if (!$permissions = config($addon . '::permissions.' . $end)) {
+                if (!$abilities = config($addon . '::abilities.' . $end)) {
                     return true;
                 } else {
-                    return $user->hasAnyPermission($permissions);
+                    return $user->hasAnyAbility($abilities);
                 }
-            } elseif (str_is('*.*.*::*.*', $permission)) {
-                $end = trim(substr($permission, strpos($permission, '::') + 2), '.*');
+            } elseif (str_is('*.*.*::*.*', $ability)) {
+                $end = trim(substr($ability, strpos($ability, '::') + 2), '.*');
 
-                if (!$permissions = config($addon . '::permissions.' . $end)) {
+                if (!$abilities = config($addon . '::abilities.' . $end)) {
                     return true;
                 } else {
                     $check = [];
 
-                    foreach ($permissions as &$permission) {
-                        $check[] = $addon . '::' . $end . '.' . $permission;
+                    foreach ($abilities as &$ability) {
+                        $check[] = $addon . '::' . $end . '.' . $ability;
                     }
 
-                    return $user->hasAnyPermission($check);
+                    return $user->hasAnyAbility($check);
                 }
             } else {
-                if (!$permissions = config($addon . '::permissions')) {
+                if (!$abilities = config($addon . '::abilities')) {
                     return true;
                 } else {
                     $check = [];
 
-                    foreach ($permissions as $group => &$permission) {
-                        foreach ($permission as $access) {
+                    foreach ($abilities as $group => &$ability) {
+                        foreach ($ability as $access) {
                             $check[] = $addon . '::' . $group . '.' . $access;
                         }
                     }
 
-                    return $user->hasAnyPermission($check);
+                    return $user->hasAnyAbility($check);
                 }
             }
         }
 
-        // Check if the user actually has permission.
-        if (!$user || !$user->hasPermission($permission)) {
+        // Check if the user actually has ability.
+        if (!$user || !$user->hasAbility($ability)) {
             return false;
         }
 

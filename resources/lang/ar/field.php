@@ -50,7 +50,7 @@ return [
         'name'         => 'الأدوار',
         'instructions' => 'حد د الأدوار التي ينتمي إليها المستخدم.',
     ],
-    'permissions'      => [
+    'abilities'      => [
         'name' => 'الصلاحيات',
     ],
     'last_activity_at' => [

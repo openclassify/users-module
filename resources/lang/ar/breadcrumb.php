@@ -2,5 +2,5 @@
 
 return [
     'login'       => 'تسجيل الدخول',
-    'permissions' => 'الصلاحيات',
+    'abilities' => 'الصلاحيات',
 ];

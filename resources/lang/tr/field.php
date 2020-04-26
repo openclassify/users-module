@@ -63,7 +63,7 @@ return [
         "instructions" => "Kullanıcının hangi rollere ait olduğunu belirtin.",
 
     ],
-    "permissions" => [
+    "abilities" => [
         "name" => "İzinler",
 
     ],

@@ -52,8 +52,8 @@ return [
         'name'         => 'Roles',
         'instructions' => 'Specify which roles the user belongs to.',
     ],
-    'permissions'      => [
-        'name' => 'Permissions',
+    'abilities'      => [
+        'name' => 'Abilities',
     ],
     'last_activity_at' => [
         'name' => 'Last Activity',

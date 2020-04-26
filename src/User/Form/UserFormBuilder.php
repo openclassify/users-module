@@ -21,7 +21,7 @@ class UserFormBuilder extends FormBuilder
     protected $skips = [
         'ip_address',
         'reset_code',
-        'permissions',
+        'abilities',
         'remember_token',
         'activation_code',
     ];

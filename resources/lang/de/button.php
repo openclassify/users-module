@@ -12,6 +12,6 @@ return [
     'reinstate'      => 'Suspendierung aufheben',
     'add_field'      => 'Feld hinzufügen',
     'deactivate'     => 'Deaktivieren',
-    'permissions'    => 'Berechtigungen',
+    'abilities'    => 'Berechtigungen',
     'reset_password' => 'Passwort zurücksetzen',
 ];

@@ -2,5 +2,5 @@
 
 return [
     'login'       => '登入',
-    'permissions' => '权限',
+    'abilities' => '权限',
 ];
