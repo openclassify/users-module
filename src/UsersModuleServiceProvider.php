@@ -73,11 +73,13 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      * @var array
      */
     public $middleware = [
-        CheckSecurity::class,
-        AuthorizeRouteRoles::class,
-        AuthorizeModuleAccess::class,
-        AuthorizeControlPanel::class,
-        AuthorizeRoutePermission::class,
+        'web' => [
+            CheckSecurity::class,
+            AuthorizeRouteRoles::class,
+            AuthorizeModuleAccess::class,
+            AuthorizeControlPanel::class,
+            AuthorizeRoutePermission::class,
+        ]
     ];
 
     /**
