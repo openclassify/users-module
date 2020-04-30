@@ -28,13 +28,13 @@ class UserFormFields
             'last_name',
             'display_name',
             'username' => [
-                'html_attributes' => [
+                'attributes' => [
                     'autocomplete' => 'off',
                     'data-lpignore' => true,
                 ]
             ],
             'email' => [
-                'html_attributes' => [
+                'attributes' => [
                     'autocomplete' => 'off',
                     'data-lpignore' => true,
                 ]
@@ -52,7 +52,7 @@ class UserFormFields
                         'handler' => ValidatePassword::class,
                     ],
                 ],
-                'html_attributes' => [
+                'attributes' => [
                     'autocomplete' => 'off',
                     'data-lpignore' => true,
                 ],
