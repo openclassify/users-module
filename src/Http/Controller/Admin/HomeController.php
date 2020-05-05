@@ -26,7 +26,7 @@ class HomeController extends AdminController
     public function index()
     {
         $home = cp()->navigation->first();
-
-        return redirect($home->getHref());
+        
+        return redirect($home->attr('attributes.href'));
     }
 }
