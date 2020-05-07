@@ -48,6 +48,7 @@ class RoleModel extends Model implements RoleInterface
     protected static $stream = [
         'slug'         => 'roles',
         'title_column' => 'name',
+        'translatable' => true,
         'trashable'    => true,
         'config' => [
             'policy' => RolePolicy::class,
