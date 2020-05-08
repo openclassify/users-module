@@ -2,10 +2,10 @@
 
 namespace Anomaly\UsersModule\User\Validation;
 
+use Symfony\Component\HttpFoundation\Response;
+use Anomaly\UsersModule\User\UserAuthenticator;
 use Anomaly\UsersModule\User\Contract\UserInterface;
 use Anomaly\UsersModule\User\Login\LoginFormBuilder;
-use Anomaly\UsersModule\User\UserAuthenticator;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class ValidateCredentials
@@ -28,7 +28,6 @@ class ValidateCredentials
         if (!$response = $authenticator->authenticate($builder->getPostData())) {
             return false;
         }
-
         if ($response instanceof UserInterface) {
             $builder->setUser($response);
         }
