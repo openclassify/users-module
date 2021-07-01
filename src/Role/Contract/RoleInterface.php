@@ -45,6 +45,22 @@ interface RoleInterface extends EntryInterface
     public function hasPermission($permission);
 
     /**
+     * Return whether a role has any of provided permission.
+     *
+     * @param array $permissions
+     * @return bool
+     */
+    public function hasAnyPermission(array $permissions);
+
+    /**
+     * Add permissions to the role.
+     *
+     * @param array $permissions
+     * @return $this
+     */
+    public function addPermissions(array $permissions);
+
+    /**
      * Get the related users.
      *
      * @return UserCollection

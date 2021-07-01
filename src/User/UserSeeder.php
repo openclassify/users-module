@@ -2,7 +2,7 @@
 
 namespace Anomaly\UsersModule\User;
 
-use Illuminate\Database\Seeder;
+use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
 use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 
@@ -49,6 +49,8 @@ class UserSeeder extends Seeder
         RoleRepositoryInterface $roles,
         UserActivator $activator
     ) {
+        parent::__construct();
+
         $this->users     = $users;
         $this->roles     = $roles;
         $this->activator = $activator;
@@ -65,17 +67,16 @@ class UserSeeder extends Seeder
             );
         }
 
+        $this->users->truncate();
+
         $admin = $this->roles->findBySlug('admin');
         $user  = $this->roles->findBySlug('user');
 
         $this->users->unguard();
-        $this->users->truncate();
 
         /* @var UserInterface|UsersUsersEntryModel $administrator */
         $administrator = $this->users->create(
             [
-                'enabled'      => true,
-                'activated'    => true,
                 'display_name' => 'Administrator',
                 'email'        => env('ADMIN_EMAIL'),
                 'username'     => env('ADMIN_USERNAME'),
@@ -86,8 +87,6 @@ class UserSeeder extends Seeder
         /* @var UserInterface|UsersUsersEntryModel $demo */
         $demo = $this->users->create(
             [
-                'enabled'      => true,
-                'activated'    => true,
                 'display_name' => 'Demo User',
                 'email'        => 'demo@pyrocms.com',
                 'password'     => 'password',
@@ -95,8 +94,8 @@ class UserSeeder extends Seeder
             ]
         );
 
-        $administrator->roles()->sync([$admin->getKey()]);
-        $demo->roles()->sync([$user->getKey()]);
+        $demo->roles()->sync([$user->getId()]);
+        $administrator->roles()->sync([$admin->getId()]);
 
         $this->activator->force($demo);
         $this->activator->force($administrator);

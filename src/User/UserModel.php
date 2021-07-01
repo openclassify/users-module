@@ -2,19 +2,18 @@
 
 namespace Anomaly\UsersModule\User;
 
-use Illuminate\Auth\Authenticatable;
-use Anomaly\UsersModule\Role\RoleModel;
-use Illuminate\Notifications\Notifiable;
-use Anomaly\UsersModule\Role\RolePresenter;
-use Anomaly\UsersModule\Role\RoleCollection;
-use Anomaly\UsersModule\Role\Command\GetRole;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Support\Collection;
-use Anomaly\Streams\Platform\Model\Traits\Streams;
-use Anomaly\UsersModule\User\Contract\UserInterface;
+use Anomaly\Streams\Platform\Model\Users\UsersUsersEntryModel;
+use Anomaly\Streams\Platform\Support\Collection;
 use Anomaly\Streams\Platform\User\Contract\RoleInterface;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Database\Eloquent\Model;
+use Anomaly\Streams\Platform\User\Contract\UserInterface as StreamsUser;
+use Anomaly\UsersModule\Role\Command\GetRole;
+use Anomaly\UsersModule\Role\RoleCollection;
+use Anomaly\UsersModule\Role\RolePresenter;
+use Anomaly\UsersModule\User\Contract\UserInterface;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class UserModel
@@ -23,118 +22,31 @@ use Illuminate\Database\Eloquent\Model;
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Auth\Authenticatable
+class UserModel extends UsersUsersEntryModel implements UserInterface, StreamsUser, \Illuminate\Contracts\Auth\Authenticatable
 {
-    use Streams;
+
+    use HasFactory;
     use Notifiable;
-    use Authorizable;
     use Authenticatable;
     use CanResetPassword;
 
     /**
-     * The entry table.
-     *
-     * @var string
-     */
-    protected $table = 'users_users';
-
-    /**
-     * The cast types.
+     * The eager loaded relationships.
      *
      * @var array
      */
-    protected $casts = [
-        'created_at'       => 'datetime',
-        'updated_at'       => 'datetime',
-        'deleted_at'       => 'datetime',
-        'last_login_at'    => 'datetime',
-        'last_activity_at' => 'datetime',
+    protected $with = [
+        'roles',
     ];
 
     /**
-     * The stream definition.
-     *
-     * @var array
-     */
-    protected static $stream = [
-        'slug'         => 'users',
-        'title_column' => 'display_name',
-        'trashable'    => true,
-        'versionable'  => true,
-        'searchable'   => true,
-        'config' => [
-            'policy' => UserPolicy::class,
-        ],
-        'fields' => [
-            'str_id'        => [
-                'required' => true,
-                'unique'   => true,
-                'type'     => 'anomaly.field_type.text',
-            ],
-            'email'        => [
-                'required' => true,
-                'unique'   => true,
-                'type'     => 'anomaly.field_type.email',
-            ],
-            'username'     => [
-                'required' => true,
-                'unique'   => true,
-                'type'   => 'anomaly.field_type.slug',
-                'config' => [
-                    'type'      => '_',
-                    'lowercase' => false,
-                ],
-            ],
-            'password'     => [
-                'required' => true,
-                'type'   => 'anomaly.field_type.text',
-                'config' => [
-                    'type' => 'password',
-                ],
-            ],
-            'roles'        => [
-                'required' => true,
-                'type'   => 'anomaly.field_type.multiple',
-                'config' => [
-                    'related' => RoleModel::class,
-                ],
-            ],
-            'display_name' => [
-                'required' => true,
-                'type' => 'anomaly.field_type.text',
-            ],
-            'first_name'       => 'anomaly.field_type.text',
-            'last_name'        => 'anomaly.field_type.text',
-            'activated'        => 'anomaly.field_type.boolean',
-            'enabled'          => 'anomaly.field_type.boolean',
-            'permissions'      => 'anomaly.field_type.checkboxes',
-            'remember_token'   => 'anomaly.field_type.text',
-            'activation_code'  => 'anomaly.field_type.text',
-            'reset_code'       => 'anomaly.field_type.text',
-            'last_login_at'    => 'anomaly.field_type.datetime',
-            'last_activity_at' => 'anomaly.field_type.datetime',
-            'ip_address'       => 'anomaly.field_type.text',
-        ],
-    ];
-
-    /**
-     * Guarded attributes.
+     * The guarded attributes.
      *
      * @var array
      */
     protected $guarded = [
         'password',
     ];
-
-    /**
-     * The roles relation
-     *
-     * @return Relation
-     */
-    public function roles()
-    {
-        return $this->stream()->fields->roles->type()->setEntry($this)->getRelation();
-    }
 
     /**
      * Get the string ID.
@@ -177,6 +89,62 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
+     * Get the first name.
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Get the last name.
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * Get related roles.
+     *
+     * @return RoleCollection
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * Return whether a user is in a role.
+     *
+     * @param RoleInterface|RolePresenter|string $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        if (!is_object($role)) {
+            $role = $this->dispatch(new GetRole($role));
+        }
+
+        if (!$role) {
+            return false;
+        }
+
+        /* @var RoleInterface $role */
+        foreach ($roles = $this->getRoles() as $attached) {
+            if ($attached->getId() === $role->getId()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Return whether a user is in any of the provided roles.
      *
      * @param $roles
@@ -202,24 +170,15 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
-     * Return whether a user is in a role.
+     * Return whether the user is an admin or not.
      *
-     * @param RoleInterface|RolePresenter|string $role
      * @return bool
      */
-    public function hasRole($role)
+    public function isAdmin()
     {
-        if (!is_object($role)) {
-            $role = dispatch_now(new GetRole($role));
-        }
-
-        if (!$role) {
-            return false;
-        }
-
         /* @var RoleInterface $role */
-        foreach ($roles = $this->getRoles() as $attached) {
-            if ($attached->getKey() === $role->getKey()) {
+        foreach ($this->getRoles() as $role) {
+            if ($role->getSlug() === 'admin') {
                 return true;
             }
         }
@@ -228,31 +187,13 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
-     * Get related roles.
+     * Get the permissions.
      *
-     * @return RoleCollection
+     * @return array
      */
-    public function getRoles()
+    public function getPermissions()
     {
-        return $this->roles;
-    }
-
-    /**
-     * Return whether a user has any of provided permission.
-     *
-     * @param array $permissions
-     * @param bool $checkRoles
-     * @return bool
-     */
-    public function hasAnyPermission(array $permissions, $checkRoles = true)
-    {
-        foreach ($permissions as $permission) {
-            if ($this->hasPermission($permission, $checkRoles)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->permissions;
     }
 
     /**
@@ -286,13 +227,34 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
-     * Get the permissions.
+     * Return whether a user has any of provided permission.
      *
-     * @return array
+     * @param array $permissions
+     * @param bool $checkRoles
+     * @return bool
      */
-    public function getPermissions()
+    public function hasAnyPermission(array $permissions, $checkRoles = true)
     {
-        return (array) $this->permissions;
+        foreach ($permissions as $permission) {
+            if ($this->hasPermission($permission, $checkRoles)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Add permissions to the user.
+     *
+     * @param array $permissions
+     * @return $this
+     */
+    public function addPermissions(array $permissions)
+    {
+        $this->permissions = array_merge($this->permissions, $permissions);
+
+        return $this;
     }
 
     /**
@@ -313,7 +275,7 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     public function isDeletable()
     {
         // You can't delete yourself.
-        if ($this->getKey() == app('auth')->id()) {
+        if ($this->getId() == app('auth')->id()) {
             return false;
         }
 
@@ -326,20 +288,13 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     }
 
     /**
-     * Return whether the user is an admin or not.
+     * Return the activated flag.
      *
      * @return bool
      */
-    public function isAdmin()
+    public function isActivated()
     {
-        /* @var RoleInterface $role */
-        foreach ($this->getRoles() as $role) {
-            if ($role->getSlug() === 'admin') {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->activated;
     }
 
     /**
@@ -380,26 +335,6 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     public function name()
     {
         return "{$this->getFirstName()} {$this->getLastName()}";
-    }
-
-    /**
-     * Get the first name.
-     *
-     * @return string
-     */
-    public function getFirstName()
-    {
-        return $this->first_name;
-    }
-
-    /**
-     * Get the last name.
-     *
-     * @return string
-     */
-    public function getLastName()
-    {
-        return $this->last_name;
     }
 
     /**
@@ -455,15 +390,5 @@ class UserModel extends Model implements UserInterface, \Illuminate\Contracts\Au
     public function shouldBeSearchable()
     {
         return $this->isActivated();
-    }
-
-    /**
-     * Return the activated flag.
-     *
-     * @return bool
-     */
-    public function isActivated()
-    {
-        return $this->activated;
     }
 }

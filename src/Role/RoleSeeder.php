@@ -2,7 +2,7 @@
 
 namespace Anomaly\UsersModule\Role;
 
-use Illuminate\Database\Seeder;
+use Anomaly\Streams\Platform\Database\Seeder\Seeder;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
 
 /**
@@ -29,6 +29,8 @@ class RoleSeeder extends Seeder
      */
     public function __construct(RoleRepositoryInterface $roles)
     {
+        parent::__construct();
+
         $this->roles = $roles;
     }
 
@@ -37,17 +39,13 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $locale = config('app.fallback_locale', 'en');
-
         $this->roles->truncate();
 
         $this->roles->create(
             [
-                'name' => [
-                    $locale => 'Admin',
-                ],
-                'description' => [
-                    $locale => 'The super admin role.',
+                config('app.locale', 'en')   => [
+                    'name'        => 'Admin',
+                    'description' => 'The super admin role.',
                 ],
                 'slug' => 'admin',
             ]
@@ -55,11 +53,9 @@ class RoleSeeder extends Seeder
 
         $this->roles->create(
             [
-                'name' => [
-                    $locale => 'User',
-                ],
-                'description' => [
-                    $locale => 'The default user role.',
+                config('app.locale', 'en')   => [
+                    'name'        => 'User',
+                    'description' => 'The default user role.',
                 ],
                 'slug' => 'user',
             ]
@@ -67,11 +63,9 @@ class RoleSeeder extends Seeder
 
         $this->roles->create(
             [
-                'name' => [
-                    $locale => 'Guest',
-                ],
-                'description' => [
-                    $locale => 'The fallback role for non-users.',
+                config('app.locale', 'en')   => [
+                    'name'        => 'Guest',
+                    'description' => 'The fallback role for non-users.',
                 ],
                 'slug' => 'guest',
             ]

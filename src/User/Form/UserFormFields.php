@@ -2,6 +2,7 @@
 
 namespace Anomaly\UsersModule\User\Form;
 
+use Anomaly\Streams\Platform\Support\Authorizer;
 use Anomaly\UsersModule\User\UserModel;
 use Anomaly\UsersModule\User\Validation\ValidatePassword;
 use Anomaly\UsersModule\User\Validation\ValidateRoles;
@@ -21,7 +22,7 @@ class UserFormFields
      *
      * @param UserFormBuilder $builder
      */
-    public function handle(UserFormBuilder $builder, UserModel $users)
+    public function handle(UserFormBuilder $builder, UserModel $users, Authorizer $authorizer)
     {
         $fields = [
             'first_name',
@@ -59,8 +60,14 @@ class UserFormFields
             ],
             'activated',
             'enabled',
-            'roles'    => [
-                'rules'      => [
+        ];
+
+        // Only allow the user to see the roles if they are able to update permissions.
+        // This avoids the risk of a user escalating themselves or another user to admin while still
+        // giving them the ability to edit user info
+        if ($authorizer->authorize('anomaly.module.users::users.manage_permissions')) {
+            $fields['roles'] = [
+                'rules' => [
                     'valid_roles',
                 ],
                 'validators' => [
@@ -69,8 +76,8 @@ class UserFormFields
                         'message' => 'anomaly.module.users::error.modify_admins',
                     ],
                 ],
-            ],
-        ];
+            ];
+        }
 
         $builder->setFields($fields);
     }

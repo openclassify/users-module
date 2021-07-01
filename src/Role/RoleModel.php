@@ -2,11 +2,11 @@
 
 namespace Anomaly\UsersModule\Role;
 
-use Anomaly\UsersModule\User\UserCollection;
-use Anomaly\Streams\Platform\Entry\EntryModel;
-use Anomaly\Streams\Platform\Model\Traits\Streams;
+use Anomaly\Streams\Platform\Model\Users\UsersRolesEntryModel;
+use Anomaly\Streams\Platform\User\Contract\RoleInterface as StreamsRole;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
-use Illuminate\Database\Eloquent\Model;
+use Anomaly\UsersModule\User\UserCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * Class RoleModel
@@ -15,67 +15,28 @@ use Illuminate\Database\Eloquent\Model;
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class RoleModel extends Model implements RoleInterface
+class RoleModel extends UsersRolesEntryModel implements RoleInterface, StreamsRole
 {
-
-    use Streams;
-
-    /**
-     * The entry table.
-     *
-     * @var string
-     */
-    protected $table = 'users_roles';
+    use HasFactory;
 
     /**
-     * The cast types.
+     * Eager loaded relations.
      *
      * @var array
      */
-    protected $casts = [
-        'created_at'  => 'datetime',
-        'updated_at'  => 'datetime',
-        'deleted_at'  => 'datetime',
-        'name'        => 'array',
-        'description' => 'array',
+    protected $with = [
+        'translations',
     ];
 
     /**
-     * The stream definition.
+     * Get the role slug.
      *
-     * @var array
+     * @return string
      */
-    protected static $stream = [
-        'slug'         => 'roles',
-        'title_column' => 'slug',
-        'translatable' => true,
-        'trashable'    => true,
-        'config' => [
-            'policy' => RolePolicy::class,
-        ],
-        'fields' => [
-            'name'        => [
-                'translatable' => true,
-                'required'     => true,
-                'type'         => 'anomaly.field_type.text',
-            ],
-            'slug'        => [
-                'required' => true,
-                'unique'   => true,
-                'type'     => 'anomaly.field_type.slug',
-                'config'   => [
-                    'slugify' => 'name',
-                ],
-            ],
-            'description' => [
-                'translatable' => true,
-                'type'         => 'anomaly.field_type.textarea',
-            ],
-            'permissions' => [
-                'type' => 'anomaly.field_type.checkboxes',
-            ],
-        ]
-    ];
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
     /**
      * Get the role name.
@@ -85,6 +46,16 @@ class RoleModel extends Model implements RoleInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Get the role's permissions.
+     *
+     * @return array
+     */
+    public function getPermissions()
+    {
+        return $this->permissions;
     }
 
     /**
@@ -111,23 +82,33 @@ class RoleModel extends Model implements RoleInterface
     }
 
     /**
-     * Get the role slug.
+     * Return whether a role has any of provided permission.
      *
-     * @return string
+     * @param array $permissions
+     * @return bool
      */
-    public function getSlug()
+    public function hasAnyPermission(array $permissions)
     {
-        return $this->slug;
+        foreach ($permissions as $permission) {
+            if ($this->hasPermission($permission)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
-     * Get the role's permissions.
+     * Add permissions to the role.
      *
-     * @return array
+     * @param array $permissions
+     * @return $this
      */
-    public function getPermissions()
+    public function addPermissions(array $permissions)
     {
-        return $this->permissions;
+        $this->permissions = array_merge($this->permissions, $permissions);
+
+        return $this;
     }
 
     /**

@@ -1,42 +1,46 @@
 <?php namespace Anomaly\UsersModule\Http\Controller;
 
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
+use Illuminate\Translation\Translator;
 
 /**
  * Class PasswordController
  *
- * @link   http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  */
 class PasswordController extends PublicController
 {
 
     /**
      * Return a forgot password view.
+     *
+     * @param  Translator $translator
      */
-    public function forgot()
+    public function forgot(Translator $translator)
     {
-        share(
+        $this->template->set(
             'meta_title',
-            trans('anomaly.module.users::breadcrumb.reset_password')
+            $translator->trans('anomaly.module.users::breadcrumb.reset_password')
         );
 
-        return view('anomaly.module.users::password/forgot');
+        return $this->view->make('anomaly.module.users::password.forgot');
     }
 
     /**
      * Reset a user password.
      *
+     * @param  Translator $translator
      * @return \Illuminate\Contracts\View\View|mixed
      */
-    public function reset()
+    public function reset(Translator $translator)
     {
-        share(
+        $this->template->set(
             'meta_title',
-            trans('anomaly.module.users::breadcrumb.reset_password')
+            $translator->trans('anomaly.module.users::breadcrumb.reset_password')
         );
 
-        return view('anomaly.module.users::password/reset');
+        return $this->view->make('anomaly.module.users::password.reset');
     }
 }

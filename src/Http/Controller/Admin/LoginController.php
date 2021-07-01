@@ -2,19 +2,19 @@
 
 namespace Anomaly\UsersModule\Http\Controller\Admin;
 
-use Illuminate\Routing\Redirector;
-use Illuminate\Support\Facades\View;
-use Anomaly\UsersModule\User\UserAuthenticator;
-use Anomaly\UsersModule\User\Login\LoginFormBuilder;
 use Anomaly\Streams\Platform\Http\Controller\PublicController;
 use Anomaly\Streams\Platform\Ui\ControlPanel\Component\Navigation\NavigationCollection;
+use Anomaly\UsersModule\User\Login\LoginFormBuilder;
+use Anomaly\UsersModule\User\UserAuthenticator;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Routing\Redirector;
 
 /**
  * Class LoginController
  *
- * @link   http://pyrocms.com/
- * @author PyroCMS, Inc. <support@pyrocms.com>
- * @author Ryan Thompson <ryan@pyrocms.com>
+ * @link          http://pyrocms.com/
+ * @author        PyroCMS, Inc. <support@pyrocms.com>
+ * @author        Ryan Thompson <ryan@pyrocms.com>
  */
 class LoginController extends PublicController
 {
@@ -22,10 +22,17 @@ class LoginController extends PublicController
     /**
      * Return the admin login form.
      *
-     * @return \Illuminate\Http\Response
+     * @param  LoginFormBuilder $form
+     * @param  Redirector $redirect
+     * @param  Guard $auth
+     * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function login()
-    {
+    public function login(
+        NavigationCollection $navigation,
+        LoginFormBuilder $form,
+        Redirector $redirect,
+        Guard $auth
+    ) {
         /*
          * If we're already logged in
          * proceed to the dashboard.
@@ -33,31 +40,30 @@ class LoginController extends PublicController
          * Replace this later with a
          * configurable landing page.
          */
-
-        if (auth()->check()) {
-            return redirect('admin');
+        if ($auth->check() && $home = $navigation->first()) {
+            return $redirect->to($home->getHref());
         }
 
-        View::share([
-            'metaTitle' => trans('anomaly.module.users::breadcrumb.login')
-        ]);
-
-        return view('admin::login');
+        return $form
+            ->setOption('redirect', 'admin')
+            ->setOption('wrapper_view', 'theme::login')
+            ->render();
     }
 
     /**
      * Log the user out.
      *
      * @param  UserAuthenticator $authenticator
+     * @param  Guard $auth
      * @return \Illuminate\Http\RedirectResponse|Redirector
      */
-    public function logout(UserAuthenticator $authenticator)
+    public function logout(UserAuthenticator $authenticator, Guard $auth)
     {
-        if (!auth()->guest()) {
+        if (!$auth->guest()) {
             $authenticator->logout();
         }
 
-        messages()->success('anomaly.module.users::message.logged_out');
+        $this->messages->success('anomaly.module.users::message.logged_out');
 
         return redirect('admin/login');
     }
