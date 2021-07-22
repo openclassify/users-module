@@ -23,7 +23,7 @@ class ValidateAuthentication
     public function handle(UserAuthenticator $authenticator, $value)
     {
         /* @var UserInterface $user */
-        $user = user();
+        $user = auth()->user();
 
         return $authenticator->attempt(
             [

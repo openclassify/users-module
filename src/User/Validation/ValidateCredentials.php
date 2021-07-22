@@ -28,6 +28,7 @@ class ValidateCredentials
         if (!$response = $authenticator->authenticate($builder->getPostData())) {
             return false;
         }
+        
         if ($response instanceof UserInterface) {
             $builder->setUser($response);
         }

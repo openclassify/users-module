@@ -1,5 +1,6 @@
 <?php namespace Anomaly\UsersModule\Role;
 
+use Anomaly\Streams\Platform\Model\EloquentCollection;
 use Illuminate\Support\Collection;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
 
@@ -10,7 +11,7 @@ use Anomaly\UsersModule\Role\Contract\RoleInterface;
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class RoleCollection extends Collection
+class RoleCollection extends EloquentCollection
 {
 
     /**
