@@ -193,67 +193,67 @@ class UsersModuleServiceProvider extends AddonServiceProvider
      */
     public function boot()
     {
-        Policy::macro('viewAny', function (UserInterface $user, $model) {
-            return AuthorizerFacade::authorize(
-                $model->stream->location(
-                    $model->stream->slug . '.view_any'
-                ),
-                $user
-            );
-        });
+        // Policy::macro('viewAny', function (UserInterface $user, $model) {
+        //     return AuthorizerFacade::authorize(
+        //         $model->stream->location(
+        //             $model->stream->slug . '.view_any'
+        //         ),
+        //         $user
+        //     );
+        // });
 
-        Policy::macro('view', function (UserInterface $user, $model) {
-            return AuthorizerFacade::authorize(
-                $model->stream->location(
-                    $model->stream->slug . '.view'
-                ),
-                $user
-            );
-        });
+        // Policy::macro('view', function (UserInterface $user, $model) {
+        //     return AuthorizerFacade::authorize(
+        //         $model->stream->location(
+        //             $model->stream->slug . '.view'
+        //         ),
+        //         $user
+        //     );
+        // });
 
-        Policy::macro('create', function (UserInterface $user, $model) {
-            return AuthorizerFacade::authorize(
-                $model->stream->location(
-                    $model->stream->slug . '.create'
-                ),
-                $user
-            );
-        });
+        // Policy::macro('create', function (UserInterface $user, $model) {
+        //     return AuthorizerFacade::authorize(
+        //         $model->stream->location(
+        //             $model->stream->slug . '.create'
+        //         ),
+        //         $user
+        //     );
+        // });
 
-        Policy::macro('update', function (UserInterface $user, $model) {
-            return AuthorizerFacade::authorize(
-                $model->stream->location(
-                    $model->stream->slug . '.update'
-                ),
-                $user
-            );
-        });
+        // Policy::macro('update', function (UserInterface $user, $model) {
+        //     return AuthorizerFacade::authorize(
+        //         $model->stream->location(
+        //             $model->stream->slug . '.update'
+        //         ),
+        //         $user
+        //     );
+        // });
 
-        Policy::macro('delete', function (UserInterface $user, $model) {
-            return AuthorizerFacade::authorize(
-                $model->stream->location(
-                    $model->stream->slug . '.delete'
-                ),
-                $user
-            );
-        });
+        // Policy::macro('delete', function (UserInterface $user, $model) {
+        //     return AuthorizerFacade::authorize(
+        //         $model->stream->location(
+        //             $model->stream->slug . '.delete'
+        //         ),
+        //         $user
+        //     );
+        // });
 
-        Policy::macro('force_delete', function (UserInterface $user, $model) {
-            return AuthorizerFacade::authorize(
-                $model->stream->location(
-                    $model->stream->slug . '.force_update'
-                ),
-                $user
-            );
-        });
+        // Policy::macro('force_delete', function (UserInterface $user, $model) {
+        //     return AuthorizerFacade::authorize(
+        //         $model->stream->location(
+        //             $model->stream->slug . '.force_update'
+        //         ),
+        //         $user
+        //     );
+        // });
 
-        Policy::macro('restore', function (UserInterface $user, $model) {
-            return AuthorizerFacade::authorize(
-                $model->stream->location(
-                    $model->stream->slug . '.restore'
-                ),
-                $user
-            );
-        });
+        // Policy::macro('restore', function (UserInterface $user, $model) {
+        //     return AuthorizerFacade::authorize(
+        //         $model->stream->location(
+        //             $model->stream->slug . '.restore'
+        //         ),
+        //         $user
+        //     );
+        // });
     }
 }
