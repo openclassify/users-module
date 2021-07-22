@@ -4,7 +4,6 @@ namespace Anomaly\UsersModule\Role;
 
 use Anomaly\Streams\Platform\Entry\EntryCollection;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
-use Anomaly\Streams\Platform\Entry\FilebaseRepository;
 use Anomaly\UsersModule\Role\Contract\RoleInterface;
 use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
 
@@ -15,7 +14,7 @@ use Anomaly\UsersModule\Role\Contract\RoleRepositoryInterface;
  * @author        PyroCMS, Inc. <support@pyrocms.com>
  * @author        Ryan Thompson <ryan@pyrocms.com>
  */
-class RoleRepository extends FilebaseRepository implements RoleRepositoryInterface
+class RoleRepository extends EntryRepository implements RoleRepositoryInterface
 {
 
     /**
@@ -33,8 +32,6 @@ class RoleRepository extends FilebaseRepository implements RoleRepositoryInterfa
     public function __construct(RoleModel $model)
     {
         $this->model = $model;
-
-        parent::__construct($model->stream());
     }
 
     /**

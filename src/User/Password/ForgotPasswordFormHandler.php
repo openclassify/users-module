@@ -1,8 +1,8 @@
 <?php namespace Anomaly\UsersModule\User\Password;
 
-use Anomaly\Streams\Platform\Message\MessageManager;
-use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 use Anomaly\UsersModule\User\UserPassword;
+use Anomaly\Streams\Platform\Message\MessageBag;
+use Anomaly\UsersModule\User\Contract\UserRepositoryInterface;
 
 /**
  * Class ForgotPasswordFormHandler
@@ -20,13 +20,13 @@ class ForgotPasswordFormHandler
      * @param ForgotPasswordFormBuilder $builder
      * @param UserRepositoryInterface $users
      * @param UserPassword $password
-     * @param MessageManager $messages
+     * @param MessageBag $messages
      */
     public function handle(
         ForgotPasswordFormBuilder $builder,
         UserRepositoryInterface $users,
         UserPassword $password,
-        MessageManager $messages
+        MessageBag $messages
     ) {
         if ($builder->hasFormErrors()) {
             return;
