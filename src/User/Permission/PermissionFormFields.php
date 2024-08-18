@@ -104,7 +104,6 @@ class PermissionFormFields
          * to be hooked in to the form as well.
          */
         if ($permissions = $config->get('anomaly.module.users::config.permissions')) {
-
             foreach ($permissions as $namespace => $group) {
                 foreach (array_get($group, 'permissions', []) as $permission => $permissions) {
                     $fields[str_replace('.', '_', $namespace . '::' . $permission)] = [
