@@ -1,5 +1,5 @@
 {
-    "name": "visiosoft/users-module",
+    "name": "anomaly/users-module",
     "type": "streams-addon",
     "description": "Manage users, roles, and permissions.",
     "keywords": [
